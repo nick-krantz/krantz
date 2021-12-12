@@ -1,5 +1,6 @@
 import type { LinksFunction, MetaFunction } from 'remix';
-import stylesUrl from '../styles/login.css';
+import stylesUrl from '../styles/index.css';
+import { ChangeCaretColor } from '../utils/change-caret-color';
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }];
@@ -14,9 +15,12 @@ export let meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="logo-container">
-      <Logo />
-    </div>
+    <>
+      <div className="logo-container">
+        <Logo />
+      </div>
+      <ChangeCaretColor />
+    </>
   );
 }
 
