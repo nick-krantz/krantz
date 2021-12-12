@@ -4,7 +4,24 @@ import globalStylesUrl from '~/styles/global.css';
 
 // https://remix.run/api/app#links
 export let links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: globalStylesUrl }];
+  return [
+    { rel: 'stylesheet', href: globalStylesUrl },
+    {
+      rel: 'icon',
+      href: 'favicon-dark.ico',
+      media: '(prefers-color-scheme: dark)',
+    },
+    {
+      rel: 'icon',
+      href: 'favicon-light.ico',
+      media: '(prefers-color-scheme: light)',
+    },
+    {
+      rel: 'icon',
+      href: 'favicon.ico',
+      media: '(prefers-color-scheme: no-preference)',
+    },
+  ];
 };
 
 // https://remix.run/api/conventions#default-export
