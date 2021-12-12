@@ -1,6 +1,10 @@
-import type { MetaFunction } from 'remix';
+import type { LinksFunction, MetaFunction } from 'remix';
+import stylesUrl from '../styles/login.css';
 
-// https://remix.run/api/conventions#meta
+export const links: LinksFunction = () => {
+  return [{ rel: 'stylesheet', href: stylesUrl }];
+};
+
 export let meta: MetaFunction = () => {
   return {
     title: 'Krantz',
@@ -9,7 +13,11 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Index() {
-  return <Logo />;
+  return (
+    <div className="logo-container">
+      <Logo />
+    </div>
+  );
 }
 
 function Logo() {

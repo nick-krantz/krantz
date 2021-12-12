@@ -1,0 +1,11 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+svg {
+  max-width: 700px;
+  width: 100%;
+}

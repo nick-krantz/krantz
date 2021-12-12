@@ -50,11 +50,4 @@ body {
 .main {
   flex: 1 1 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-svg {
-  max-width: 700px;
-  width: 100%;
 }
