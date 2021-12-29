@@ -1,17 +1,17 @@
-import type { LinksFunction, MetaFunction } from 'remix';
-import stylesUrl from '../styles/index.css';
-import { ChangeCaretColor } from '../utils/change-caret-color';
+import type { LinksFunction, MetaFunction } from 'remix'
+import stylesUrl from '../styles/index.css'
+import { ChangeCaretColor } from '../utils/change-caret-color'
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: stylesUrl }];
-};
+  return [{ rel: 'stylesheet', href: stylesUrl }]
+}
 
-export let meta: MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return {
     title: 'Krantz',
     description: 'Krantz',
-  };
-};
+  }
+}
 
 export default function Index() {
   return (
@@ -21,7 +21,7 @@ export default function Index() {
       </div>
       <ChangeCaretColor />
     </>
-  );
+  )
 }
 
 function Logo() {
@@ -45,5 +45,5 @@ function Logo() {
         </g>
       </g>
     </svg>
-  );
+  )
 }

@@ -1,1 +1,1 @@
-export { badRequest } from './bad-request';
+export { badRequest } from './bad-request'

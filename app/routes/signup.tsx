@@ -1,63 +1,63 @@
-import { User } from '@supabase/supabase-js';
-import { ActionFunction, MetaFunction, redirect, useActionData } from 'remix';
-import { ErrorMessage } from '~/components/error-message';
-import { badRequest } from '~/utils/network';
-import { supabase } from '~/utils/supabase/index.server';
-import { validateEmail, validatePassword } from '~/utils/validation';
+import { User } from '@supabase/supabase-js'
+import { ActionFunction, MetaFunction, redirect, useActionData } from 'remix'
+import { ErrorMessage } from 'components/error-message'
+import { badRequest } from 'utils/network'
+import { supabase } from 'utils/supabase/index.server'
+import { validateEmail, validatePassword } from 'utils/validation'
 
 type ActionData = {
-  formError?: string;
+  formError?: string
   fieldErrors?: {
-    email: string | undefined;
-    password: string | undefined;
-  };
+    email: string | undefined
+    password: string | undefined
+  }
   fields?: {
-    email: string;
-    password: string;
-  };
-  user?: User;
-};
+    email: string
+    password: string
+  }
+  user?: User
+}
 
-export let meta: MetaFunction = () => {
+export const meta: MetaFunction = () => {
   return {
     title: 'Krantz - Sign Up',
     description: 'Sign up using an email and password',
-  };
-};
+  }
+}
 
 export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const email = form.get('email');
-  const password = form.get('password');
-  const redirectTo = form.get('redirectTo');
+  const form = await request.formData()
+  const email = form.get('email')
+  const password = form.get('password')
+  const redirectTo = form.get('redirectTo')
 
   if (typeof email !== 'string' || typeof password !== 'string' || typeof redirectTo !== 'string') {
     return badRequest({
       formError: `Form not submitted correctly.`,
-    });
+    })
   }
 
-  const fields = { email, password };
+  const fields = { email, password }
   const fieldErrors = {
     email: validateEmail(email),
     password: validatePassword(password),
-  };
+  }
 
   if (Object.values(fieldErrors).some(Boolean)) {
-    return badRequest({ fieldErrors, fields });
+    return badRequest({ fieldErrors, fields })
   }
 
   // Note: supabase hashes passwords for us, no need to do that client side
-  const { user, session, error } = await supabase.auth.signUp({ email, password }, { redirectTo });
+  const { user, session, error } = await supabase.auth.signUp({ email, password }, { redirectTo })
 
   // Sign up failed
   if (error) {
-    return badRequest({ fields, formError: error.message }, error.status);
+    return badRequest({ fields, formError: error.message }, error.status)
   }
 
   // User does not need to confirm email, take them to the recipe page
   if (session !== null) {
-    redirect('recipes');
+    redirect('recipes')
   }
 
   // Return the user & session to the page
@@ -66,14 +66,14 @@ export const action: ActionFunction = async ({ request }) => {
       email,
     },
     user,
-  };
-};
+  }
+}
 
 /**
  * SignUp form
  */
 export default function SignUp() {
-  const actionData = useActionData<ActionData>();
+  const actionData = useActionData<ActionData>()
 
   // When user is returned, session was null so email needs to be confirmed
   if (actionData?.user) {
@@ -85,7 +85,7 @@ export default function SignUp() {
           <p>Please confirm your email to continue.</p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -131,5 +131,5 @@ export default function SignUp() {
         </form>
       </div>
     </div>
-  );
+  )
 }
