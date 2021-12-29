@@ -35,10 +35,10 @@ module.exports = {
       'error',
       {
         pathGroups: [
-          { pattern: 'components/**', group: 'internal' },
-          { pattern: 'routes/**', group: 'internal' },
-          { pattern: 'styles/**', group: 'internal' },
-          { pattern: 'utils/**', group: 'internal' },
+          { pattern: '~/components/**', group: 'internal' },
+          { pattern: '~/routes/**', group: 'internal' },
+          { pattern: '~/styles/**', group: 'internal' },
+          { pattern: '~/utils/**', group: 'internal' },
         ],
         pathGroupsExcludedImportTypes: [],
         groups: [ 'builtin', 'unknown', 'external', 'internal', 'parent', 'sibling', 'index' ],

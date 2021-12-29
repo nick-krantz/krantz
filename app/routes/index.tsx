@@ -1,6 +1,6 @@
 import type { LinksFunction, MetaFunction } from 'remix'
-import stylesUrl from '../styles/index.css'
-import { ChangeCaretColor } from '../utils/change-caret-color'
+import stylesUrl from '~/styles/index.css'
+import { ChangeCaretColor } from '~/utils/change-caret-color'
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }]

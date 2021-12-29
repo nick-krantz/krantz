@@ -1,9 +1,9 @@
 import { User } from '@supabase/supabase-js'
 import { ActionFunction, MetaFunction, redirect, useActionData } from 'remix'
-import { ErrorMessage } from 'components/error-message'
-import { badRequest } from 'utils/network'
-import { supabase } from 'utils/supabase/index.server'
-import { validateEmail, validatePassword } from 'utils/validation'
+import { ErrorMessage } from '~/components/error-message'
+import { badRequest } from '~/utils/network'
+import { supabase } from '~/utils/supabase/index.server'
+import { validateEmail, validatePassword } from '~/utils/validation'
 
 type ActionData = {
   formError?: string

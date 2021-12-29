@@ -1,6 +1,6 @@
 import type { LinksFunction } from 'remix'
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
-import globalStylesUrl from 'styles/global.css'
+import globalStylesUrl from '~/styles/global.css'
 
 // https://remix.run/api/app#links
 export const links: LinksFunction = () => {
