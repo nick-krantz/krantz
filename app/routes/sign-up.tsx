@@ -73,7 +73,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 /**
- * SignUp form
+ * Sign Up form
  */
 export default function SignUp() {
   const actionData = useActionData<ActionData>()
