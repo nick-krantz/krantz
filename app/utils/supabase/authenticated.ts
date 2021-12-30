@@ -1,15 +1,21 @@
+import { User } from '@supabase/supabase-js'
 import { redirect, Session } from 'remix'
 import { commitSession, getSession } from './get-session.server'
+import { supabase } from './index.server'
 
 /**
  * Checks if the user has an access_token cookie to verify that they are authorized
  */
-export async function authenticated<T>(request: Request, callback: (token: string) => Promise<T>) {
+export async function authenticated<T>(
+  request: Request,
+  callback: (params: { token: string; user: User }) => Promise<T>,
+) {
   const session = await getSession(request.headers.get('Cookie'))
   try {
     const token = session.get('access_token')
-    if (token) {
-      return await callback(token)
+    const { user } = await supabase.auth.api.getUser(token)
+    if (token && user) {
+      return await callback({ token, user })
     }
     return unAuthorizedResponse(session)
   } catch {
@@ -23,5 +29,5 @@ export async function authenticated<T>(request: Request, callback: (token: strin
 async function unAuthorizedResponse(session: Session): Promise<Response> {
   session.unset('access_token')
   const cookie = await commitSession(session)
-  return redirect('/login', { headers: { 'Set-Cookie': cookie } })
+  return redirect('/sign-in', { headers: { 'Set-Cookie': cookie } })
 }
