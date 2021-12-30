@@ -31,6 +31,7 @@ module.exports = {
     singleQuote: 0,
     eqeqeq: [ 'error' ],
     '@typescript-eslint/indent': 0,
+    '@typescript-eslint/no-empty-interface': 0,
     'import/order': [
       'error',
       {

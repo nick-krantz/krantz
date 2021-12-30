@@ -12,3 +12,5 @@ TODO:
 - [x] Rename `signup` route to `sign-up`.
 - [ ] Move 'access_token` string to a constant, because constants are better and cooler.
 - [ ] Flush out readme with better information about packages/tech/things used.
+- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
+- [ ] Make DB types more developer friendly
