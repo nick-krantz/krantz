@@ -2,6 +2,7 @@ import { User } from '@supabase/supabase-js'
 import { ActionFunction, MetaFunction, redirect, useActionData } from 'remix'
 import { ErrorMessage } from '~/components/error-message'
 import { badRequest } from '~/utils/network'
+import { commitSession, getSession } from '~/utils/supabase/get-session.server'
 import { supabase } from '~/utils/supabase/index.server'
 import { validateEmail, validatePassword } from '~/utils/validation'
 
@@ -48,25 +49,25 @@ export const action: ActionFunction = async ({ request }) => {
   }
 
   // Note: supabase hashes passwords for us, no need to do that client side
-  const { user, session, error } = await supabase.auth.signUp({ email, password }, { redirectTo })
-
+  const { user, session: supabaseSession, error } = await supabase.auth.signUp({ email, password }, { redirectTo })
   // Sign up failed
   if (error) {
     return badRequest({ fields, formError: error.message }, error.status)
   }
 
-  // User does not need to confirm email, take them to the recipe page
-  if (session !== null) {
-    redirect('recipes')
+  //  take them to the recipe page
+  if (user !== null && supabaseSession !== null) {
+    const session = await getSession(request.headers.get('Cookie'))
+    session.set('access_token', supabaseSession.access_token)
+    return redirect('recipes', {
+      headers: {
+        'Set-Cookie': await commitSession(session),
+      },
+    })
   }
 
-  // Return the user & session to the page
-  return {
-    fields: {
-      email,
-    },
-    user,
-  }
+  // TODO: Can this happen? User/session are null without an error?
+  return null
 }
 
 /**
@@ -74,19 +75,6 @@ export const action: ActionFunction = async ({ request }) => {
  */
 export default function SignUp() {
   const actionData = useActionData<ActionData>()
-
-  // When user is returned, session was null so email needs to be confirmed
-  if (actionData?.user) {
-    return (
-      <div className="container">
-        <div className="content">
-          <h2>Confirm Email</h2>
-          <p>A confirmation email was sent to {actionData.fields?.email}.</p>
-          <p>Please confirm your email to continue.</p>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="container">
