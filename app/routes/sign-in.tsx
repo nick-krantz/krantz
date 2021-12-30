@@ -23,8 +23,8 @@ type ActionData = {
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Krantz - Sign Up',
-    description: 'Sign up using an email and password',
+    title: 'Krantz - Sign In',
+    description: 'Sign in using an email and password',
   }
 }
 
@@ -42,22 +42,21 @@ export const action: ActionFunction = async ({ request }) => {
 
   const fields = { email, password }
   const fieldErrors = {
-    email: validateEmail(email),
-    password: validatePassword(password),
+    email: validateEmail(email, false),
+    password: validatePassword(password, false),
   }
 
   if (Object.values(fieldErrors).some(Boolean)) {
     return badRequest({ fieldErrors, fields })
   }
 
-  // Note: supabase hashes passwords for us, no need to do that client side
-  const { user, session: supabaseSession, error } = await supabase.auth.signUp({ email, password }, { redirectTo })
-  // Sign up failed
+  const { user, session: supabaseSession, error } = await supabase.auth.signIn({ email, password })
+  // Sign in failed
   if (error) {
     return badRequest({ fields, formError: error.message }, error.status)
   }
 
-  //  take them to the recipe page
+  // Take user to the recipe page
   if (user !== null && supabaseSession !== null) {
     const session = await getSession(request.headers.get('Cookie'))
     session.set('access_token', supabaseSession.access_token)
@@ -73,15 +72,15 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 /**
- * SignUp form
+ * Sign In form
  */
-export default function SignUp() {
+export default function SignIn() {
   const actionData = useActionData<ActionData>()
 
   return (
     <div className="container">
       <div className="content">
-        <h1>Sign Up</h1>
+        <h1>Sign In</h1>
         <form method="post" aria-describedby={actionData?.formError ? 'form-error-message' : undefined}>
           <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
           <div>
@@ -94,7 +93,7 @@ export default function SignUp() {
             {actionData?.formError}
           </ErrorMessage>
           <button type="submit" className="button">
-            Sign Up
+            Sign In
           </button>
         </form>
       </div>
