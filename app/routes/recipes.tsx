@@ -1,4 +1,5 @@
-import { LoaderFunction, MetaFunction, redirect, useLoaderData } from 'remix'
+import { Box, Heading } from '@chakra-ui/react'
+import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { definitions } from 'types/supabase'
 import { RecipeList } from '~/components/recipe-list'
 import { authenticated } from '~/utils/supabase/authenticated'
@@ -24,9 +25,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Recipes() {
   const recipes = useLoaderData<definitions['recipes'][] | null>()
   return (
-    <div className="container">
-      Recipes
+    <Box textAlign="center">
+      <Heading>Recipes</Heading>
       {!!recipes && <RecipeList recipes={recipes} />}
-    </div>
+    </Box>
   )
 }

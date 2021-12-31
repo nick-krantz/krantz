@@ -1,7 +1,7 @@
+import { Alert, AlertDescription, AlertIcon, Button, CloseButton, Container, Heading, VStack } from '@chakra-ui/react'
 import { User } from '@supabase/supabase-js'
-import { ActionFunction, MetaFunction, redirect, useActionData } from 'remix'
+import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
 import { EmailInput } from '~/components/email-input'
-import { ErrorMessage } from '~/components/error-message'
 import { PasswordInput } from '~/components/password-input'
 import { badRequest } from '~/utils/network'
 import { commitSession, getSession } from '~/utils/supabase/get-session.server'
@@ -79,25 +79,25 @@ export default function SignUp() {
   const actionData = useActionData<ActionData>()
 
   return (
-    <div className="container">
-      <div className="content">
-        <h1>Sign Up</h1>
-        <form method="post" aria-describedby={actionData?.formError ? 'form-error-message' : undefined}>
+    <Container borderRadius="8px" marginTop="50px">
+      <Heading paddingTop="24px">Sign Up</Heading>
+      <Form method="post" aria-describedby={actionData?.formError ? 'form-error-message' : undefined}>
+        <VStack spacing="24px" align="stretch">
           <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
-          <div>
-            <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
-          </div>
-          <div>
-            <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
-          </div>
-          <ErrorMessage condition={actionData?.formError} id="form-error-message">
-            {actionData?.formError}
-          </ErrorMessage>
-          <button type="submit" className="button">
+          <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
+          <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
+          {!!actionData?.formError && (
+            <Alert status="error" id="form-error-message">
+              <AlertIcon />
+              <AlertDescription>{actionData.formError}</AlertDescription>
+              <CloseButton position="absolute" right="8px" top="8px" />
+            </Alert>
+          )}
+          <Button variant="solid" colorScheme="green" type="submit">
             Sign Up
-          </button>
-        </form>
-      </div>
-    </div>
+          </Button>
+        </VStack>
+      </Form>
+    </Container>
   )
 }

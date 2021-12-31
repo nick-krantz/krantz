@@ -1,4 +1,4 @@
-import { ErrorMessage } from '../error-message'
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
 
 type Props = {
   email?: string
@@ -7,19 +7,10 @@ type Props = {
 
 export const EmailInput: React.FC<Props> = ({ email, errorMessage }) => {
   return (
-    <>
-      <label htmlFor="email-input">Email</label>
-      <input
-        type="email"
-        id="email-input"
-        name="email"
-        defaultValue={email}
-        aria-invalid={Boolean(errorMessage)}
-        aria-describedby={errorMessage ? 'email-error' : undefined}
-      />
-      <ErrorMessage condition={errorMessage} id="email-error">
-        {errorMessage}
-      </ErrorMessage>
-    </>
+    <FormControl isInvalid={Boolean(errorMessage)}>
+      <FormLabel>Email</FormLabel>
+      <Input type="email" name="email" defaultValue={email} />
+      <FormErrorMessage>{errorMessage}</FormErrorMessage>
+    </FormControl>
   )
 }

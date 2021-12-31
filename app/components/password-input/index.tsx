@@ -1,4 +1,4 @@
-import { ErrorMessage } from '../error-message'
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
 
 type Props = {
   password?: string
@@ -7,19 +7,10 @@ type Props = {
 
 export const PasswordInput: React.FC<Props> = ({ password, errorMessage }) => {
   return (
-    <>
-      <label htmlFor="password-input">Password</label>
-      <input
-        type="password"
-        id="password-input"
-        name="password"
-        defaultValue={password}
-        aria-invalid={Boolean(errorMessage)}
-        aria-describedby={errorMessage ? 'password-error' : undefined}
-      />
-      <ErrorMessage condition={errorMessage} id="password-error">
-        {errorMessage}
-      </ErrorMessage>
-    </>
+    <FormControl isInvalid={Boolean(errorMessage)}>
+      <FormLabel>Password</FormLabel>
+      <Input type="password" name="password" defaultValue={password} />
+      <FormErrorMessage>{errorMessage}</FormErrorMessage>
+    </FormControl>
   )
 }

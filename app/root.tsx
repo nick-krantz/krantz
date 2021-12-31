@@ -1,3 +1,4 @@
+import { ChakraProvider, Flex } from '@chakra-ui/react'
 import type { LinksFunction } from 'remix'
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
 import globalStylesUrl from '~/styles/global.css'
@@ -104,8 +105,10 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="app">
-      <div className="main">{children}</div>
-    </div>
+    <ChakraProvider>
+      <Flex h="100%" w="100%" flexDirection="column">
+        {children}
+      </Flex>
+    </ChakraProvider>
   )
 }
