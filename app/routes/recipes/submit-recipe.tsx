@@ -84,7 +84,7 @@ export default function SubmitRecipe() {
         <ModalHeader>Edit Recipe</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <RecipeCard name={name} image={data?.image ?? actionData?.data.image} />
+          <RecipeCard name={name} image={data?.image ?? actionData?.data.image} url={data.recipeURL} preview />
           <Form
             id="submit-recipe-form"
             method="post"
