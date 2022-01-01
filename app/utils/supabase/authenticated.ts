@@ -13,8 +13,8 @@ export async function authenticated<T>(
   const session = await getSession(request.headers.get('Cookie'))
   try {
     const token = session.get('access_token')
-    const { user } = await supabase.auth.api.getUser(token)
-    if (token && user) {
+    const { user, error } = await supabase.auth.api.getUser(token)
+    if (token && user && !error) {
       return await callback({ token, user })
     }
     return unAuthorizedResponse(session)

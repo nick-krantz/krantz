@@ -79,8 +79,8 @@ export default function SignUp() {
   const actionData = useActionData<ActionData>()
 
   return (
-    <Container borderRadius="8px" marginTop="50px">
-      <Heading paddingTop="24px">Sign Up</Heading>
+    <Container borderRadius="8px" mt="50px">
+      <Heading pt="24px">Sign Up</Heading>
       <Form method="post" aria-describedby={actionData?.formError ? 'form-error-message' : undefined}>
         <VStack spacing="24px" align="stretch">
           <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
@@ -90,10 +90,9 @@ export default function SignUp() {
             <Alert status="error" id="form-error-message">
               <AlertIcon />
               <AlertDescription>{actionData.formError}</AlertDescription>
-              <CloseButton position="absolute" right="8px" top="8px" />
             </Alert>
           )}
-          <Button variant="solid" colorScheme="green" type="submit">
+          <Button colorScheme="green" type="submit">
             Sign Up
           </Button>
         </VStack>
