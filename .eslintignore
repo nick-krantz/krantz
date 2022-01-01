@@ -4,3 +4,4 @@ build
 .eslintrc.js
 remix.config.js
 .env
+api/_build
