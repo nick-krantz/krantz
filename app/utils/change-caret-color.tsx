@@ -4,7 +4,7 @@ type Partitions = { red: ConfigIndicator; green: ConfigIndicator; blue: ConfigIn
 /**
  * Based on the mouse/touch position change the color of the carets
  */
-function changeCaretColor(e: MouseEvent | TouchEvent) {
+export function changeCaretColor(e: MouseEvent | TouchEvent) {
   // 1/6 of the screen width
   const widthSixth = Math.ceil(window.innerWidth / 6)
   //  Max RGB value
@@ -68,18 +68,4 @@ function changeCaretColor(e: MouseEvent | TouchEvent) {
   const rgb = `rgb(${red}, ${green}, ${blue})`
   ;(document.querySelector('#openingCaret') as HTMLElement).style.fill = rgb
   ;(document.querySelector('#closingCaret') as HTMLElement).style.fill = rgb
-}
-
-export function ChangeCaretColor() {
-  return (
-    <script
-      type="text/javascript"
-      dangerouslySetInnerHTML={{
-        __html: `
-        document.addEventListener('mousemove', ${changeCaretColor});
-        document.addEventListener('touchmove', ${changeCaretColor});
-      `,
-      }}
-    />
-  )
 }

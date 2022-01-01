@@ -1,7 +1,8 @@
 import { Flex } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import type { LinksFunction, MetaFunction } from 'remix'
 import stylesUrl from '~/styles/index.css'
-import { ChangeCaretColor } from '~/utils/change-caret-color'
+import { changeCaretColor } from '~/utils/change-caret-color'
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: stylesUrl }]
@@ -15,12 +16,21 @@ export const meta: MetaFunction = () => {
 }
 
 export default function Index() {
+  useEffect(() => {
+    window.addEventListener('mousemove', changeCaretColor)
+    window.addEventListener('touchmove', changeCaretColor)
+
+    return () => {
+      window.removeEventListener('mousemove', changeCaretColor)
+      window.removeEventListener('touchmove', changeCaretColor)
+    }
+  }, [])
+
   return (
     <Flex h="100%">
       <Flex justifyContent="center" alignItems="center" w="100%">
         <Logo />
       </Flex>
-      <ChangeCaretColor />
     </Flex>
   )
 }
