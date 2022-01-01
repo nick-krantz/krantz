@@ -20,3 +20,4 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [x] submit-recipe, find a cleaner way to determine where data should come from
 - [x] ~~Modal - focus on input first rather than close button.~~ This is by default, so I'm going to leave it as standard behavior.
 - [x] Min width of recipe icons
+- [ ] Update Catch & Error boundary html & styles

@@ -1,6 +1,7 @@
-import { ChakraProvider, Flex } from '@chakra-ui/react'
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
 import type { LinksFunction } from 'remix'
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
+import { Footer } from '~/components/footer'
 import globalStylesUrl from '~/styles/global.css'
 
 // https://remix.run/api/app#links
@@ -107,7 +108,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <ChakraProvider>
       <Flex h="100%" w="100%" flexDirection="column">
-        {children}
+        <Box flex="1">{children}</Box>
+        <Footer />
       </Flex>
     </ChakraProvider>
   )
