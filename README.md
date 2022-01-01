@@ -16,4 +16,4 @@ TODO:
 - [x] eslint unused imports should be an error
 - [ ] submit-recipe, find a cleaner way to determine where data should come from
 - [ ] Modal - focus on input first rather than close button
-- [ ] Min width of recipe icons
+- [x] Min width of recipe icons
