@@ -1,5 +1,5 @@
 import { SimpleGrid } from '@chakra-ui/react'
-import { Recipe } from 'types'
+import { Recipe } from '~/types'
 import { RecipeCard } from '../recipe-card'
 
 type Props = {

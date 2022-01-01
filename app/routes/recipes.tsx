@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading } from '@chakra-ui/react'
 import { Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
-import { Recipe } from 'types'
 import { RecipeList } from '~/components/recipe-list'
+import { Recipe } from '~/types'
 import { authenticated } from '~/utils/supabase/authenticated'
 import { supabase } from '~/utils/supabase/index.server'
 

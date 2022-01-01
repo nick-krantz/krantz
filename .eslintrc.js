@@ -41,6 +41,7 @@ module.exports = {
           { pattern: '~/components/**', group: 'internal' },
           { pattern: '~/routes/**', group: 'internal' },
           { pattern: '~/styles/**', group: 'internal' },
+          { pattern: '~/types', group: 'internal' },
           { pattern: '~/utils/**', group: 'internal' },
         ],
         pathGroupsExcludedImportTypes: [],
