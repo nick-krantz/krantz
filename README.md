@@ -14,6 +14,6 @@ TODO:
 - [ ] Make DB types more developer friendly
 - [x] Figure out why I need to use `--ignore-engines` so often when installing packages
 - [x] eslint unused imports should be an error
-- [ ] submit-recipe, find a cleaner way to determine where data should come from
+- [x] submit-recipe, find a cleaner way to determine where data should come from
 - [x] ~~Modal - focus on input first rather than close button.~~ This is by default, so I'm going to leave it as standard behavior.
 - [x] Min width of recipe icons

@@ -68,10 +68,13 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function SubmitRecipe() {
   const navigation = useNavigate()
-  const data = useLoaderData<LoaderData>()
+  const loaderData = useLoaderData<LoaderData>()
   const actionData = useActionData<ActionData>()
 
-  const [name, setRecipeName] = useState<string>(data?.name || actionData?.data?.name || '')
+  // loaderData should take precedence over actionData
+  const image = loaderData?.name || actionData?.data?.name || ''
+  const url = loaderData?.recipeURL || actionData?.data.recipeURL || ''
+  const [name, setRecipeName] = useState<string>(loaderData?.name || actionData?.data?.name || '')
 
   const close = () => {
     navigation('/recipes')
@@ -84,14 +87,14 @@ export default function SubmitRecipe() {
         <ModalHeader>Edit Recipe</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <RecipeCard name={name} image={data?.image ?? actionData?.data.image} url={data.recipeURL} preview />
+          <RecipeCard name={name} image={image} url={url} preview />
           <Form
             id="submit-recipe-form"
             method="post"
             aria-describedby={actionData?.error?.message ? 'form-error-message' : undefined}
           >
-            <input type="hidden" name="url" defaultValue={data?.recipeURL ?? actionData?.data.recipeURL} />
-            <input type="hidden" name="image" defaultValue={data?.image ?? actionData?.data.image} />
+            <input type="hidden" name="url" defaultValue={url} />
+            <input type="hidden" name="image" defaultValue={image} />
             <FormControl isInvalid={!name} mt="24px">
               <FormLabel>Title</FormLabel>
               <Textarea
