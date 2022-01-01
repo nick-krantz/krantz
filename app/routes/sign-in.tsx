@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertIcon, Button, CloseButton, Container, Heading, VStack } from '@chakra-ui/react'
+import { Alert, AlertDescription, AlertIcon, Button, Container, Heading, VStack } from '@chakra-ui/react'
 import { User } from '@supabase/supabase-js'
 import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
 import { EmailInput } from '~/components/email-input'

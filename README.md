@@ -13,7 +13,7 @@ TODO:
 - [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
 - [ ] Make DB types more developer friendly
 - [ ] Figure out why I need to use `--ignore-engines` so often when installing packages
-- [ ] eslint unused imports should be an error
+- [x] eslint unused imports should be an error
 - [ ] submit-recipe, find a cleaner way to determine where data should come from
 - [ ] Modal - focus on input first rather than close button
 - [ ] Min width of recipe icons

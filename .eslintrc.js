@@ -30,6 +30,7 @@ module.exports = {
     semi: 0,
     singleQuote: 0,
     eqeqeq: [ 'error' ],
+    '@typescript-eslint/no-unused-vars': [ 'error' ],
     '@typescript-eslint/indent': 0,
     '@typescript-eslint/no-empty-interface': 0,
     'import/order': [
