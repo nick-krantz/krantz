@@ -11,7 +11,7 @@ TODO:
 - [x] Move `access_token` string to a constant, because constants are better and cooler.
 - [ ] Flush out readme with better information about packages/tech/things used.
 - [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
-- [ ] Make DB types more developer friendly
+- [x] Make DB types more developer friendly
 - [x] Figure out why I need to use `--ignore-engines` so often when installing packages
 - [x] eslint unused imports should be an error
 - [x] submit-recipe, find a cleaner way to determine where data should come from

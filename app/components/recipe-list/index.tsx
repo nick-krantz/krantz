@@ -1,9 +1,9 @@
 import { SimpleGrid } from '@chakra-ui/react'
-import { definitions } from 'types/supabase'
+import { Recipe } from 'types'
 import { RecipeCard } from '../recipe-card'
 
 type Props = {
-  recipes: definitions['recipes'][]
+  recipes: Recipe[]
 }
 
 export const RecipeList: React.FC<Props> = ({ recipes }) => {
