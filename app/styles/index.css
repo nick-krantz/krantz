@@ -4,5 +4,5 @@ svg {
 }
 
 svg > #k {
-  fill: var(--chakra-colors-gray-800);
+  fill: currentColor;
 }
