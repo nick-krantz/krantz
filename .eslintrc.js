@@ -37,6 +37,7 @@ module.exports = {
       'error',
       {
         pathGroups: [
+          { pattern: '~/constants/**', group: 'internal' },
           { pattern: '~/components/**', group: 'internal' },
           { pattern: '~/routes/**', group: 'internal' },
           { pattern: '~/styles/**', group: 'internal' },

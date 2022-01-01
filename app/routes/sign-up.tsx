@@ -3,6 +3,7 @@ import { User } from '@supabase/supabase-js'
 import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
 import { EmailInput } from '~/components/email-input'
 import { PasswordInput } from '~/components/password-input'
+import { ACCESS_TOKEN } from '~/constants/access-token'
 import { badRequest } from '~/utils/network'
 import { commitSession, getSession } from '~/utils/supabase/get-session.server'
 import { supabase } from '~/utils/supabase/index.server'
@@ -60,7 +61,7 @@ export const action: ActionFunction = async ({ request }) => {
   //  take them to the recipe page
   if (user !== null && supabaseSession !== null) {
     const session = await getSession(request.headers.get('Cookie'))
-    session.set('access_token', supabaseSession.access_token)
+    session.set(ACCESS_TOKEN, supabaseSession.access_token)
     return redirect('recipes', {
       headers: {
         'Set-Cookie': await commitSession(session),
