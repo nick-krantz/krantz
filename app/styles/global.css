@@ -23,14 +23,3 @@ body {
 body {
   line-height: 1.5;
 }
-
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: calc(100vh - env(safe-area-inset-bottom));
-}
-
-.app > * {
-  width: 100%;
-}
