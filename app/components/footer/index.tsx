@@ -12,7 +12,7 @@ const linkHover: CSSObject = {
 
 export const Footer: React.FC = () => (
   <Flex p="20px" m="0 auto" maxW="400px" width="100%" justifyContent="space-around">
-    <Link href="mailto:krantznicholas@gmail.com" _hover={linkHover} isExternal>
+    <Link href="mailto:krantznicholas@gmail.com" _hover={linkHover}>
       <EmailIcon />
     </Link>
     <Link href="https://github.com/nick-krantz" _hover={linkHover} isExternal>
