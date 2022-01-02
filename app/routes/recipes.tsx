@@ -1,5 +1,6 @@
-import { Box, Button, Flex, Heading } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
+import { Header } from '~/components/header'
 import { RecipeList } from '~/components/recipe-list'
 import { Recipe } from '~/types'
 import { authenticated } from '~/utils/supabase/authenticated'
@@ -26,13 +27,11 @@ export default function Recipes() {
   const recipes = useLoaderData<Recipe[] | null>()
   return (
     <Box textAlign="center">
-      <Flex justifyContent="space-between" p="32px">
-        <div></div> {/* empty div for alignment */}
-        <Heading>Recipes</Heading>
+      <Header title="Recipes">
         <Link to="./fetch-recipe">
           <Button colorScheme="green"> Add Recipe</Button>
         </Link>
-      </Flex>
+      </Header>
       {!!recipes && <RecipeList recipes={recipes} />}
       <Outlet />
     </Box>

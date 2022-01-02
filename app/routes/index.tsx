@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react'
 import { useEffect } from 'react'
 import type { LinksFunction, MetaFunction } from 'remix'
+import { Header } from '~/components/header'
 import stylesUrl from '~/styles/index.css'
 import { changeCaretColor } from '~/utils/change-caret-color'
 
@@ -27,11 +28,14 @@ export default function Index() {
   }, [])
 
   return (
-    <Flex h="100%">
-      <Flex justifyContent="center" alignItems="center" w="100%">
-        <Logo />
+    <>
+      <Header />
+      <Flex h="100%">
+        <Flex justifyContent="center" alignItems="center" w="100%">
+          <Logo />
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   )
 }
 
