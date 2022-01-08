@@ -65,7 +65,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
           </button>
         </Header>
         <div className="flex items-center justify-center flex-col h-full">
-          <h1>There was an error</h1>
+          <h1 className="text-3xl font-semibold">There was an error</h1>
           <p>Use the back button in the upper right or your browsers back button to return to your last page.</p>
           <br></br>
           <code>Error: {error.message}</code>
@@ -87,7 +87,7 @@ export function CatchBoundary() {
           </Link>
         </Header>
         <div className="flex items-center justify-center h-full">
-          <h1>
+          <h1 className="text-3xl font-semibold">
             {caught.status}: {caught.statusText}
           </h1>
         </div>

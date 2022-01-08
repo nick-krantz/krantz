@@ -2,17 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  h1 {
-    @apply text-3xl;
-    @apply font-semibold;
-  }
-  h2 {
-    @apply text-2xl;
-    @apply font-semibold;
-  }
-}
-
 html {
   box-sizing: border-box;
 }
