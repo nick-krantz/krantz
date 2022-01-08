@@ -1,14 +1,14 @@
-import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
 import type { LinksFunction } from 'remix'
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
 import { Footer } from '~/components/footer'
-import { theme } from '~/styles/chakra/theme'
 import globalStylesUrl from '~/styles/global.css'
+import styles from './tailwind.css'
 
 // https://remix.run/api/app#links
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: globalStylesUrl },
+    { rel: 'stylesheet', href: styles },
     {
       rel: 'icon',
       href: 'favicon-dark.ico',
@@ -95,7 +95,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -107,11 +107,9 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <ChakraProvider theme={theme}>
-      <Flex h="100%" w="100%" flexDirection="column">
-        <Box flex="1">{children}</Box>
-        <Footer />
-      </Flex>
-    </ChakraProvider>
+    <div className="flex flex-col h-full w-full">
+      <div className="flex-1">{children}</div>
+      <Footer />
+    </div>
   )
 }

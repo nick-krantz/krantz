@@ -1,4 +1,3 @@
-import { SimpleGrid } from '@chakra-ui/react'
 import { Recipe } from '~/types'
 import { RecipeCard } from '../recipe-card'
 
@@ -8,10 +7,10 @@ type Props = {
 
 export const RecipeList: React.FC<Props> = ({ recipes }) => {
   return (
-    <SimpleGrid minChildWidth="240px" spacing="35px" m="40px" justifyItems="center">
+    <div className="grid gap-8 justify-center m-10 grid-cols-recipe-grid max-w-screen-xl mx-auto">
       {recipes.map((recipe) => (
         <RecipeCard key={recipe.id} image={recipe.image || ''} {...recipe} />
       ))}
-    </SimpleGrid>
+    </div>
   )
 }

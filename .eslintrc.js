@@ -23,7 +23,11 @@ module.exports = {
     "import/resolver": {
       typescript: {} // this loads <rootdir>/tsconfig.json to eslint
     },
-
+  },
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true,
   },
   rules: {
     indent: 0,

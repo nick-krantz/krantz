@@ -4,7 +4,7 @@
 
 Framework: [react](https://reactjs.org/) & [remix](https://remix.run)  
 Auth & Database: [supabase](https://supabase.com/)  
-UI Components: [chakra](https://chakra-ui.com/)  
+UI Styling: [tailwindcss](https://tailwindcss.com/)  
 Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)  
 
 ## Todo

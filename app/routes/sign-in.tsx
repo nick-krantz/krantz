@@ -1,7 +1,8 @@
-import { Alert, AlertDescription, AlertIcon, Button, Container, VStack } from '@chakra-ui/react'
 import { User } from '@supabase/supabase-js'
 import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
+import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
+import { ErrorMessage } from '~/components/error-message'
 import { Header } from '~/components/header'
 import { PasswordInput } from '~/components/password-input'
 import { ACCESS_TOKEN } from '~/constants/access-token'
@@ -34,9 +35,8 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
   const email = form.get('email')
   const password = form.get('password')
-  const redirectTo = form.get('redirectTo')
 
-  if (typeof email !== 'string' || typeof password !== 'string' || typeof redirectTo !== 'string') {
+  if (typeof email !== 'string' || typeof password !== 'string') {
     return badRequest({
       formError: `Form not submitted correctly.`,
     })
@@ -78,28 +78,21 @@ export const action: ActionFunction = async ({ request }) => {
  */
 export default function SignIn() {
   const actionData = useActionData<ActionData>()
+  const hasError = Boolean(actionData?.formError)
 
   return (
     <>
       <Header title="Sign In" />
-      <Container borderRadius="8px" mt="50px">
-        <Form method="post" aria-describedby={actionData?.formError ? 'form-error-message' : undefined}>
-          <VStack spacing="24px" align="stretch">
-            <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
+      <div className="mt-20 px-4 mx-auto max-w-lg">
+        <Form method="post" aria-describedby={hasError ? 'form-error-message' : undefined}>
+          <div className="flex align-stretch flex-col gap-6">
             <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
             <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
-            {!!actionData?.formError && (
-              <Alert status="error" id="form-error-message">
-                <AlertIcon />
-                <AlertDescription>{actionData.formError}.</AlertDescription>
-              </Alert>
-            )}
-            <Button colorScheme="green" type="submit">
-              Sign In
-            </Button>
-          </VStack>
+            <ErrorMessage id="form-error-message">{actionData?.formError}</ErrorMessage>
+            <Button type="submit">Sign In</Button>
+          </div>
         </Form>
-      </Container>
+      </div>
     </>
   )
 }

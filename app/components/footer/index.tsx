@@ -1,28 +1,19 @@
-import { CSSObject, Flex, Link } from '@chakra-ui/react'
-import { EmailIcon } from '../icons/email'
-import { GitHubIcon } from '../icons/github'
-import { LinkedInIcon } from '../icons/linkedin'
-import { TwitterIcon } from '../icons/twitter'
-
-const linkHover: CSSObject = {
-  _hover: {
-    transform: `scale(1.2)`,
-  },
-}
+import { FiGithub, FiLinkedin, FiMail, FiTwitter } from 'react-icons/fi'
+import { Icon } from '../icons'
 
 export const Footer: React.FC = () => (
-  <Flex p="20px" m="0 auto" maxW="400px" width="100%" justifyContent="space-around">
-    <Link href="mailto:krantznicholas@gmail.com" _hover={linkHover}>
-      <EmailIcon />
-    </Link>
-    <Link href="https://github.com/nick-krantz" _hover={linkHover} isExternal>
-      <GitHubIcon />
-    </Link>
-    <Link href="https://www.linkedin.com/in/nicholaskrantz/" _hover={linkHover} isExternal>
-      <LinkedInIcon />
-    </Link>
-    <Link href="https://twitter.com/nick__krantz" _hover={linkHover} isExternal>
-      <TwitterIcon />
-    </Link>
-  </Flex>
+  <div className="flex p-5 my-0 mx-auto max-w-sm w-full justify-around">
+    <a href="mailto:krantznicholas@gmail.com" className="transition-transform duration-300 hover:scale-125">
+      <Icon Icon={FiMail} />
+    </a>
+    <a href="https://github.com/nick-krantz" className="transition-transform duration-300 hover:scale-125">
+      <Icon Icon={FiGithub} />
+    </a>
+    <a href="https://www.linkedin.com/in/nicholaskrantz/" className="transition-transform duration-300 hover:scale-125">
+      <Icon Icon={FiLinkedin} />
+    </a>
+    <a href="https://twitter.com/nick__krantz" className="transition-transform duration-300 hover:scale-125">
+      <Icon Icon={FiTwitter} />
+    </a>
+  </div>
 )

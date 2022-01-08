@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * @type {import('@remix-run/dev/config').AppConfig}
  */

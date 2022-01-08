@@ -1,5 +1,5 @@
-import { Box, Button } from '@chakra-ui/react'
 import { Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
+import { Button } from '~/components/button'
 import { Header } from '~/components/header'
 import { RecipeList } from '~/components/recipe-list'
 import { Recipe } from '~/types'
@@ -26,14 +26,14 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Recipes() {
   const recipes = useLoaderData<Recipe[] | null>()
   return (
-    <Box textAlign="center">
+    <div className="text-center">
       <Header title="Recipes">
         <Link to="./fetch-recipe">
-          <Button colorScheme="green"> Add Recipe</Button>
+          <Button>Add Recipe</Button>
         </Link>
       </Header>
       {!!recipes && <RecipeList recipes={recipes} />}
       <Outlet />
-    </Box>
+    </div>
   )
 }

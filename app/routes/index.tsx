@@ -1,13 +1,7 @@
-import { Flex } from '@chakra-ui/react'
 import { useEffect } from 'react'
-import type { LinksFunction, MetaFunction } from 'remix'
+import type { MetaFunction } from 'remix'
 import { Header } from '~/components/header'
-import stylesUrl from '~/styles/index.css'
 import { changeCaretColor } from '~/utils/change-caret-color'
-
-export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: stylesUrl }]
-}
 
 export const meta: MetaFunction = () => {
   return {
@@ -30,18 +24,18 @@ export default function Index() {
   return (
     <>
       <Header />
-      <Flex h="100%">
-        <Flex justifyContent="center" alignItems="center" w="100%">
+      <div className="flex h-full">
+        <div className="flex justify-center align-center w-full">
           <Logo />
-        </Flex>
-      </Flex>
+        </div>
+      </div>
     </>
   )
 }
 
 function Logo() {
   return (
-    <svg viewBox="0 0 436.986 257.953" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-full max-w-2xl" viewBox="0 0 436.986 257.953" xmlns="http://www.w3.org/2000/svg">
       <g transform="matrix(1.148174, 0, 0, 1.179296, 319.907816, 70.323626)">
         <g xmlns="http://www.w3.org/2000/svg" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g id="closingCaret" fill="#000">
@@ -49,7 +43,7 @@ function Logo() {
           </g>
         </g>
       </g>
-      <g id="k" transform="matrix(18.726593, 0, 0, 18.726593, 102.893733, -139.16959)" fill="#ffffff">
+      <g className="fill-current" transform="matrix(18.726593, 0, 0, 18.726593, 102.893733, -139.16959)" fill="#ffffff">
         <path d="M 1.093 20.569 C 0.953 20.569 0.833 20.449 0.833 20.309 L 0.833 8.329 C 0.833 8.189 0.953 8.069 1.093 8.069 L 3.693 8.069 C 3.833 8.069 3.953 8.189 3.953 8.329 L 3.953 11.869 L 7.573 8.149 C 7.633 8.109 7.693 8.069 7.773 8.069 L 10.793 8.069 C 10.893 8.069 10.993 8.129 11.033 8.209 C 11.073 8.309 11.053 8.409 10.993 8.489 L 6.953 12.809 L 11.453 20.149 C 11.493 20.189 11.513 20.249 11.513 20.309 C 11.513 20.449 11.393 20.569 11.253 20.569 L 8.133 20.569 C 8.053 20.569 7.973 20.529 7.933 20.449 L 4.633 14.869 L 3.953 15.469 L 3.953 20.309 C 3.953 20.449 3.833 20.569 3.693 20.569 L 1.093 20.569 Z" />
       </g>
       <g transform="matrix(1.148174, 0, 0, 1.179296, 3.592722, 70.011622)">

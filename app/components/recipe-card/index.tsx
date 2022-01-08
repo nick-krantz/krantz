@@ -1,6 +1,4 @@
-import { Box, Flex, IconButton, Text, VStack, Link } from '@chakra-ui/react'
-import { ExternalIcon } from '../icons/external'
-import { ShareIcon } from '../icons/share'
+import { FiExternalLink, FiShare2 } from 'react-icons/fi'
 
 type Props = {
   name: string
@@ -25,38 +23,37 @@ export const RecipeCard: React.FC<Props> = ({ name, image, url, preview }) => {
   }
 
   return (
-    <Flex
-      flexDirection="column"
-      w="100%"
-      boxShadow="md"
-      maxW="sm"
-      borderRadius="lg"
-      overflow="hidden"
-      border="1px solid #CBD5E0"
-    >
-      <Box
-        height="0"
-        paddingTop="60%"
-        bgImage={`url("${image}")`}
-        bgSize="cover"
-        bgPosition="center"
-        bgRepeat="no-repeat"
-      />
-      <VStack p="4" spacing="20px" alignItems="flex-start" height="100%" flex="1">
-        <Text fontWeight="semibold" textAlign="left" flex="1">
-          {name}
-        </Text>
-        <Flex width="100%" gap="10px">
-          <Link href={url} isExternal borderRadius="6px">
-            <IconButton aria-label={`Open ${name} link`} tabIndex={-1} disabled={preview}>
-              <ExternalIcon></ExternalIcon>
-            </IconButton>
-          </Link>
-          <IconButton aria-label={`Share ${name}`} onClick={share} disabled={preview}>
-            <ShareIcon />
-          </IconButton>
-        </Flex>
-      </VStack>
-    </Flex>
+    <div className="flex flex-col w-full rounded-md shadow-lg max-w-sm overflow-hidden border border-gray-800 dark:border-gray-200">
+      <div className={`h-0 pt-60% bg-cover bg-center bg-no-repeat`} style={{ backgroundImage: `url('${image}')` }} />
+      <div className="flex flex-col items-start h-full flex-1 p-4 gap-5">
+        <p className="font-semibold text-left flex-1">{name}</p>
+        <div className="flex w-full gap-3">
+          {preview ? (
+            <button
+              className="inline-flex items-center p-3 rounded-md text-gray-800 bg-gray-300 dark:text-gray-200 dark:bg-slate-700  disabled:opacity-50"
+              disabled={preview}
+            >
+              <FiExternalLink />
+            </button>
+          ) : (
+            <a
+              className="inline-flex items-center p-3 rounded-md text-gray-800 bg-gray-300 dark:text-gray-200 dark:bg-slate-700"
+              href={url}
+            >
+              <FiExternalLink />
+            </a>
+          )}
+
+          <button
+            className="inline-flex items-center p-3 rounded-md text-gray-800 bg-gray-300 dark:text-gray-200 dark:bg-slate-700  disabled:opacity-50"
+            aria-label={`Share ${name}`}
+            onClick={share}
+            disabled={preview}
+          >
+            <FiShare2 />
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }

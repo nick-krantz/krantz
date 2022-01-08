@@ -1,7 +1,8 @@
-import { Alert, AlertDescription, AlertIcon, Button, Container, VStack } from '@chakra-ui/react'
 import { User } from '@supabase/supabase-js'
 import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
+import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
+import { ErrorMessage } from '~/components/error-message'
 import { Header } from '~/components/header'
 import { PasswordInput } from '~/components/password-input'
 import { ACCESS_TOKEN } from '~/constants/access-token'
@@ -79,28 +80,22 @@ export const action: ActionFunction = async ({ request }) => {
  */
 export default function SignUp() {
   const actionData = useActionData<ActionData>()
+  const hasError = Boolean(actionData?.formError)
 
   return (
     <>
       <Header title="Sign Up" />
-      <Container borderRadius="8px" mt="50px">
-        <Form method="post" aria-describedby={actionData?.formError ? 'form-error-message' : undefined}>
-          <VStack spacing="24px" align="stretch">
+      <div className="mt-20 px-4 mx-auto max-w-lg">
+        <Form method="post" aria-describedby={hasError ? 'form-error-message' : undefined}>
+          <div className="flex align-stretch flex-col gap-6">
             <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
             <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
             <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
-            {!!actionData?.formError && (
-              <Alert status="error" id="form-error-message">
-                <AlertIcon />
-                <AlertDescription>{actionData.formError}</AlertDescription>
-              </Alert>
-            )}
-            <Button colorScheme="green" type="submit">
-              Sign Up
-            </Button>
-          </VStack>
+            <ErrorMessage id="form-error-message">{actionData?.formError}</ErrorMessage>
+            <Button type="submit">Sign Up</Button>
+          </div>
         </Form>
-      </Container>
+      </div>
     </>
   )
 }
