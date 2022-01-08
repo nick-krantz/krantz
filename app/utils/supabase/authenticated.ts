@@ -9,15 +9,23 @@ import { supabase } from './index.server'
  */
 export async function authenticated<T>(
   request: Request,
-  callback: (params: { token: string; user: User }) => Promise<T>,
+  callback: (params: { user: User | null; authorized: boolean }) => Promise<T>,
+  guardedRoute = true,
 ) {
   const session = await getSession(request.headers.get('Cookie'))
   try {
     const token = session.get(ACCESS_TOKEN)
+
     const { user, error } = await supabase.auth.api.getUser(token)
-    if (token && user && !error) {
-      return await callback({ token, user })
+
+    if (!guardedRoute && user === null) {
+      return await callback({ user, authorized: false })
     }
+
+    if (!error) {
+      return await callback({ user, authorized: true })
+    }
+
     return unAuthorizedResponse(session)
   } catch {
     return unAuthorizedResponse(session)

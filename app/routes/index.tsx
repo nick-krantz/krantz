@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
-import type { MetaFunction } from 'remix'
+import { Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { Button } from '~/components/button'
 import { Header } from '~/components/header'
 import { changeCaretColor } from '~/utils/change-caret-color'
+import { authenticated } from '~/utils/supabase/authenticated'
 
 export const meta: MetaFunction = () => {
   return {
@@ -10,7 +12,19 @@ export const meta: MetaFunction = () => {
   }
 }
 
+export const loader: LoaderFunction = ({ request }) => {
+  return authenticated(
+    request,
+    ({ authorized }) => {
+      return Promise.resolve(authorized)
+    },
+    false,
+  )
+}
+
 export default function Index() {
+  const authorized = useLoaderData<boolean>()
+
   useEffect(() => {
     window.addEventListener('mousemove', changeCaretColor)
     window.addEventListener('touchmove', changeCaretColor)
@@ -22,14 +36,22 @@ export default function Index() {
   }, [])
 
   return (
-    <>
-      <Header />
+    <div className="flex flex-col h-full">
+      <Header>
+        {authorized ? null : (
+          <Link to="/sign-in" aria-labelledby="sign-in-button">
+            <Button id="sign-in-button" tabIndex={-1}>
+              Sign In
+            </Button>
+          </Link>
+        )}
+      </Header>
       <div className="flex h-full">
         <div className="flex justify-center align-center w-full">
           <Logo />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

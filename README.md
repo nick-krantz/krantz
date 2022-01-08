@@ -22,5 +22,5 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [x] Min width of recipe icons
 - [x] Update Catch & Error boundary html & styles
 - [ ] Update metadata for search engines / previews
-- [ ] make dark/light mode toggle include moon/sun icons
+- [ ] make dark/light mode toggle
 - [ ] add testing
