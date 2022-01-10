@@ -24,3 +24,4 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] Update metadata for search engines / previews
 - [ ] make dark/light mode toggle
 - [ ] add testing
+- [ ] add RGBA to color route
