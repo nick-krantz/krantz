@@ -71,7 +71,9 @@ export default function Color() {
     const hexString = hex.replace('#', '')
 
     if (isValidHEXValue(hexString)) {
-      setColor(standardizeHEX(hex))
+      const newHex = standardizeHEX(hex)
+      setColor(newHex)
+      setFieldValue('#hex-input', newHex)
     } else {
       setFieldValue('#hex-input', color)
     }
@@ -81,7 +83,9 @@ export default function Color() {
     const rgbArr = rgbToRGBArray(rgb)
     if (rgbArr) {
       const [red, green, blue] = rgbArr
-      setColor(RGBToHEX(red, green, blue) ?? fallbackRGBColor)
+      const hex = RGBToHEX(red, green, blue)
+      setColor(hex ?? fallbackRGBColor)
+      setFieldValue('#hex-input', hex ?? fallbackRGBColor)
     } else {
       setFieldValue('#rgb-input', HEXtoRGB(color) ?? fallbackRGBColor)
     }
