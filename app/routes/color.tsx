@@ -97,12 +97,21 @@ export default function Color() {
     <div className="flex flex-col">
       <Header authorized={authorized} title="Convert Colors" />
       <div className="flex flex-col text-center max-w-md mx-auto gap-8 w-full">
-        <h2 className="text-xl">RGB to HEX to RGB</h2>
+        <section className="text-left">
+          <h2 className="text-2xl">Usage:</h2>
+          <p>Enter a HEX or RGB value to convert the color to the other format.</p>
+          <br />
+          <p>
+            This can be via the URL using query params: <br />
+            <code>/color?hex=323299</code> <br />
+            <code>/color?rgb=233,123,9</code> <br />
+          </p>
+        </section>
         <div
-          className="w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
+          className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
           style={{ backgroundColor: color }}
         ></div>
-        <div className="grid grid-cols-2 justify-items-center">
+        <div className="flex flex-wrap gap-4 justify-items-center w-full">
           <Field
             labelProps={{ htmlFor: 'hex-input' }}
             inputProps={{

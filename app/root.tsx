@@ -99,7 +99,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full p-5">
       <div className="flex-1">{children}</div>
       <Footer />
     </div>

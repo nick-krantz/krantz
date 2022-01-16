@@ -27,7 +27,7 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] add RGBA to color route
 - [ ] add sign out
 - [x] trap focus in menu
-- [ ] add usage to color route
+- [x] add usage to color route
 - [ ] add edit for recipes
 - [x] change authenticated param order, guardedRoute should be before the callback 
 - [ ] dynamic theme-color meta tag based on user preference

@@ -4,7 +4,7 @@ type Props = {
 }
 
 export const Field: React.FC<Props> = ({ children, labelProps, inputProps }) => (
-  <div className="flex flex-col items-start">
+  <div className="flex flex-col items-start w-inherit">
     <label className="mb-2 font-semibold" {...labelProps}>
       {children}
     </label>
