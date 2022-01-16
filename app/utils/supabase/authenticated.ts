@@ -9,8 +9,8 @@ import { supabase } from './index.server'
  */
 export async function authenticated<T>(
   request: Request,
+  guardedRoute: boolean,
   callback: (params: { user: User | null; authorized: boolean }) => Promise<T | Response>,
-  guardedRoute = true,
 ) {
   const session = await getSession(request.headers.get('Cookie'))
   try {

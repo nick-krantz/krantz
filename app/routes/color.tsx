@@ -54,17 +54,13 @@ const getDefaultColor = (hex: string | null, rgb: string | null): string => {
  * Returns HEX and RGB query params
  */
 export const loader: LoaderFunction = ({ request }) => {
-  return authenticated(
-    request,
-    ({ authorized }) => {
-      const url = new URL(request.url)
-      const rgb = url.searchParams.get('rgb')
-      const hex = url.searchParams.get('hex')
+  return authenticated(request, false, ({ authorized }) => {
+    const url = new URL(request.url)
+    const rgb = url.searchParams.get('rgb')
+    const hex = url.searchParams.get('hex')
 
-      return Promise.resolve({ hex, rgb, authorized })
-    },
-    false,
-  )
+    return Promise.resolve({ hex, rgb, authorized })
+  })
 }
 
 export default function Color() {

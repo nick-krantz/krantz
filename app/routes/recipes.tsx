@@ -19,7 +19,7 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(request, async ({ authorized }) => {
+  return authenticated(request, true, async ({ authorized }) => {
     const { data: recipes } = await supabase.from<Recipe>('recipes').select()
     return { recipes, authorized }
   })

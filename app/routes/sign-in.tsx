@@ -33,16 +33,12 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(
-    request,
-    ({ authorized }) => {
-      if (authorized) {
-        return Promise.resolve(redirect('./'))
-      }
-      return Promise.resolve({ authorized })
-    },
-    false,
-  )
+  return authenticated(request, false, ({ authorized }) => {
+    if (authorized) {
+      return Promise.resolve(redirect('./'))
+    }
+    return Promise.resolve({ authorized })
+  })
 }
 
 export const action: ActionFunction = async ({ request }) => {

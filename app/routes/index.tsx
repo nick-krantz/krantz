@@ -12,13 +12,9 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader: LoaderFunction = ({ request }) => {
-  return authenticated(
-    request,
-    ({ authorized }) => {
-      return Promise.resolve({ authorized })
-    },
-    false,
-  )
+  return authenticated(request, false, ({ authorized }) => {
+    return Promise.resolve({ authorized })
+  })
 }
 
 export default function Index() {
