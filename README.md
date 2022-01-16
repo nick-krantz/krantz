@@ -31,5 +31,5 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] add edit for recipes
 - [x] change authenticated param order, guardedRoute should be before the callback 
 - [ ] dynamic theme-color meta tag based on user preference
-- [ ] add active state to menu nav items
+- [x] add active state to menu nav items
 - [ ] initial focus on menu close button
