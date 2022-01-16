@@ -24,7 +24,7 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "/recipes",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#1f2937",
   "background_color": "#1f2937"
