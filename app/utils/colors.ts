@@ -24,18 +24,24 @@ export const standardizeHEX = (hex: string): string => {
 }
 
 /**
- * Converts an RGB string into array if valid otherwise null
+ * Converts an RGB(A) string into array if valid otherwise null
  *
- * @returns [red, green, blue]
+ * @returns [red, green, blue] or [red, green, blue, alpha]
  */
-export const rgbToRGBArray = (rgb: string): [number, number, number] | null => {
+export const rgbToRGBArray = (rgb: string): [number, number, number] | [number, number, number, number] | null => {
   const rgbArr = rgb.split(',')
 
-  if (rgbArr.length === 3) {
-    const [redStr, greenStr, blueStr] = rgbArr
+  if (rgbArr.length === 3 || rgbArr.length === 4) {
+    const [redStr, greenStr, blueStr, alphaStr] = rgbArr
     const red = parseInt(redStr, 10)
     const green = parseInt(greenStr, 10)
     const blue = parseInt(blueStr, 10)
+
+    if (alphaStr) {
+      const alpha = parseFloat(alphaStr)
+      if ([red, green, blue, alpha].filter(isNaN).length) return null
+      return [red, green, blue, alpha]
+    }
 
     if ([red, green, blue].filter(isNaN).length) return null
 
@@ -46,26 +52,32 @@ export const rgbToRGBArray = (rgb: string): [number, number, number] | null => {
 }
 
 /**
- * Converts RGB value to the HEX representation.
+ * Converts RGB/RGBA value to the HEX representation.
  *
  * Returns null if invalid inputs are given for any RGB input.
  */
-export const RGBToHEX = (r: number, g: number, b: number): string | null => {
-  const allValidInputs = [r, g, b].reduce((accum, color) => {
+export const RGBToHEX = (r: number, g: number, b: number, a?: number): string | null => {
+  const allValidRGBInputs = [r, g, b].reduce((accum, color) => {
     return accum && color >= 0 && color <= 255
   }, true)
 
-  if (!allValidInputs) return null
+  // Check for valid RGB inputs
+  if (!allValidRGBInputs) return null
+
+  // Check for valid alpha value if defined
+  if (a && (a < 0 || a > 1)) return null
 
   let red = r.toString(16)
   let green = g.toString(16)
   let blue = b.toString(16)
+  let alpha = a !== undefined ? Math.round(a * 255).toString(16) : ''
 
   if (red.length === 1) red = '0' + red
   if (green.length === 1) green = '0' + green
   if (blue.length === 1) blue = '0' + blue
+  if (alpha.length === 1) alpha = '0' + alpha
 
-  return '#' + red + green + blue
+  return '#' + red + green + blue + alpha
 }
 
 /**

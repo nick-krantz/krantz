@@ -39,9 +39,9 @@ const getDefaultColor = (hex: string | null, rgb: string | null): string => {
 
   if (hexValue && isValidHEXValue(hexValue)) {
     return standardizeHEX(hexValue)
-  } else if (rgbArr?.length === 3) {
-    const [r, g, b] = rgbArr
-    return RGBToHEX(r, g, b) ?? fallbackHEXColor
+  } else if (rgbArr?.length === 3 || rgbArr?.length === 4) {
+    const [r, g, b, a] = rgbArr
+    return RGBToHEX(r, g, b, a) ?? fallbackHEXColor
   }
 
   return (
@@ -96,22 +96,23 @@ export default function Color() {
   return (
     <div className="flex flex-col">
       <Header authorized={authorized} title="Convert Colors" />
-      <div className="flex flex-col text-center max-w-md mx-auto gap-8 w-full">
+      <div className="flex flex-col text-center max-w-2xl mx-auto gap-8 w-full">
         <section className="text-left">
           <h2 className="text-2xl">Usage:</h2>
-          <p>Enter a HEX or RGB value to convert the color to the other format.</p>
+          <p>Enter a HEX, RGB, or RGBA value to convert the color to the other format.</p>
           <br />
           <p>
             This can be via the URL using query params: <br />
             <code>/color?hex=323299</code> <br />
             <code>/color?rgb=233,123,9</code> <br />
+            <code>/color?rgb=22,123,229,.45</code> <br />
           </p>
         </section>
         <div
           className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
           style={{ backgroundColor: color }}
         ></div>
-        <div className="flex flex-wrap gap-4 justify-items-center w-full">
+        <div className="flex flex-wrap gap-4 w-full">
           <Field
             labelProps={{ htmlFor: 'hex-input' }}
             inputProps={{
@@ -132,7 +133,7 @@ export default function Color() {
               onBlur: (e) => rgbChange(e.target.value),
             }}
           >
-            RGB
+            RGB / RGBA
           </Field>
         </div>
       </div>
