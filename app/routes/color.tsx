@@ -3,7 +3,7 @@ import { FiHome } from 'react-icons/fi'
 import { Link, LoaderFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
 import { Header } from '~/components/header'
-import { Icon } from '~/components/icons'
+import { Icon } from '~/components/icon'
 import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } from '~/utils/colors'
 
 type LoaderData = {

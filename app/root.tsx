@@ -14,7 +14,7 @@ import {
 import { Footer } from '~/components/footer'
 import globalStylesUrl from '~/styles/global.css'
 import { Header } from './components/header'
-import { Icon } from './components/icons'
+import { Icon } from './components/icon'
 import styles from './tailwind.css'
 
 // https://remix.run/api/app#links
