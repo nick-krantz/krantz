@@ -1,5 +1,5 @@
 import { User } from '@supabase/supabase-js'
-import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
+import { ActionFunction, Form, LoaderFunction, MetaFunction, redirect, useActionData, useLoaderData } from 'remix'
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
 import { ErrorMessage } from '~/components/error-message'
@@ -7,6 +7,7 @@ import { Header } from '~/components/header'
 import { PasswordInput } from '~/components/password-input'
 import { ACCESS_TOKEN } from '~/constants/access-token'
 import { badRequest } from '~/utils/network'
+import { authenticated } from '~/utils/supabase/authenticated'
 import { commitSession, getSession } from '~/utils/supabase/get-session.server'
 import { supabase } from '~/utils/supabase/index.server'
 import { validateEmail, validatePassword } from '~/utils/validation'
@@ -29,6 +30,15 @@ export const meta: MetaFunction = () => {
     title: 'Krantz - Sign In',
     description: 'Sign in using an email and password',
   }
+}
+
+export const loader: LoaderFunction = async ({ request }) => {
+  return authenticated(request, false, ({ authorized }) => {
+    if (authorized) {
+      return Promise.resolve(redirect('./'))
+    }
+    return Promise.resolve({ authorized })
+  })
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -78,11 +88,12 @@ export const action: ActionFunction = async ({ request }) => {
  */
 export default function SignIn() {
   const actionData = useActionData<ActionData>()
+  const { authorized } = useLoaderData()
   const hasError = Boolean(actionData?.formError)
 
   return (
     <>
-      <Header title="Sign In" />
+      <Header authorized={authorized} title="Sign In" />
       <div className="mt-20 px-4 mx-auto max-w-lg">
         <Form method="post" aria-describedby={hasError ? 'form-error-message' : undefined}>
           <div className="flex align-stretch flex-col gap-6">

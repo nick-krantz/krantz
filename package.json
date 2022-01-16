@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {
     "build": "yarn build:css && remix build",
-    "build:css": "tailwindcss -o ./app/tailwind.css",
+    "build:css": "tailwindcss -i ./app/styles/global.css -o ./app/tailwind.css --minify",
     "dev": "concurrently \"yarn dev:css\" \"node -r dotenv/config ./node_modules/@remix-run/dev/cli.js\"",
     "dev:css": "tailwindcss -i ./app/styles/global.css -o ./app/tailwind.css --watch",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet --fix",

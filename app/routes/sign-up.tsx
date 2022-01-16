@@ -84,7 +84,7 @@ export default function SignUp() {
 
   return (
     <>
-      <Header title="Sign Up" />
+      <Header authorized={false} title="Sign Up" />
       <div className="mt-20 px-4 mx-auto max-w-lg">
         <Form method="post" aria-describedby={hasError ? 'form-error-message' : undefined}>
           <div className="flex align-stretch flex-col gap-6">

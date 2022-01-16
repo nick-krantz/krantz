@@ -1,5 +1,5 @@
 import { FiGithub, FiLinkedin, FiMail, FiTwitter } from 'react-icons/fi'
-import { Icon } from '../icons'
+import { Icon } from '../icon'
 
 export const Footer: React.FC = () => (
   <div className="flex p-5 my-0 mx-auto max-w-sm w-full justify-around">

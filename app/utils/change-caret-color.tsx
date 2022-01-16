@@ -5,6 +5,10 @@ type Partitions = { red: ConfigIndicator; green: ConfigIndicator; blue: ConfigIn
  * Based on the mouse/touch position change the color of the carets
  */
 export function changeCaretColor(e: MouseEvent | TouchEvent) {
+  const body = document.querySelector('body')
+  // Skip color change if menu is open
+  if (body?.classList.contains('menu-open')) return
+
   // 1/6 of the screen width
   const widthSixth = Math.ceil(window.innerWidth / 6)
   //  Max RGB value

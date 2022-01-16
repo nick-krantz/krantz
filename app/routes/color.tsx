@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { FiHome } from 'react-icons/fi'
-import { Link, LoaderFunction, useLoaderData } from 'remix'
+import { LoaderFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
 import { Header } from '~/components/header'
-import { Icon } from '~/components/icons'
 import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } from '~/utils/colors'
+import { authenticated } from '~/utils/supabase/authenticated'
 
 type LoaderData = {
   rgb: string | null
   hex: string | null
+  authorized: boolean
 }
 
 /**
@@ -53,16 +53,18 @@ const getDefaultColor = (hex: string | null, rgb: string | null): string => {
 /**
  * Returns HEX and RGB query params
  */
-export const loader: LoaderFunction = ({ request }): LoaderData => {
-  const url = new URL(request.url)
-  const rgb = url.searchParams.get('rgb')
-  const hex = url.searchParams.get('hex')
+export const loader: LoaderFunction = ({ request }) => {
+  return authenticated(request, false, ({ authorized }) => {
+    const url = new URL(request.url)
+    const rgb = url.searchParams.get('rgb')
+    const hex = url.searchParams.get('hex')
 
-  return { hex, rgb }
+    return Promise.resolve({ hex, rgb, authorized })
+  })
 }
 
 export default function Color() {
-  const { hex, rgb } = useLoaderData<LoaderData>()
+  const { hex, rgb, authorized } = useLoaderData<LoaderData>()
   const defaultColor = getDefaultColor(hex, rgb)
 
   const [color, setColor] = useState<string>(defaultColor)
@@ -71,7 +73,9 @@ export default function Color() {
     const hexString = hex.replace('#', '')
 
     if (isValidHEXValue(hexString)) {
-      setColor(standardizeHEX(hex))
+      const newHex = standardizeHEX(hex)
+      setColor(newHex)
+      setFieldValue('#hex-input', newHex)
     } else {
       setFieldValue('#hex-input', color)
     }
@@ -81,7 +85,9 @@ export default function Color() {
     const rgbArr = rgbToRGBArray(rgb)
     if (rgbArr) {
       const [red, green, blue] = rgbArr
-      setColor(RGBToHEX(red, green, blue) ?? fallbackRGBColor)
+      const hex = RGBToHEX(red, green, blue)
+      setColor(hex ?? fallbackRGBColor)
+      setFieldValue('#hex-input', hex ?? fallbackRGBColor)
     } else {
       setFieldValue('#rgb-input', HEXtoRGB(color) ?? fallbackRGBColor)
     }
@@ -89,15 +95,11 @@ export default function Color() {
 
   return (
     <div className="flex flex-col">
-      <Header title="Convert Colors">
-        <Link to="/" aria-label="link to home">
-          <Icon Icon={FiHome} />
-        </Link>
-      </Header>
+      <Header authorized={authorized} title="Convert Colors" />
       <div className="flex flex-col text-center max-w-md mx-auto gap-8 w-full">
         <h2 className="text-xl">RGB to HEX to RGB</h2>
         <div
-          className="w-full h-48 border-solid border-2 border-white rounded-md"
+          className="w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
           style={{ backgroundColor: color }}
         ></div>
         <div className="grid grid-cols-2 justify-items-center">
