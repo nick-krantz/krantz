@@ -1,4 +1,9 @@
-export const MenuIcon: React.FC<{ isOpen: boolean; toggle: () => void }> = ({ isOpen, toggle }) => (
+import React from 'react'
+
+export const MenuIcon: React.FC<{
+  isOpen: boolean
+  toggle: () => void
+}> = ({ isOpen, toggle }) => (
   <div className="relative h-7">
     <button
       className="w-8 h-full"
