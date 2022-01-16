@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
-import { Button } from '~/components/button'
+import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Header } from '~/components/header'
 import { changeCaretColor } from '~/utils/change-caret-color'
 import { authenticated } from '~/utils/supabase/authenticated'
@@ -16,14 +15,14 @@ export const loader: LoaderFunction = ({ request }) => {
   return authenticated(
     request,
     ({ authorized }) => {
-      return Promise.resolve(authorized)
+      return Promise.resolve({ authorized })
     },
     false,
   )
 }
 
 export default function Index() {
-  const authorized = useLoaderData<boolean>()
+  const { authorized } = useLoaderData<{ authorized: boolean }>()
 
   useEffect(() => {
     window.addEventListener('mousemove', changeCaretColor)
@@ -37,15 +36,7 @@ export default function Index() {
 
   return (
     <div className="flex flex-col h-full">
-      <Header>
-        {authorized ? null : (
-          <Link to="/sign-in" aria-labelledby="sign-in-button">
-            <Button id="sign-in-button" tabIndex={-1}>
-              Sign In
-            </Button>
-          </Link>
-        )}
-      </Header>
+      <Header authorized={authorized} />
       <div className="flex h-full">
         <div className="flex justify-center align-center w-full">
           <Logo />

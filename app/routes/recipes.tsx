@@ -6,6 +6,11 @@ import { Recipe } from '~/types'
 import { authenticated } from '~/utils/supabase/authenticated'
 import { supabase } from '~/utils/supabase/index.server'
 
+type LoaderData = {
+  recipes: Recipe[] | null
+  authorized: boolean
+}
+
 export const meta: MetaFunction = () => {
   return {
     title: 'Krantz Recipes',
@@ -14,9 +19,9 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(request, async () => {
+  return authenticated(request, async ({ authorized }) => {
     const { data: recipes } = await supabase.from<Recipe>('recipes').select()
-    return recipes
+    return { recipes, authorized }
   })
 }
 
@@ -24,10 +29,10 @@ export const loader: LoaderFunction = async ({ request }) => {
  * Recipe page
  */
 export default function Recipes() {
-  const recipes = useLoaderData<Recipe[] | null>()
+  const { recipes, authorized } = useLoaderData<LoaderData>()
   return (
     <div className="text-center">
-      <Header title="Recipes">
+      <Header authorized={authorized} title="Recipes">
         <Link to="./fetch-recipe">
           <Button>Add Recipe</Button>
         </Link>

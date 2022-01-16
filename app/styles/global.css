@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .menu-bar {
+    @apply absolute block h-1 bg-gray-800 dark:bg-gray-200 w-full transition-all duration-300
+  }
+
+  .menu-bar-open-top {
+    @apply rotate-[38deg] scale-[.95] translate-x-[12px] translate-y-[6px] rounded-sm w-[65%]
+  }
+
+  .menu-bar-open-middle {
+    @apply rounded-sm w-[90%] translate-x-[2px]
+  }
+
+  .menu-bar-open-bottom {
+    @apply rotate-[-38deg] scale-[.95] translate-x-[12px] translate-y-[-6px] rounded-sm w-[65%]
+  }
+}
+
 html {
   box-sizing: border-box;
 }
