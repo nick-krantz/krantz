@@ -21,9 +21,11 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
   return (
     <div className="overflow-hidden h-7">
       <MenuIcon isOpen={false} toggle={toggle} />
-      <div className={`${isOpen ? 'fixed bg-gray-200 opacity-50 h-full w-full top-0 left-0 ' : ''}`}></div>
       <div
-        className={`flex flex-col w-80 p-5 h-full fixed right-0 top-0 bg-gray-800 transition-all duration-300 ${
+        className={`${isOpen ? 'fixed bg-gray-800 dark:bg-gray-200 opacity-50 h-full w-full top-0 left-0 ' : ''}`}
+      ></div>
+      <div
+        className={`flex flex-col w-80 p-5 h-full fixed right-0 top-0 bg-gray-200 dark:bg-gray-800 transition-all duration-300 ${
           isOpen ? 'translate-x-0' : 'translate-x-80'
         }`}
       >

@@ -99,7 +99,7 @@ export default function Color() {
       <div className="flex flex-col text-center max-w-md mx-auto gap-8 w-full">
         <h2 className="text-xl">RGB to HEX to RGB</h2>
         <div
-          className="w-full h-48 border-solid border-2 border-white rounded-md"
+          className="w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
           style={{ backgroundColor: color }}
         ></div>
         <div className="grid grid-cols-2 justify-items-center">
