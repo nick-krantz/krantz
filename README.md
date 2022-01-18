@@ -28,8 +28,10 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] add sign out
 - [x] trap focus in menu
 - [x] add usage to color route
-- [ ] add edit for recipes
+- [x] add edit for recipes
 - [x] change authenticated param order, guardedRoute should be before the callback 
 - [x] dynamic theme-color meta tag based on user preference
 - [x] add active state to menu nav items
 - [ ] initial focus on menu close button
+- [ ] only load recipe images that are in view
+- [ ] replace other field like UI elements with Field component

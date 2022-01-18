@@ -9,8 +9,8 @@ export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: globalStylesUrl },
     { rel: 'stylesheet', href: styles },
-    { rel: 'apple-touch-icon', href: 'logo192.png' },
-    { rel: 'manifest', href: 'manifest.json' },
+    { rel: 'apple-touch-icon', href: '/logo192.png' },
+    { rel: 'manifest', href: '/manifest.json' },
     {
       rel: 'icon',
       href: 'favicon-dark.ico',

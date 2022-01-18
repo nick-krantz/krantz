@@ -6,14 +6,12 @@ import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'
 import { Modal } from '~/components/modal'
 import { RecipeCard } from '~/components/recipe-card'
+import { Recipe } from '~/types'
 import { badRequest } from '~/utils/network'
-import { getUser } from '~/utils/supabase/get-user'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
-  name: string
-  image: string
-  recipeURL: string
+  recipes: Recipe[]
 }
 
 type ActionData = {
@@ -21,35 +19,30 @@ type ActionData = {
   data: LoaderData
 }
 
-export const loader: LoaderFunction = ({ request }) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url)
-  const name = decodeURIComponent(url.searchParams.get('name') || '')
-  const image = decodeURIComponent(url.searchParams.get('image') || '')
-  const recipeURL = decodeURIComponent(url.searchParams.get('url') || '')
+  const paths = url.pathname.split('/')
+  const recipeId = paths[paths.length - 1]
+  console.log(recipeId)
+  const { data: recipes } = await supabase.from<Recipe>('recipes').select().eq('id', recipeId)
 
-  return {
-    name,
-    image,
-    recipeURL,
-  }
+  return { recipes }
 }
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
-  const name = form.get('name')
-  const image = form.get('image')
-  const url = form.get('url')
+  const name = form.get('title')
+  const id = form.get('id')
 
-  if (typeof name !== 'string' || !name) {
+  console.log({ name, id })
+  if (typeof name !== 'string' || !name || !id) {
     return badRequest({
       error: { message: 'Please enter a recipe name' },
-      data: { name, image, url },
     })
   }
-  const created_by = (await getUser(request))?.id
-  const { error } = await supabase.from('recipes').insert([{ name, image, url, created_by }], { returning: 'minimal' })
+  const { error } = await supabase.from('recipes').update({ name }).eq('id', id.toString())
   if (error) {
-    return badRequest({ error, data: { name, image, url } })
+    return badRequest({ error, data: { name } })
   }
 
   return redirect('/recipes')
@@ -57,13 +50,10 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function SubmitRecipe() {
   const navigation = useNavigate()
-  const loaderData = useLoaderData<LoaderData>()
+  const recipe = useLoaderData<LoaderData>().recipes[0]
   const actionData = useActionData<ActionData>()
 
-  // loaderData should take precedence over actionData
-  const image = loaderData?.image || actionData?.data?.image || ''
-  const url = loaderData?.recipeURL || actionData?.data.recipeURL || ''
-  const [name, setRecipeName] = useState<string>(loaderData?.name || actionData?.data?.name || '')
+  const [name, setRecipeName] = useState<string>(recipe.name)
 
   const close = () => {
     navigation('/recipes')
@@ -84,15 +74,14 @@ export default function SubmitRecipe() {
         </button>
       </h2>
       <div className="flex justify-center">
-        <RecipeCard recipe={{ id: -1, name, url, image }} preview />
+        <RecipeCard recipe={{ ...recipe, name: name }} preview />
       </div>
       <Form
         id="submit-recipe-form"
         method="post"
         aria-describedby={actionData?.error?.message ? 'form-error-message' : undefined}
       >
-        <input type="hidden" name="url" defaultValue={url} />
-        <input type="hidden" name="image" defaultValue={image} />
+        <input type="hidden" name="id" defaultValue={recipe.id} />
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
             <label className="mb-2 font-semibold" htmlFor="title-input">
@@ -117,7 +106,7 @@ export default function SubmitRecipe() {
               Cancel
             </Button>
             <Button type="submit" form="submit-recipe-form">
-              Submit Recipe
+              Save Recipe
             </Button>
           </div>
         </div>
