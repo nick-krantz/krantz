@@ -36,7 +36,7 @@ export const loader: LoaderFunction = ({ request }) => {
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
-  const name = form.get('name')
+  const name = form.get('title')
   const image = form.get('image')
   const url = form.get('url')
 
