@@ -1,4 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+node scripts/sort-todos.js
+git add .
+
 yarn pre-commit
