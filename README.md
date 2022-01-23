@@ -9,12 +9,12 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 
 ## TODOs
 
-- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
-- [ ] make dark/light mode toggle
-- [ ] add testing
-- [ ] add sign out
-- [ ] initial focus on menu close button
 - [ ] only load recipe images that are in view
+- [ ] initial focus on menu close button
+- [ ] add sign out
+- [ ] add testing
+- [ ] make dark/light mode toggle
+- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
 - [x] Update metadata for search engines / previews
 - [x] replace other field like UI elements with Field component
 - [x] Move image cards to use `img` tags versus background images
