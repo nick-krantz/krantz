@@ -35,7 +35,7 @@ export const RecipeCard: React.FC<Props> = ({ recipe: { name, image, url, id }, 
 
   return (
     <div className="flex flex-col w-full rounded-md shadow-lg max-w-sm overflow-hidden border border-gray-800 dark:border-gray-200">
-      <div className={`h-0 pt-60% bg-cover bg-center bg-no-repeat`} style={{ backgroundImage: `url('${image}')` }} />
+      <img className="h-60% max-h-52 object-cover" src={image} alt={name} />
       <div className="flex flex-col items-start h-full flex-1 p-4 gap-5">
         <p className="font-semibold text-left flex-1">{name}</p>
         <div className="flex w-full gap-3">
