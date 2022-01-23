@@ -36,7 +36,7 @@ export const loader: LoaderFunction = ({ request }) => {
 
 export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData()
-  const name = form.get('title')
+  const name = form.get('name')
   const image = form.get('image')
   const url = form.get('url')
 
@@ -95,13 +95,13 @@ export default function SubmitRecipe() {
         <input type="hidden" name="image" defaultValue={image} />
         <div className="flex flex-col gap-5">
           <div className="flex flex-col">
-            <label className="mb-2 font-semibold" htmlFor="title-input">
-              Title
+            <label className="mb-2 font-semibold" htmlFor="name-input">
+              Name
             </label>
             <input
               type="text"
-              name="title"
-              id="title-input"
+              name="name"
+              id="name-input"
               defaultValue={name}
               className="rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
               onChange={(e) => {

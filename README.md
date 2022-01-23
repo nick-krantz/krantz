@@ -35,4 +35,6 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] initial focus on menu close button
 - [ ] only load recipe images that are in view
 - [ ] replace other field like UI elements with Field component
-- [ ] switch all namings/variables of 'title' for recipe name to 'name'
+- [x] switch all namings/variables of 'title' for recipe name to 'name'
+- [ ] GitHub action to update todo list
+- [ ] Move image cards to use `img` tags versus background images
