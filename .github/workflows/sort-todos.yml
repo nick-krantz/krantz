@@ -20,7 +20,7 @@ jobs:
       with:
         node-version: '14'
     - name: Sort TODOs
-      run:  node ./scripts/sort-todo.js
+      run:  node scripts/sort-todo.js
     - name: Add & Commit files
       run: |
         git config --local user.email "krantni@gmail.com"

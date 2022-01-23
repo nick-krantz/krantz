@@ -33,7 +33,7 @@ async function sortTODOList() {
     return (file += line + '\n')
   }, '')
 
-  await fs.writeFileSync('./test.md', newREADME)
+  await fs.writeFileSync('./README.md', newREADME)
 }
 
 function isTODOListLine(line) {

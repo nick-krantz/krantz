@@ -7,7 +7,7 @@ Auth & Database: [supabase](https://supabase.com/)
 UI Styling: [tailwindcss](https://tailwindcss.com/)  
 Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)  
 
-## Todo
+## TODO
 
 - [x] ~~EmailInput & PasswordInput have hardcoded names. The consuming forms use the name to get the value and could lead to bugs if one or the other changes accidentally.~~ CharkaUI removed the need for this.
 - [x] Rename `signup` route to `sign-up`.
