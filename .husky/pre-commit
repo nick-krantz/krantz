@@ -1,4 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Sort and add README changes to commit
+node scripts/sort-todos.js
+git add .
+
+# Run lint-staged
 yarn pre-commit
