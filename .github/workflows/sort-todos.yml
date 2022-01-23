@@ -1,0 +1,33 @@
+# Sorts TODOs in README
+
+name: Sort TODO List
+
+
+on:
+  push:
+    paths:
+      - README.md
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Sort TODOs
+      run:  node ./scripts/sort-todo.js
+    - name: Add & Commit files
+      run: |
+        git config --local user.email "krantni@gmail.com"
+        git config --local user.name "sort-todos [gh action]"
+        git commit -m "Sorting TODOs" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}

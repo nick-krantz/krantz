@@ -36,5 +36,5 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] only load recipe images that are in view
 - [ ] replace other field like UI elements with Field component
 - [x] switch all namings/variables of 'title' for recipe name to 'name'
-- [ ] GitHub action to update todo list
+- [x] GitHub action to update todo list
 - [ ] Move image cards to use `img` tags versus background images
