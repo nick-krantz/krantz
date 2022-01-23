@@ -1,4 +1,5 @@
 import { ErrorMessage } from '../error-message'
+import { Field } from '../field'
 
 type Props = {
   email?: string
@@ -8,20 +9,21 @@ type Props = {
 export const EmailInput: React.FC<Props> = ({ email, errorMessage }) => {
   const hasError = Boolean(errorMessage)
   return (
-    <div className="flex flex-col">
-      <label className="mb-2 font-semibold" htmlFor="email-input">
+    <>
+      <Field
+        labelProps={{ htmlFor: 'email-input' }}
+        inputProps={{
+          type: 'email',
+          name: 'email',
+          id: 'email-input',
+          defaultValue: email,
+          'aria-invalid': hasError,
+          'aria-describedby': hasError ? 'email-error' : undefined,
+        }}
+      >
         Email
-      </label>
-      <input
-        type="email"
-        name="email"
-        id="email-input"
-        defaultValue={email}
-        aria-invalid={hasError}
-        aria-describedby={hasError ? 'email-error' : undefined}
-        className="rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
-      />
+      </Field>
       <ErrorMessage id="email-error">{errorMessage}</ErrorMessage>
-    </div>
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi'
 import { ActionFunction, Form, redirect, useActionData, useNavigate } from 'remix'
 import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'
+import { Field } from '~/components/field'
 import { Modal } from '~/components/modal'
 import { badRequest, createQueryParams } from '~/utils/network'
 
@@ -68,17 +69,16 @@ export default function FetchRecipe() {
         aria-describedby={actionData?.error?.message ? 'form-error-message' : undefined}
       >
         <div className="flex flex-col gap-5">
-          <div className="flex flex-col">
-            <label className="mb-2 font-semibold" htmlFor="url-input">
-              Recipe URL
-            </label>
-            <input
-              type="url"
-              name="url"
-              id="url-input"
-              className="rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
-            />
-          </div>
+          <Field
+            labelProps={{ htmlFor: 'url-input' }}
+            inputProps={{
+              type: 'url',
+              name: 'url',
+              id: 'url-input',
+            }}
+          >
+            Recipe URL
+          </Field>
 
           <ErrorMessage id="form-error-message">{actionData?.error?.message}</ErrorMessage>
 

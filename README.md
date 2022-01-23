@@ -9,14 +9,14 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 
 ## TODOs
 
-- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
-- [ ] Update metadata for search engines / previews
-- [ ] make dark/light mode toggle
-- [ ] add testing
-- [ ] add sign out
-- [ ] initial focus on menu close button
 - [ ] only load recipe images that are in view
-- [ ] replace other field like UI elements with Field component
+- [ ] initial focus on menu close button
+- [ ] add sign out
+- [ ] add testing
+- [ ] make dark/light mode toggle
+- [ ] Update metadata for search engines / previews
+- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
+- [x] replace other field like UI elements with Field component
 - [x] Move image cards to use `img` tags versus background images
 - [x] ~~EmailInput & PasswordInput have hardcoded names. The consuming forms use the name to get the value and could lead to bugs if one or the other changes accidentally.~~ CharkaUI removed the need for this.
 - [x] Rename `signup` route to `sign-up`.

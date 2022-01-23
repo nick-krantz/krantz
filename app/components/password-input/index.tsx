@@ -1,4 +1,5 @@
 import { ErrorMessage } from '../error-message'
+import { Field } from '../field'
 
 type Props = {
   password?: string
@@ -8,20 +9,21 @@ type Props = {
 export const PasswordInput: React.FC<Props> = ({ password, errorMessage }) => {
   const hasError = Boolean(errorMessage)
   return (
-    <div className="flex flex-col">
-      <label className="mb-2 font-semibold" htmlFor="password-input">
+    <>
+      <Field
+        labelProps={{ htmlFor: 'password-input' }}
+        inputProps={{
+          type: 'password',
+          name: 'password',
+          id: 'password-input',
+          defaultValue: password,
+          'aria-invalid': hasError,
+          'aria-describedby': hasError ? 'password-error' : undefined,
+        }}
+      >
         Password
-      </label>
-      <input
-        type="password"
-        name="password"
-        id="password-input"
-        defaultValue={password}
-        aria-invalid={hasError}
-        aria-describedby={hasError ? 'password-error' : undefined}
-        className="rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
-      />
-      <ErrorMessage id="email-error">{errorMessage}</ErrorMessage>
-    </div>
+      </Field>
+      <ErrorMessage id="password-error">{errorMessage}</ErrorMessage>
+    </>
   )
 }
