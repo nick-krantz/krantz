@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
+import { FiCode, FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
 import { MenuIcon } from './menu-icon'
 import { NavItem } from './nav-item'
 
@@ -70,6 +70,9 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
               <ul>
                 <NavItem to="/" icon={FiHome}>
                   Home
+                </NavItem>
+                <NavItem to="../about" icon={FiCode}>
+                  About
                 </NavItem>
                 {authorized && (
                   <NavItem to="../recipes" icon={FiInbox}>
