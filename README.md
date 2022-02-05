@@ -6,16 +6,17 @@ Framework: [react](https://reactjs.org/) & [remix](https://remix.run)
 Auth & Database: [supabase](https://supabase.com/)  
 UI Styling: [tailwindcss](https://tailwindcss.com/)  
 Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)  
+Animation: [framer motion](https://www.framer.com/motion/)  
 
 ## TODOs
 
-- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
-- [ ] make dark/light mode toggle
-- [ ] add testing
-- [ ] add sign out
-- [ ] only load recipe images that are in view
-- [ ] replace other field like UI elements with Field component
 - [ ] add Burger Page
+- [ ] replace other field like UI elements with Field component
+- [ ] only load recipe images that are in view
+- [ ] add sign out
+- [ ] add testing
+- [ ] make dark/light mode toggle
+- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
 - [x] Move image cards to use `img` tags versus background images
 - [x] Update metadata for search engines / previews
 - [x] initial focus on menu close button
