@@ -58,6 +58,7 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
     // Add class to disable background caret color when menu is open
     if (isOpen) {
       document.querySelector('body')?.classList.add('menu-open')
+      document.querySelector('button')?.focus()
     } else {
       document.querySelector('body')?.classList.remove('menu-open')
     }
