@@ -1,10 +1,16 @@
+import { HTMLMotionProps, motion } from 'framer-motion'
 import { IconType } from 'react-icons/lib'
 import { NavLink } from 'remix'
 import { Icon } from '../icon'
 
+const itemVariants: HTMLMotionProps<'li'>['variants'] = {
+  closed: { opacity: 0 },
+  open: { opacity: 1 },
+}
+
 export const NavItem: React.FC<{ to: string; icon: IconType }> = ({ children, to, icon }) => {
   return (
-    <li className="p-4 text-lg">
+    <motion.li className="p-4 text-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={itemVariants}>
       <NavLink
         to={to}
         className="flex items-center gap-6 p-2 rounded-md"
@@ -21,6 +27,6 @@ export const NavItem: React.FC<{ to: string; icon: IconType }> = ({ children, to
         <Icon Icon={icon} />
         {children}
       </NavLink>
-    </li>
+    </motion.li>
   )
 }

@@ -1,5 +1,7 @@
+import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
+import { BackDrop } from '../backdrop'
 import { MenuIcon } from './menu-icon'
 import { NavItem } from './nav-item'
 
@@ -30,6 +32,21 @@ function trapFocus(event: React.KeyboardEvent<HTMLDivElement>, escapeCallback: (
   }
 }
 
+const navVariants: HTMLMotionProps<'ul'>['variants'] = {
+  closed: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: 1,
+    },
+  },
+}
+
 export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
   const [isOpen, setMenu] = useState<boolean>(false)
 
@@ -47,48 +64,53 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
   }, [isOpen])
 
   return (
-    <div className="overflow-hidden h-7">
-      <MenuIcon isOpen={false} toggle={toggle} />
-      <div
-        className={`${isOpen ? 'fixed bg-gray-800 dark:bg-gray-200 opacity-50 h-full w-full top-0 left-0 ' : ''}`}
-      ></div>
-      <div
-        className={`flex flex-col w-80 p-5 h-full fixed right-0 top-0 bg-gray-200 dark:bg-gray-800 transition-all duration-300 ${
-          isOpen ? 'translate-x-0 visible' : 'translate-x-80 invisible'
-        }`}
-        aria-hidden={!isOpen}
-        onKeyDown={(e) => {
-          trapFocus(e, toggle)
-        }}
-      >
+    <>
+      <AnimatePresence>
         {isOpen && (
           <>
-            <div className="inline-block w-8 h-8 self-end">
-              <MenuIcon isOpen={true} toggle={toggle} />
-            </div>
-            <nav>
-              <ul>
-                <NavItem to="/" icon={FiHome}>
-                  Home
-                </NavItem>
-                {authorized && (
-                  <NavItem to="../recipes" icon={FiInbox}>
-                    Recipes
+            <BackDrop />
+            <motion.div
+              className="fixed flex flex-col h-screen z-20 top-0 right-0 p-5 bg-gray-200 dark:bg-gray-800"
+              initial={{ width: 0 }}
+              animate={{
+                width: 300,
+              }}
+              exit={{
+                width: 0,
+                transition: { delay: 0.7, duration: 0.3 },
+              }}
+              onKeyDown={(e) => {
+                trapFocus(e, toggle)
+              }}
+            >
+              <div className="inline-block m-5 w-8 h-8 self-end">
+                <MenuIcon isOpen={true} toggle={toggle} />
+              </div>
+              <nav>
+                <motion.ul className="container" initial="closed" animate="open" exit="closed" variants={navVariants}>
+                  <NavItem to="/" icon={FiHome}>
+                    Home
                   </NavItem>
-                )}
-                <NavItem to="../color" icon={FiPenTool}>
-                  Colors
-                </NavItem>
-                {!authorized && (
-                  <NavItem to="../sign-in" icon={FiLogIn}>
-                    Sign In
+                  {authorized && (
+                    <NavItem to="../recipes" icon={FiInbox}>
+                      Recipes
+                    </NavItem>
+                  )}
+                  <NavItem to="../color" icon={FiPenTool}>
+                    Colors
                   </NavItem>
-                )}
-              </ul>
-            </nav>
+                  {!authorized && (
+                    <NavItem to="../sign-in" icon={FiLogIn}>
+                      Sign In
+                    </NavItem>
+                  )}
+                </motion.ul>
+              </nav>
+            </motion.div>
           </>
         )}
-      </div>
-    </div>
+      </AnimatePresence>
+      <MenuIcon isOpen={false} toggle={toggle} />
+    </>
   )
 }
