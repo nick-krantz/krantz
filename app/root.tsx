@@ -49,7 +49,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
       <Layout>
         <Header authorized={false}></Header>
         <div className="flex items-center justify-center flex-col h-full">
-          <h1 className="text-3xl font-semibold">There was an error</h1>
+          <h1>There was an error</h1>
           <p>Use the menu or your browsers back button to return to your last page.</p>
           <br></br>
           <code>Error: {error.message}</code>
@@ -67,7 +67,7 @@ export function CatchBoundary() {
       <Layout>
         <Header authorized={false}></Header>
         <div className="flex items-center justify-center h-full">
-          <h1 className="text-3xl font-semibold">
+          <h1>
             {caught.status}: {caught.statusText}
           </h1>
         </div>
@@ -84,6 +84,13 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="theme-color" content="#1f2937" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#e5e7eb" media="(prefers-color-scheme: light)" />
+        <meta name="og:type" content="website" />
+        <meta name="og:image" content="https://www.krantz.app/og-image.png" />
+        <meta name="og:image:height" content="630" />
+        <meta name="og:image:width" content="1200" />
+        <meta name="twitter:card" content="app" />
+        <meta name="twitter:site" content="@nick__krantz" />
+        <meta name="twitter:creator" content="@nick__krantz" />
         {title ? <title>{title}</title> : null}
         <Meta />
         <Links />

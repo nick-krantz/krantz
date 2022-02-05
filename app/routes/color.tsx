@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LoaderFunction, useLoaderData } from 'remix'
+import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
 import { Header } from '~/components/header'
 import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } from '~/utils/colors'
@@ -9,6 +9,13 @@ type LoaderData = {
   rgb: string | null
   hex: string | null
   authorized: boolean
+}
+
+export const meta: MetaFunction = () => {
+  return {
+    title: 'Color Converter',
+    description: 'Convert colors between their Hexadecimal & RGB representation',
+  }
 }
 
 /**

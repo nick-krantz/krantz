@@ -7,8 +7,8 @@ import { authenticated } from '~/utils/supabase/authenticated'
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Krantz',
-    description: 'Krantz',
+    title: 'Nick Krantz',
+    description: 'Krantz.app - A website built with React & Remix to utilize some functionality for my everyday life.',
   }
 }
 

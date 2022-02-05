@@ -8,6 +8,6 @@ export const Field: React.FC<Props> = ({ children, labelProps, inputProps }) => 
     <label className="mb-2 font-semibold" {...labelProps}>
       {children}
     </label>
-    <input {...inputProps} className="rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200" />
+    <input {...inputProps} className="w-full rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200" />
   </div>
 )

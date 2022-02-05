@@ -4,6 +4,7 @@ import { FiX } from 'react-icons/fi'
 import { ActionFunction, Form, LoaderFunction, redirect, useActionData, useLoaderData, useNavigate } from 'remix'
 import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'
+import { Field } from '~/components/field'
 import { Modal } from '~/components/modal'
 import { RecipeCard } from '~/components/recipe-card'
 import { Recipe } from '~/types'
@@ -83,21 +84,20 @@ export default function SubmitRecipe() {
       >
         <input type="hidden" name="id" defaultValue={recipe.id} />
         <div className="flex flex-col gap-5">
-          <div className="flex flex-col">
-            <label className="mb-2 font-semibold" htmlFor="name-input">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name-input"
-              defaultValue={name}
-              className="rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
-              onChange={(e) => {
+          <Field
+            labelProps={{ htmlFor: 'name-input' }}
+            inputProps={{
+              type: 'text',
+              name: 'name',
+              id: 'name-input',
+              defaultValue: name,
+              onChange: (e) => {
                 setRecipeName(e.target.value)
-              }}
-            />
-          </div>
+              },
+            }}
+          >
+            Name
+          </Field>
 
           <ErrorMessage id="form-error-message">{actionData?.error?.message}</ErrorMessage>
 

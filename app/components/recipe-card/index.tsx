@@ -34,10 +34,10 @@ export const RecipeCard: React.FC<Props> = ({ recipe: { name, image, url, id }, 
   }
 
   return (
-    <div className="flex flex-col w-full rounded-md shadow-lg max-w-sm overflow-hidden border border-gray-800 dark:border-gray-200">
-      <div className={`h-0 pt-60% bg-cover bg-center bg-no-repeat`} style={{ backgroundImage: `url('${image}')` }} />
+    <div className="grid grid-rows-recipe-card w-full rounded-md shadow-lg max-w-sm overflow-hidden border border-gray-800 dark:border-gray-200">
+      <img className="h-full w-full object-cover" src={image} alt={name} />
       <div className="flex flex-col items-start h-full flex-1 p-4 gap-5">
-        <p className="font-semibold text-left flex-1">{name}</p>
+        <p className="font-semibold text-left flex-1 overflow-hidden text-ellipsis line-clamp-3">{name}</p>
         <div className="flex w-full gap-3">
           <a
             className="inline-flex items-center p-3 rounded-md text-gray-800 bg-gray-300 dark:text-gray-200 dark:bg-slate-700"

@@ -1,6 +1,6 @@
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
+import { FiCode, FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
 import { BackDrop } from '../backdrop'
 import { MenuIcon } from './menu-icon'
 import { NavItem } from './nav-item'
@@ -91,6 +91,9 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
                 <motion.ul className="container" initial="closed" animate="open" exit="closed" variants={navVariants}>
                   <NavItem to="/" icon={FiHome}>
                     Home
+                  </NavItem>
+                  <NavItem to="../about" icon={FiCode}>
+                    About
                   </NavItem>
                   {authorized && (
                     <NavItem to="../recipes" icon={FiInbox}>
