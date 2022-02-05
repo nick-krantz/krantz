@@ -70,6 +70,7 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
 
   // Set fill of svg image
   const rgb = `rgb(${red}, ${green}, ${blue})`
-  ;(document.querySelector('#openingCaret') as HTMLElement).style.fill = rgb
-  ;(document.querySelector('#closingCaret') as HTMLElement).style.fill = rgb
+  document.querySelectorAll('.caret').forEach((caret) => {
+    ;(caret as HTMLElement).setAttribute('style', `stroke:${rgb};`)
+  })
 }

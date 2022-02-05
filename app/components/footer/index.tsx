@@ -1,35 +1,28 @@
+import { HTMLMotionProps, motion } from 'framer-motion'
 import { FiGithub, FiLinkedin, FiMail, FiTwitter } from 'react-icons/fi'
 import { Icon } from '../icon'
 
+const anchorMotion: HTMLMotionProps<'a'> = {
+  whileHover: { scale: 1.2 },
+  whileTap: { scale: 0.95 },
+  initial: { y: '40px' },
+  animate: { y: 0 },
+  transition: { type: 'spring', bounce: 0.5 },
+}
+
 export const Footer: React.FC = () => (
   <div className="flex p-5 my-0 mx-auto max-w-sm w-full justify-around">
-    <a
-      href="mailto:krantznicholas@gmail.com"
-      className="transition-transform duration-300 hover:scale-125"
-      aria-label="Shoot me an email"
-    >
+    <motion.a href="mailto:krantznicholas@gmail.com" aria-label="Shoot me an email" {...anchorMotion}>
       <Icon Icon={FiMail} />
-    </a>
-    <a
-      href="https://github.com/nick-krantz"
-      className="transition-transform duration-300 hover:scale-125"
-      aria-label="Check out my GitHub"
-    >
+    </motion.a>
+    <motion.a href="https://github.com/nick-krantz" aria-label="Check out my GitHub" {...anchorMotion}>
       <Icon Icon={FiGithub} />
-    </a>
-    <a
-      href="https://www.linkedin.com/in/nicholaskrantz/"
-      className="transition-transform duration-300 hover:scale-125"
-      aria-label="Connect on LinkedIn"
-    >
+    </motion.a>
+    <motion.a href="https://www.linkedin.com/in/nicholaskrantz/" aria-label="Connect on LinkedIn" {...anchorMotion}>
       <Icon Icon={FiLinkedin} />
-    </a>
-    <a
-      href="https://twitter.com/nick__krantz"
-      className="transition-transform duration-300 hover:scale-125"
-      aria-label="Follow me on Twitter"
-    >
+    </motion.a>
+    <motion.a href="https://twitter.com/nick__krantz" aria-label="Follow me on Twitter" {...anchorMotion}>
       <Icon Icon={FiTwitter} />
-    </a>
+    </motion.a>
   </div>
 )

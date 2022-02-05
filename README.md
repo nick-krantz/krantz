@@ -17,6 +17,7 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 - [ ] add testing
 - [ ] make dark/light mode toggle
 - [ ] Update metadata for search engines / previews
+- [ ] Reduce repetition in logo motion
 - [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
 - [x] ~~EmailInput & PasswordInput have hardcoded names. The consuming forms use the name to get the value and could lead to bugs if one or the other changes accidentally.~~ CharkaUI removed the need for this.
 - [x] Rename `signup` route to `sign-up`.
