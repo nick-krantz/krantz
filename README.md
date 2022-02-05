@@ -10,12 +10,16 @@ Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)
 ## TODOs
 
 - [ ] add Burger Page
+- [ ] Move image cards to use `img` tags versus background images
+- [ ] replace other field like UI elements with Field component
 - [ ] only load recipe images that are in view
-- [ ] initial focus on menu close button
 - [ ] add sign out
 - [ ] add testing
 - [ ] make dark/light mode toggle
+- [ ] Update metadata for search engines / previews
 - [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
+- [x] initial focus on menu close button
+- [x] Reduce repetition in logo motion
 - [x] add About Page
 - [x] Update metadata for search engines / previews
 - [x] replace other field like UI elements with Field component
