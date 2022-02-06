@@ -31,14 +31,15 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Recipes() {
   const { recipes, authorized } = useLoaderData<LoaderData>()
   return (
-    <div className="text-center">
-      <Header authorized={authorized} title="Recipes">
+    <>
+      <Header authorized={authorized} title="Recipes" />
+      <div className="max-w-screen-xl mx-auto">
         <Link to="./fetch-recipe">
           <Button>Add Recipe</Button>
         </Link>
-      </Header>
+      </div>
       {!!recipes && <RecipeList recipes={recipes} />}
       <Outlet />
-    </div>
+    </>
   )
 }
