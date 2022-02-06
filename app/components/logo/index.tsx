@@ -32,7 +32,7 @@ const fillVariants: SVGMotionProps<SVGPathElement>['variants'] = {
 const pathProps = (strokeWidth: number): SVGMotionProps<SVGPathElement> => {
   return {
     strokeWidth,
-    stroke: '#171717',
+    stroke: 'currentColor',
     strokeLinecap: 'round',
     strokeLinejoin: 'miter',
     fill: 'none',
