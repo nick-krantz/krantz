@@ -22,19 +22,15 @@
 
 @layer base {
   h1 {
-    @apply text-4xl font-semibold
+    @apply text-4xl font-semibold mb-6
   }
 
   h2 {
-    @apply text-3xl font-semibold
+    @apply text-3xl font-semibold mb-6
   }
 
   h3 {
-    @apply text-2xl font-semibold
-  }
-
-  h1, h2, h3 {
-    @apply mb-6
+    @apply text-2xl font-semibold mb-4
   }
 
   p {
