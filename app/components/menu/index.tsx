@@ -87,8 +87,14 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
               <div className="inline-block m-5 w-8 h-8 self-end">
                 <MenuIcon isOpen={true} toggle={toggle} />
               </div>
-              <nav>
-                <motion.ul className="container" initial="closed" animate="open" exit="closed" variants={navVariants}>
+              <nav className="h-full">
+                <motion.ul
+                  className="container h-full flex flex-col"
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  variants={navVariants}
+                >
                   <NavItem to="/" icon={FiHome}>
                     Home
                   </NavItem>
@@ -104,7 +110,7 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
                     Colors
                   </NavItem>
                   {!authorized && (
-                    <NavItem to="../sign-in" icon={FiLogIn}>
+                    <NavItem to="../sign-in" icon={FiLogIn} className="mt-auto">
                       Sign In
                     </NavItem>
                   )}

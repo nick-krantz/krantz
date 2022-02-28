@@ -8,9 +8,19 @@ const itemVariants: HTMLMotionProps<'li'>['variants'] = {
   open: { opacity: 1 },
 }
 
-export const NavItem: React.FC<{ to: string; icon: IconType }> = ({ children, to, icon }) => {
+export const NavItem: React.FC<{ to: string; icon: IconType; className?: string }> = ({
+  children,
+  to,
+  icon,
+  className,
+}) => {
   return (
-    <motion.li className="p-4 text-lg" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} variants={itemVariants}>
+    <motion.li
+      className={`p-4 text-lg ${className}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      variants={itemVariants}
+    >
       <NavLink
         to={to}
         className="flex items-center gap-6 p-2 rounded-md"
