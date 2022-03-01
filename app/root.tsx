@@ -84,6 +84,9 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="theme-color" content="#1f2937" media="(prefers-color-scheme: dark)" />
         <meta name="theme-color" content="#e5e7eb" media="(prefers-color-scheme: light)" />
+        <meta name="url" content="https://www.krantz.app" />
+        <meta name="type" content="website" />
+        <meta name="image" content="https://www.krantz.app/og-image.png" />
         <meta name="og:type" content="website" />
         <meta name="og:image" content="https://www.krantz.app/og-image.png" />
         <meta name="og:image:height" content="630" />
@@ -91,6 +94,7 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <meta name="twitter:card" content="app" />
         <meta name="twitter:site" content="@nick__krantz" />
         <meta name="twitter:creator" content="@nick__krantz" />
+        <meta name="twitter:image" content="https://www.krantz.app/og-image.png" />
         {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
