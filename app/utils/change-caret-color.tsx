@@ -7,7 +7,7 @@ type Partitions = { red: ConfigIndicator; green: ConfigIndicator; blue: ConfigIn
 export function changeCaretColor(e: MouseEvent | TouchEvent) {
   const body = document.querySelector('body')
   // Skip color change if menu is open
-  if (body?.classList.contains('menu-open')) return
+  if (body?.classList.contains('overflow-hidden')) return
 
   // 1/6 of the screen width
   const widthSixth = Math.ceil(window.innerWidth / 6)

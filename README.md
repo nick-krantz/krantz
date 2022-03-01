@@ -10,12 +10,12 @@ Animation: [framer motion](https://www.framer.com/motion/)
 
 ## TODOs
 
-- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
-- [ ] make dark/light mode toggle
-- [ ] add testing
-- [ ] add sign out
-- [ ] only load recipe images that are in view
 - [ ] replace other field like UI elements with Field component
+- [ ] only load recipe images that are in view
+- [ ] add sign out
+- [ ] add testing
+- [ ] make dark/light mode toggle
+- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
 - [x] add Burger Page
 - [x] Update default color of carets on home page (more contrast needed)
 - [x] Move image cards to use `img` tags versus background images
