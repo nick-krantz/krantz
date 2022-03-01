@@ -1,4 +1,5 @@
 import { HTMLMotionProps, motion } from 'framer-motion'
+import React from 'react'
 import { IconType } from 'react-icons/lib'
 import { NavLink } from 'remix'
 import { Icon } from '../icon'
@@ -8,7 +9,7 @@ const itemVariants: HTMLMotionProps<'li'>['variants'] = {
   open: { opacity: 1 },
 }
 
-export const NavItem: React.FC<{ to: string; icon: IconType; className?: string }> = ({
+export const NavItem: React.FC<{ to: string; icon: IconType | React.FC; className?: string }> = ({
   children,
   to,
   icon,

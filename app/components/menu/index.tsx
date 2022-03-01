@@ -2,6 +2,7 @@ import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { FiCode, FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
 import { BackDrop } from '../backdrop'
+import { BurgerIcon } from '../icon/burger'
 import { MenuIcon } from './menu-icon'
 import { NavItem } from './nav-item'
 
@@ -101,14 +102,18 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
                   <NavItem to="../about" icon={FiCode}>
                     About
                   </NavItem>
+                  <NavItem to="../burgers" icon={BurgerIcon}>
+                    Burgers
+                  </NavItem>
+                  <NavItem to="../color" icon={FiPenTool}>
+                    Colors
+                  </NavItem>
                   {authorized && (
                     <NavItem to="../recipes" icon={FiInbox}>
                       Recipes
                     </NavItem>
                   )}
-                  <NavItem to="../color" icon={FiPenTool}>
-                    Colors
-                  </NavItem>
+
                   {!authorized && (
                     <NavItem to="../sign-in" icon={FiLogIn} className="mt-auto">
                       Sign In

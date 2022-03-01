@@ -12,12 +12,123 @@ export interface paths {
       }
     }
   }
+  '/burgers': {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.burgers.id']
+          created_at?: parameters['rowFilter.burgers.created_at']
+          name?: parameters['rowFilter.burgers.name']
+          restaurant?: parameters['rowFilter.burgers.restaurant']
+          description?: parameters['rowFilter.burgers.description']
+          rank?: parameters['rowFilter.burgers.rank']
+          url?: parameters['rowFilter.burgers.url']
+          location?: parameters['rowFilter.burgers.location']
+          /** Filtering Columns */
+          select?: parameters['select']
+          /** Ordering */
+          order?: parameters['order']
+          /** Limiting and Pagination */
+          offset?: parameters['offset']
+          /** Limiting and Pagination */
+          limit?: parameters['limit']
+        }
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters['range']
+          /** Limiting and Pagination */
+          'Range-Unit'?: parameters['rangeUnit']
+          /** Preference */
+          Prefer?: parameters['preferCount']
+        }
+      }
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions['burgers'][]
+        }
+        /** Partial Content */
+        206: unknown
+      }
+    }
+    post: {
+      parameters: {
+        body: {
+          /** burgers */
+          burgers?: definitions['burgers']
+        }
+        query: {
+          /** Filtering Columns */
+          select?: parameters['select']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** Created */
+        201: unknown
+      }
+    }
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.burgers.id']
+          created_at?: parameters['rowFilter.burgers.created_at']
+          name?: parameters['rowFilter.burgers.name']
+          restaurant?: parameters['rowFilter.burgers.restaurant']
+          description?: parameters['rowFilter.burgers.description']
+          rank?: parameters['rowFilter.burgers.rank']
+          url?: parameters['rowFilter.burgers.url']
+          location?: parameters['rowFilter.burgers.location']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** No Content */
+        204: never
+      }
+    }
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.burgers.id']
+          created_at?: parameters['rowFilter.burgers.created_at']
+          name?: parameters['rowFilter.burgers.name']
+          restaurant?: parameters['rowFilter.burgers.restaurant']
+          description?: parameters['rowFilter.burgers.description']
+          rank?: parameters['rowFilter.burgers.rank']
+          url?: parameters['rowFilter.burgers.url']
+          location?: parameters['rowFilter.burgers.location']
+        }
+        body: {
+          /** burgers */
+          burgers?: definitions['burgers']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** No Content */
+        204: never
+      }
+    }
+  }
   '/recipes': {
     get: {
       parameters: {
         query: {
+          /** unique id of the recipe */
           id?: parameters['rowFilter.recipes.id']
+          /** timestamp of when recipe was created */
           created_at?: parameters['rowFilter.recipes.created_at']
+          /** Id of the user that created the recipe */
           created_by?: parameters['rowFilter.recipes.created_by']
           /** Name of recipe */
           name?: parameters['rowFilter.recipes.name']
@@ -75,8 +186,11 @@ export interface paths {
     delete: {
       parameters: {
         query: {
+          /** unique id of the recipe */
           id?: parameters['rowFilter.recipes.id']
+          /** timestamp of when recipe was created */
           created_at?: parameters['rowFilter.recipes.created_at']
+          /** Id of the user that created the recipe */
           created_by?: parameters['rowFilter.recipes.created_by']
           /** Name of recipe */
           name?: parameters['rowFilter.recipes.name']
@@ -98,8 +212,11 @@ export interface paths {
     patch: {
       parameters: {
         query: {
+          /** unique id of the recipe */
           id?: parameters['rowFilter.recipes.id']
+          /** timestamp of when recipe was created */
           created_at?: parameters['rowFilter.recipes.created_at']
+          /** Id of the user that created the recipe */
           created_by?: parameters['rowFilter.recipes.created_by']
           /** Name of recipe */
           name?: parameters['rowFilter.recipes.name']
@@ -126,7 +243,7 @@ export interface paths {
 }
 
 export interface definitions {
-  recipes: {
+  burgers: {
     /**
      * Format: bigint
      * @description Note:
@@ -138,7 +255,38 @@ export interface definitions {
      * @default now()
      */
     created_at?: string
-    /** Format: uuid */
+    /** Format: text */
+    name: string
+    /** Format: text */
+    restaurant: string
+    /** Format: text */
+    description: string
+    /** Format: smallint */
+    rank: number
+    /** Format: text */
+    url: string
+    /** Format: text */
+    location: string
+  }
+  recipes: {
+    /**
+     * Format: bigint
+     * @description unique id of the recipe
+     *
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number
+    /**
+     * Format: timestamp with time zone
+     * @description timestamp of when recipe was created
+     * @default now()
+     */
+    created_at?: string
+    /**
+     * Format: uuid
+     * @description Id of the user that created the recipe
+     */
     created_by?: string
     /**
      * Format: text
@@ -159,11 +307,20 @@ export interface definitions {
 }
 
 export interface parameters {
-  /** @description Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferParams: 'params=single-object'
-  /** @description Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferReturn: 'return=representation' | 'return=minimal' | 'return=none'
-  /** @description Preference */
+  /**
+   * @description Preference
+   * @enum {string}
+   */
   preferCount: 'count=none'
   /** @description Filtering Columns */
   select: string
@@ -182,13 +339,40 @@ export interface parameters {
   offset: string
   /** @description Limiting and Pagination */
   limit: string
+  /** @description burgers */
+  'body.burgers': definitions['burgers']
+  /** Format: bigint */
+  'rowFilter.burgers.id': string
+  /** Format: timestamp with time zone */
+  'rowFilter.burgers.created_at': string
+  /** Format: text */
+  'rowFilter.burgers.name': string
+  /** Format: text */
+  'rowFilter.burgers.restaurant': string
+  /** Format: text */
+  'rowFilter.burgers.description': string
+  /** Format: smallint */
+  'rowFilter.burgers.rank': string
+  /** Format: text */
+  'rowFilter.burgers.url': string
+  /** Format: text */
+  'rowFilter.burgers.location': string
   /** @description recipes */
   'body.recipes': definitions['recipes']
-  /** Format: bigint */
+  /**
+   * Format: bigint
+   * @description unique id of the recipe
+   */
   'rowFilter.recipes.id': string
-  /** Format: timestamp with time zone */
+  /**
+   * Format: timestamp with time zone
+   * @description timestamp of when recipe was created
+   */
   'rowFilter.recipes.created_at': string
-  /** Format: uuid */
+  /**
+   * Format: uuid
+   * @description Id of the user that created the recipe
+   */
   'rowFilter.recipes.created_by': string
   /**
    * Format: text
