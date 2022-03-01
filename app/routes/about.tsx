@@ -75,7 +75,11 @@ export default function About() {
         <p>You can find me on Twitter, LinkedIn, GitHub or shoot me an email!</p>
       </section>
       <section className="mt-16 px-4 mx-auto max-w-2xl">
-        <h2>Technology</h2>
+        <h2 className="mb-1">Technology</h2>
+        <p>
+          Here is a subset of the of some of the technologies I'm using or have used. There are more, but the list can
+          get long so I only listed some larger ones.
+        </p>
         <ul>
           {technologies.map((tech) => (
             <li key={tech.key} className="pb-6">
