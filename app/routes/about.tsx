@@ -72,7 +72,25 @@ export default function About() {
           code works. That end process is a little different as software isn't as tangible as a wooden box or ceramic
           water fountain, but that feeling of completion and satisfaction is still the same.
         </p>
-        <p>You can find me on Twitter, LinkedIn, GitHub or shoot me an email!</p>
+        <p>
+          You can find me on{' '}
+          <a href="https://twitter.com/nick__krantz" className="underline decoration-2">
+            Twitter
+          </a>
+          ,{' '}
+          <a href="https://www.linkedin.com/in/nicholaskrantz/" className="underline decoration-2">
+            LinkedIn
+          </a>
+          ,{' '}
+          <a href="https://github.com/nick-krantz" className="underline decoration-2">
+            GitHub
+          </a>
+          , or shoot me an{' '}
+          <a href="mailto:krantznicholas@gmail.com" className="underline decoration-2">
+            email
+          </a>
+          !
+        </p>
       </section>
       <section className="mt-16 px-4 mx-auto max-w-2xl">
         <h2 className="mb-1">Technology</h2>
