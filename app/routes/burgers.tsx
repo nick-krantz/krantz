@@ -63,7 +63,7 @@ export default function Burgers() {
             variants={staggerChildrenVariants}
           >
             {burgers.map((burger, i) => (
-              <motion.li key={burger.id} className="pb-2" variants={itemVariants(i % 2 === 0 ? 1 : -1)}>
+              <motion.li key={burger.id} className="pb-2 ml-7" variants={itemVariants(i % 2 === 0 ? 1 : -1)}>
                 <h4 className="text-3xl	">{burger.name}</h4>
                 <a href={burger.url} className="underline">
                   {burger.restaurant} - {burger.location}
