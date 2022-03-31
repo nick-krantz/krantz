@@ -86,7 +86,7 @@ export default function About() {
             GitHub
           </a>
           , or shoot me an{' '}
-          <a href="mailto:krantznicholas@gmail.com" className="underline decoration-2">
+          <a href="mailto:nick@krantz.app" className="underline decoration-2">
             email
           </a>
           !

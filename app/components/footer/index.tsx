@@ -12,7 +12,7 @@ const anchorMotion: HTMLMotionProps<'a'> = {
 
 export const Footer: React.FC = () => (
   <div className="flex p-5 my-0 mx-auto max-w-sm w-full justify-around">
-    <motion.a href="mailto:krantznicholas@gmail.com" aria-label="Shoot me an email" {...anchorMotion}>
+    <motion.a href="mailto:nick@krantz.app" aria-label="Shoot me an email" {...anchorMotion}>
       <Icon Icon={FiMail} />
     </motion.a>
     <motion.a href="https://github.com/nick-krantz" aria-label="Check out my GitHub" {...anchorMotion}>
