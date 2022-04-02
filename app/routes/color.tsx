@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
 import { Header } from '~/components/header'
+import { ShadesAndTints } from '~/components/shades-and-tints'
 import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } from '~/utils/colors'
 import { authenticated } from '~/utils/supabase/authenticated'
 
@@ -83,7 +84,7 @@ export default function Color() {
       setColor(newHex)
       setFieldValue('#hex-input', newHex)
     } else {
-      setFieldValue('#rgb-input', color)
+      setFieldValue('#rgb-input', HEXtoRGB(color) ?? fallbackRGBColor)
     }
   }
 
@@ -142,6 +143,7 @@ export default function Color() {
           className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
           style={{ backgroundColor: color }}
         ></div>
+        <ShadesAndTints color={color} />
       </div>
     </div>
   )

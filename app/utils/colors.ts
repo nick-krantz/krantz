@@ -67,9 +67,9 @@ export const RGBToHEX = (r: number, g: number, b: number, a?: number): string | 
   // Check for valid alpha value if defined
   if (a && (a < 0 || a > 1)) return null
 
-  let red = r.toString(16)
-  let green = g.toString(16)
-  let blue = b.toString(16)
+  let red = Math.round(r).toString(16)
+  let green = Math.round(g).toString(16)
+  let blue = Math.round(b).toString(16)
   let alpha = a !== undefined ? Math.round(a * 255).toString(16) : ''
 
   if (red.length === 1) red = '0' + red
@@ -109,4 +109,56 @@ export const HEXtoRGB = (h: string): string | null => {
   }
 
   return `${+red},${+green},${+blue}`
+}
+
+/**
+ * Adjusts the color to another tint or shade
+ *
+ * @param color base HEX color to start with
+ * @param increment increment between 0 & 10 to alter the color
+ * @param tintOrShade darken (tint) or brighten (shade) the color
+ * @returns
+ */
+export function adjustColor(color: string, increment: number, tintOrShade: 'shade' | 'tint'): string | null {
+  const rgbString = HEXtoRGB(color)
+  if (!rgbString) return null
+
+  const rgbArray = rgbToRGBArray(rgbString)
+  if (!rgbArray) return null
+
+  if (tintOrShade === 'shade') return shadeRGB(rgbArray, increment)
+
+  return tintRGB(rgbArray, increment)
+}
+
+/**
+ * Darken RGB color based on the given increment
+ *
+ * (Increments assumed to be 0 - 10)
+ */
+function shadeRGB(
+  rgbArray: [number, number, number] | [number, number, number, number],
+  increment: number,
+): string | null {
+  const r = rgbArray[0] * (1 - 0.1 * increment)
+  const g = rgbArray[1] * (1 - 0.1 * increment)
+  const b = rgbArray[2] * (1 - 0.1 * increment)
+
+  return RGBToHEX(r, g, b)
+}
+
+/**
+ * Lighten RGB color based on the given increment
+ *
+ * (Increments assumed to be 0 - 10)
+ */
+function tintRGB(
+  rgbArray: [number, number, number] | [number, number, number, number],
+  increment: number,
+): string | null {
+  const r = rgbArray[0] + (255 - rgbArray[0]) * increment * 0.1
+  const g = rgbArray[1] + (255 - rgbArray[1]) * increment * 0.1
+  const b = rgbArray[2] + (255 - rgbArray[2]) * increment * 0.1
+
+  return RGBToHEX(r, g, b)
 }

@@ -8,13 +8,18 @@ UI Styling: [tailwindcss](https://tailwindcss.com/)
 Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)  
 Animation: [framer motion](https://www.framer.com/motion/)  
 
+## Acknowledgements
+
+[Tints and Shades](https://github.com/edelstone/tints-and-shades/): A _lot_ of learning about color manipulation from their examples.
+
 ## TODOs
 
-- [ ] add color increasing/decreasing increments on colors page
-- [ ] only load recipe images that are in view
-- [ ] add sign out
-- [ ] make dark/light mode toggle
 - [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
+- [ ] make dark/light mode toggle
+- [ ] add sign out
+- [ ] only load recipe images that are in view
+- [ ] add ability to copy a shade/tint color
+- [x] add color increasing/decreasing increments on colors page
 - [x] replace other field like UI elements with Field component
 - [x] add Burger Page
 - [x] Update default color of carets on home page (more contrast needed)
