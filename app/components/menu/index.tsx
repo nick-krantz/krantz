@@ -36,13 +36,13 @@ function trapFocus(event: React.KeyboardEvent<HTMLDivElement>, escapeCallback: (
 const navVariants: HTMLMotionProps<'ul'>['variants'] = {
   closed: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: -1,
     },
   },
   open: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
       staggerDirection: 1,
     },
   },
@@ -73,13 +73,15 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
             <BackDrop />
             <motion.div
               className="fixed flex flex-col h-screen z-20 top-0 right-0 p-5 bg-gray-200 dark:bg-gray-800"
-              initial={{ width: 0 }}
+              initial={{ width: 0, opacity: 0 }}
               animate={{
                 width: 300,
+                opacity: 1,
               }}
               exit={{
                 width: 0,
-                transition: { delay: 0.7, duration: 0.3 },
+                opacity: 0,
+                transition: { duration: 0.6 },
               }}
               onKeyDown={(e) => {
                 trapFocus(e, toggle)
