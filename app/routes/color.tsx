@@ -115,10 +115,6 @@ export default function Color() {
             <code>/color?rgb=22,123,229,.45</code> <br />
           </p>
         </section>
-        <div
-          className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
-          style={{ backgroundColor: color }}
-        ></div>
         <div className="flex flex-wrap gap-4 w-full">
           <Field
             labelProps={{ htmlFor: 'hex-input' }}
@@ -143,6 +139,10 @@ export default function Color() {
             RGB / RGBA
           </Field>
         </div>
+        <div
+          className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
+          style={{ backgroundColor: color }}
+        ></div>
       </div>
     </div>
   )
