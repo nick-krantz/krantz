@@ -6,8 +6,7 @@ import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } fr
 import { authenticated } from '~/utils/supabase/authenticated'
 
 type LoaderData = {
-  rgb: string | null
-  hex: string | null
+  initialColor: string
   authorized: boolean
 }
 
@@ -65,16 +64,16 @@ export const loader: LoaderFunction = ({ request }) => {
     const url = new URL(request.url)
     const rgb = url.searchParams.get('rgb')
     const hex = url.searchParams.get('hex')
+    const initialColor = getDefaultColor(hex, rgb)
 
-    return Promise.resolve({ hex, rgb, authorized })
+    return Promise.resolve({ initialColor, authorized })
   })
 }
 
 export default function Color() {
-  const { hex, rgb, authorized } = useLoaderData<LoaderData>()
-  const defaultColor = getDefaultColor(hex, rgb)
+  const { initialColor, authorized } = useLoaderData<LoaderData>()
 
-  const [color, setColor] = useState<string>(defaultColor)
+  const [color, setColor] = useState<string>(initialColor)
 
   const hexChange = (hex: string): void => {
     const hexString = hex.replace('#', '')
