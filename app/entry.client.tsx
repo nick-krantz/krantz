@@ -1,7 +1,7 @@
-import { hydrate } from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 import { RemixBrowser } from 'remix'
 
-hydrate(<RemixBrowser />, document)
+hydrateRoot(document, <RemixBrowser />)
 
 // if the browser supports SW (all modern browsers do it)
 if ('serviceWorker' in navigator) {
