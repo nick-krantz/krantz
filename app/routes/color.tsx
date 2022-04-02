@@ -84,15 +84,15 @@ export default function Color() {
       setColor(newHex)
       setFieldValue('#hex-input', newHex)
     } else {
-      setFieldValue('#hex-input', color)
+      setFieldValue('#rgb-input', color)
     }
   }
 
   const rgbChange = (rgb: string): void => {
     const rgbArr = rgbToRGBArray(rgb)
     if (rgbArr) {
-      const [red, green, blue] = rgbArr
-      const hex = RGBToHEX(red, green, blue)
+      const [red, green, blue, alpha] = rgbArr
+      const hex = RGBToHEX(red, green, blue, alpha)
       setColor(hex ?? fallbackRGBColor)
       setFieldValue('#hex-input', hex ?? fallbackRGBColor)
     } else {
