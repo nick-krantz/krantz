@@ -14,11 +14,11 @@ Animation: [framer motion](https://www.framer.com/motion/)
 
 ## TODOs
 
-- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
-- [ ] make dark/light mode toggle
-- [ ] add sign out
 - [ ] only load recipe images that are in view
-- [ ] add ability to copy a shade/tint color
+- [ ] add sign out
+- [ ] make dark/light mode toggle
+- [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
+- [x] add ability to copy a shade/tint color
 - [x] add color increasing/decreasing increments on colors page
 - [x] replace other field like UI elements with Field component
 - [x] add Burger Page
