@@ -4,7 +4,7 @@ import { authenticated } from '~/utils/supabase/authenticated'
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'About - Krantz.app',
+    title: 'Nick Krantz - About',
     description: 'The who, what, why, when, where, and how of Krantz.app',
   }
 }

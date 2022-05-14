@@ -13,7 +13,7 @@ type LoaderData = {
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Color Converter',
+    title: 'Nick Krantz - Color Converter',
     description: 'Convert colors between their Hexadecimal & RGB representation',
   }
 }

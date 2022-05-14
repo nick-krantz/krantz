@@ -13,7 +13,7 @@ type LoaderData = {
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Krantz Recipes',
+    title: 'Nick Krantz - Recipes',
     description: 'Recipes worth making',
   }
 }

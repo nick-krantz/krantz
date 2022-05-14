@@ -26,7 +26,7 @@ type ActionData = {
 
 export const meta: MetaFunction = () => {
   return {
-    title: 'Krantz - Sign Up',
+    title: 'Nick Krantz - Sign Up',
     description: 'Sign up for Krantz.app using an email and password',
   }
 }
