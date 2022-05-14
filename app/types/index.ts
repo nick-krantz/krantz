@@ -3,3 +3,4 @@ import { definitions } from './supabase'
 
 export type Recipe = definitions['recipes']
 export type Burger = definitions['burgers']
+export type Bookmark = definitions['bookmarks']

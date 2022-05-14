@@ -1,6 +1,6 @@
 import { AnimatePresence, HTMLMotionProps, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
-import { FiCode, FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
+import { FiBookmark, FiCode, FiHome, FiInbox, FiLogIn, FiPenTool } from 'react-icons/fi'
 import { BackDrop } from '../backdrop'
 import { BurgerIcon } from '../icon/burger'
 import { MenuIcon } from './menu-icon'
@@ -113,6 +113,11 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
                   {authorized && (
                     <NavItem to="../recipes" icon={FiInbox}>
                       Recipes
+                    </NavItem>
+                  )}
+                  {authorized && (
+                    <NavItem to="../bookmarks" icon={FiBookmark}>
+                      Bookmarks
                     </NavItem>
                   )}
 

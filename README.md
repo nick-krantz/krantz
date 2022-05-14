@@ -18,6 +18,9 @@ Animation: [framer motion](https://www.framer.com/motion/)
 - [ ] make dark/light mode toggle
 - [ ] add sign out
 - [ ] only load recipe images that are in view
+- [ ] rework auth to be a global provider
+- [ ] Update metadata to use Nick Krantz instead of just krantz
+- [ ] Build "add bookmark" functionality
 - [x] add ability to copy a shade/tint color
 - [x] add color increasing/decreasing increments on colors page
 - [x] replace other field like UI elements with Field component

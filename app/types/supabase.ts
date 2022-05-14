@@ -12,6 +12,198 @@ export interface paths {
       }
     }
   }
+  '/bookmark-types': {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.bookmark-types.id']
+          created_at?: parameters['rowFilter.bookmark-types.created_at']
+          type?: parameters['rowFilter.bookmark-types.type']
+          /** Filtering Columns */
+          select?: parameters['select']
+          /** Ordering */
+          order?: parameters['order']
+          /** Limiting and Pagination */
+          offset?: parameters['offset']
+          /** Limiting and Pagination */
+          limit?: parameters['limit']
+        }
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters['range']
+          /** Limiting and Pagination */
+          'Range-Unit'?: parameters['rangeUnit']
+          /** Preference */
+          Prefer?: parameters['preferCount']
+        }
+      }
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions['bookmark-types'][]
+        }
+        /** Partial Content */
+        206: unknown
+      }
+    }
+    post: {
+      parameters: {
+        body: {
+          /** bookmark-types */
+          'bookmark-types'?: definitions['bookmark-types']
+        }
+        query: {
+          /** Filtering Columns */
+          select?: parameters['select']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** Created */
+        201: unknown
+      }
+    }
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.bookmark-types.id']
+          created_at?: parameters['rowFilter.bookmark-types.created_at']
+          type?: parameters['rowFilter.bookmark-types.type']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** No Content */
+        204: never
+      }
+    }
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.bookmark-types.id']
+          created_at?: parameters['rowFilter.bookmark-types.created_at']
+          type?: parameters['rowFilter.bookmark-types.type']
+        }
+        body: {
+          /** bookmark-types */
+          'bookmark-types'?: definitions['bookmark-types']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** No Content */
+        204: never
+      }
+    }
+  }
+  '/bookmarks': {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.bookmarks.id']
+          created_at?: parameters['rowFilter.bookmarks.created_at']
+          title?: parameters['rowFilter.bookmarks.title']
+          url?: parameters['rowFilter.bookmarks.url']
+          category?: parameters['rowFilter.bookmarks.category']
+          /** Filtering Columns */
+          select?: parameters['select']
+          /** Ordering */
+          order?: parameters['order']
+          /** Limiting and Pagination */
+          offset?: parameters['offset']
+          /** Limiting and Pagination */
+          limit?: parameters['limit']
+        }
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters['range']
+          /** Limiting and Pagination */
+          'Range-Unit'?: parameters['rangeUnit']
+          /** Preference */
+          Prefer?: parameters['preferCount']
+        }
+      }
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions['bookmarks'][]
+        }
+        /** Partial Content */
+        206: unknown
+      }
+    }
+    post: {
+      parameters: {
+        body: {
+          /** bookmarks */
+          bookmarks?: definitions['bookmarks']
+        }
+        query: {
+          /** Filtering Columns */
+          select?: parameters['select']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** Created */
+        201: unknown
+      }
+    }
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.bookmarks.id']
+          created_at?: parameters['rowFilter.bookmarks.created_at']
+          title?: parameters['rowFilter.bookmarks.title']
+          url?: parameters['rowFilter.bookmarks.url']
+          category?: parameters['rowFilter.bookmarks.category']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** No Content */
+        204: never
+      }
+    }
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters['rowFilter.bookmarks.id']
+          created_at?: parameters['rowFilter.bookmarks.created_at']
+          title?: parameters['rowFilter.bookmarks.title']
+          url?: parameters['rowFilter.bookmarks.url']
+          category?: parameters['rowFilter.bookmarks.category']
+        }
+        body: {
+          /** bookmarks */
+          bookmarks?: definitions['bookmarks']
+        }
+        header: {
+          /** Preference */
+          Prefer?: parameters['preferReturn']
+        }
+      }
+      responses: {
+        /** No Content */
+        204: never
+      }
+    }
+  }
   '/burgers': {
     get: {
       parameters: {
@@ -243,6 +435,44 @@ export interface paths {
 }
 
 export interface definitions {
+  'bookmark-types': {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string
+    /** Format: text */
+    type: string
+  }
+  bookmarks: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string
+    /** Format: text */
+    title: string
+    /** Format: text */
+    url: string
+    /**
+     * Format: text
+     * @description Note:
+     * This is a Foreign Key to `bookmark-types.type`.<fk table='bookmark-types' column='type'/>
+     */
+    category: string
+  }
   burgers: {
     /**
      * Format: bigint
@@ -339,6 +569,26 @@ export interface parameters {
   offset: string
   /** @description Limiting and Pagination */
   limit: string
+  /** @description bookmark-types */
+  'body.bookmark-types': definitions['bookmark-types']
+  /** Format: bigint */
+  'rowFilter.bookmark-types.id': string
+  /** Format: timestamp with time zone */
+  'rowFilter.bookmark-types.created_at': string
+  /** Format: text */
+  'rowFilter.bookmark-types.type': string
+  /** @description bookmarks */
+  'body.bookmarks': definitions['bookmarks']
+  /** Format: bigint */
+  'rowFilter.bookmarks.id': string
+  /** Format: timestamp with time zone */
+  'rowFilter.bookmarks.created_at': string
+  /** Format: text */
+  'rowFilter.bookmarks.title': string
+  /** Format: text */
+  'rowFilter.bookmarks.url': string
+  /** Format: text */
+  'rowFilter.bookmarks.category': string
   /** @description burgers */
   'body.burgers': definitions['burgers']
   /** Format: bigint */
