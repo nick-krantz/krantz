@@ -12,13 +12,13 @@ export interface paths {
       }
     }
   }
-  '/bookmark-types': {
+  '/bookmark-categories': {
     get: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.bookmark-types.id']
-          created_at?: parameters['rowFilter.bookmark-types.created_at']
-          type?: parameters['rowFilter.bookmark-types.type']
+          id?: parameters['rowFilter.bookmark-categories.id']
+          created_at?: parameters['rowFilter.bookmark-categories.created_at']
+          category?: parameters['rowFilter.bookmark-categories.category']
           /** Filtering Columns */
           select?: parameters['select']
           /** Ordering */
@@ -40,7 +40,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions['bookmark-types'][]
+          schema: definitions['bookmark-categories'][]
         }
         /** Partial Content */
         206: unknown
@@ -49,8 +49,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** bookmark-types */
-          'bookmark-types'?: definitions['bookmark-types']
+          /** bookmark-categories */
+          'bookmark-categories'?: definitions['bookmark-categories']
         }
         query: {
           /** Filtering Columns */
@@ -69,9 +69,9 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.bookmark-types.id']
-          created_at?: parameters['rowFilter.bookmark-types.created_at']
-          type?: parameters['rowFilter.bookmark-types.type']
+          id?: parameters['rowFilter.bookmark-categories.id']
+          created_at?: parameters['rowFilter.bookmark-categories.created_at']
+          category?: parameters['rowFilter.bookmark-categories.category']
         }
         header: {
           /** Preference */
@@ -86,13 +86,13 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.bookmark-types.id']
-          created_at?: parameters['rowFilter.bookmark-types.created_at']
-          type?: parameters['rowFilter.bookmark-types.type']
+          id?: parameters['rowFilter.bookmark-categories.id']
+          created_at?: parameters['rowFilter.bookmark-categories.created_at']
+          category?: parameters['rowFilter.bookmark-categories.category']
         }
         body: {
-          /** bookmark-types */
-          'bookmark-types'?: definitions['bookmark-types']
+          /** bookmark-categories */
+          'bookmark-categories'?: definitions['bookmark-categories']
         }
         header: {
           /** Preference */
@@ -435,7 +435,7 @@ export interface paths {
 }
 
 export interface definitions {
-  'bookmark-types': {
+  'bookmark-categories': {
     /**
      * Format: bigint
      * @description Note:
@@ -448,7 +448,7 @@ export interface definitions {
      */
     created_at?: string
     /** Format: text */
-    type: string
+    category: string
   }
   bookmarks: {
     /**
@@ -469,7 +469,7 @@ export interface definitions {
     /**
      * Format: text
      * @description Note:
-     * This is a Foreign Key to `bookmark-types.type`.<fk table='bookmark-types' column='type'/>
+     * This is a Foreign Key to `bookmark-categories.category`.<fk table='bookmark-categories' column='category'/>
      */
     category: string
   }
@@ -569,14 +569,14 @@ export interface parameters {
   offset: string
   /** @description Limiting and Pagination */
   limit: string
-  /** @description bookmark-types */
-  'body.bookmark-types': definitions['bookmark-types']
+  /** @description bookmark-categories */
+  'body.bookmark-categories': definitions['bookmark-categories']
   /** Format: bigint */
-  'rowFilter.bookmark-types.id': string
+  'rowFilter.bookmark-categories.id': string
   /** Format: timestamp with time zone */
-  'rowFilter.bookmark-types.created_at': string
+  'rowFilter.bookmark-categories.created_at': string
   /** Format: text */
-  'rowFilter.bookmark-types.type': string
+  'rowFilter.bookmark-categories.category': string
   /** @description bookmarks */
   'body.bookmarks': definitions['bookmarks']
   /** Format: bigint */

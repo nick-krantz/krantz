@@ -1,4 +1,5 @@
-import { LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
+import { Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
+import { Button } from '~/components/button'
 import { Header } from '~/components/header'
 import { Bookmark } from '~/types'
 import { authenticated } from '~/utils/supabase/authenticated'
@@ -41,6 +42,11 @@ export default function Bookmarks() {
   return (
     <>
       <Header authorized={authorized} title="Bookmarks" />
+      <div className="max-w-screen-md mx-auto mb-6">
+        <Link to="./add">
+          <Button>Add Bookmark</Button>
+        </Link>
+      </div>
       {categories?.map((category) => (
         <div className="max-w-screen-md mx-auto mb-6" key={category}>
           <h3 className="capitalize">{category}</h3>

@@ -1,11 +1,9 @@
 import { User } from '@supabase/supabase-js'
-import { ACCESS_TOKEN } from '~/constants/access-token'
-import { getSession } from './get-session.server'
+import { getToken } from './get-token'
 import { supabase } from './index.server'
 
 export const getUser = async (request: Request): Promise<User | null> => {
-  const session = await getSession(request.headers.get('Cookie'))
-  const token = session.get(ACCESS_TOKEN)
+  const token = await getToken(request)
 
   const { user, error } = await supabase.auth.api.getUser(token)
 
