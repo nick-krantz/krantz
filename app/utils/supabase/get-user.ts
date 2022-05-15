@@ -6,7 +6,10 @@ import { supabase } from './index.server'
 export const getUser = async (request: Request): Promise<User | null> => {
   const session = await getSession(request.headers.get('Cookie'))
   const token = session.get(ACCESS_TOKEN)
+
   const { user, error } = await supabase.auth.api.getUser(token)
-  console.error(error)
+
+  if (error) console.error(error)
+
   return user
 }

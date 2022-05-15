@@ -1,7 +1,7 @@
 import { User } from '@supabase/supabase-js'
 import { redirect, Session } from 'remix'
 import { ACCESS_TOKEN } from '~/constants/access-token'
-import { commitSession, getSession } from './get-session.server'
+import { getSession } from './get-session.server'
 import { supabase } from './index.server'
 
 /**
@@ -37,6 +37,5 @@ export async function authenticated<T>(
  */
 async function unAuthorizedResponse(session: Session): Promise<Response> {
   session.unset(ACCESS_TOKEN)
-  const cookie = await commitSession(session)
-  return redirect('/sign-in', { headers: { 'Set-Cookie': cookie } })
+  return redirect('/sign-in')
 }

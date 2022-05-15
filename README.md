@@ -14,12 +14,12 @@ Animation: [framer motion](https://www.framer.com/motion/)
 
 ## TODOs
 
-- [ ] Build "add bookmark" functionality
-- [ ] rework auth to be a global provider
-- [ ] only load recipe images that are in view
-- [ ] add sign out
-- [ ] make dark/light mode toggle
 - [ ] Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)
+- [ ] make dark/light mode toggle
+- [ ] add sign out
+- [ ] only load recipe images that are in view
+- [ ] rework auth to be a global provider
+- [ ] Build "add bookmark" functionality
 - [x] Update metadata to use Nick Krantz instead of just krantz
 - [x] add ability to copy a shade/tint color
 - [x] add color increasing/decreasing increments on colors page
