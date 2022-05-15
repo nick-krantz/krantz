@@ -9,10 +9,11 @@ import { Modal } from '~/components/modal'
 import { RecipeCard } from '~/components/recipe-card'
 import { Recipe } from '~/types'
 import { badRequest } from '~/utils/network'
+import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
-  recipes: Recipe[]
+  recipes: Recipe[] | null
 }
 
 type ActionData = {
@@ -24,7 +25,11 @@ export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url)
   const paths = url.pathname.split('/')
   const recipeId = paths[paths.length - 1]
-  console.log(recipeId)
+
+  const token = await getToken(request)
+
+  supabase.auth.setAuth(token)
+
   const { data: recipes } = await supabase.from<Recipe>('recipes').select().eq('id', recipeId)
 
   return { recipes }
@@ -35,15 +40,20 @@ export const action: ActionFunction = async ({ request }) => {
   const name = form.get('name')
   const id = form.get('id')
 
-  console.log({ name, id })
   if (typeof name !== 'string' || !name || !id) {
     return badRequest({
       error: { message: 'Please enter a recipe name' },
     })
   }
-  const { error } = await supabase.from('recipes').update({ name }).eq('id', id.toString())
-  if (error) {
-    return badRequest({ error, data: { name } })
+
+  const token = await getToken(request)
+
+  supabase.auth.setAuth(token)
+
+  const thing = await supabase.from('recipes').update({ name }, { returning: 'minimal' }).eq('id', id.toString())
+
+  if (thing.error) {
+    return badRequest({ error: thing.error, data: { name } })
   }
 
   return redirect('/recipes')
@@ -51,10 +61,11 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function SubmitRecipe() {
   const navigation = useNavigate()
-  const recipe = useLoaderData<LoaderData>().recipes[0]
+  const { recipes } = useLoaderData<LoaderData>()
   const actionData = useActionData<ActionData>()
 
-  const [name, setRecipeName] = useState<string>(recipe.name)
+  const recipe = recipes?.[0] || ({} as Recipe)
+  const [name, setRecipeName] = useState<string>(recipe.name ?? '')
 
   const close = () => {
     navigation('/recipes')

@@ -4,6 +4,7 @@ import { Header } from '~/components/header'
 import { RecipeList } from '~/components/recipe-list'
 import { Recipe } from '~/types'
 import { authenticated } from '~/utils/supabase/authenticated'
+import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
@@ -20,6 +21,10 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({ request }) => {
   return authenticated(request, true, async ({ authorized }) => {
+    const token = await getToken(request)
+
+    supabase.auth.setAuth(token)
+
     const { data: recipes } = await supabase.from<Recipe>('recipes').select()
     return { recipes, authorized }
   })

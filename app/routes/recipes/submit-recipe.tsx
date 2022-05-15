@@ -8,6 +8,7 @@ import { Field } from '~/components/field'
 import { Modal } from '~/components/modal'
 import { RecipeCard } from '~/components/recipe-card'
 import { badRequest } from '~/utils/network'
+import { getToken } from '~/utils/supabase/get-token'
 import { getUser } from '~/utils/supabase/get-user'
 import { supabase } from '~/utils/supabase/index.server'
 
@@ -41,13 +42,19 @@ export const action: ActionFunction = async ({ request }) => {
   const image = form.get('image')
   const url = form.get('url')
 
-  if (typeof name !== 'string' || !name) {
+  if (typeof name !== 'string' || !name || !image || !url) {
     return badRequest({
-      error: { message: 'Please enter a recipe name' },
+      error: { message: 'Please enter all details: recipe name, image & url' },
       data: { name, image, url },
     })
   }
+
+  const token = await getToken(request)
+
+  supabase.auth.setAuth(token)
+
   const created_by = (await getUser(request))?.id
+
   const { error } = await supabase.from('recipes').insert([{ name, image, url, created_by }], { returning: 'minimal' })
   if (error) {
     return badRequest({ error, data: { name, image, url } })
