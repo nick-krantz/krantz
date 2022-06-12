@@ -1,6 +1,25 @@
 type ConfigIndicator = 0 | 1 | -1 | 100
 type Partitions = { red: ConfigIndicator; green: ConfigIndicator; blue: ConfigIndicator }
 
+//  Max RGB value
+const rgbMax = 255
+
+/**
+ * Returns the RGB value based on the percentage & config property
+ */
+function getRGBValue(configProperty: ConfigIndicator, percentage: number): number {
+  if (configProperty === 0) return 0
+  if (configProperty === 100) return rgbMax
+
+  // Value is increasing
+  if (configProperty === 1) {
+    return Math.floor(rgbMax * percentage)
+  }
+
+  // Value is decreasing
+  return rgbMax - Math.floor(rgbMax * percentage)
+}
+
 /**
  * Based on the mouse/touch position change the color of the carets
  */
@@ -11,8 +30,6 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
 
   // 1/6 of the screen width
   const widthSixth = Math.ceil(window.innerWidth / 6)
-  //  Max RGB value
-  const rgbMax = 255
 
   /**
    * Config for each of the 6 partitions
@@ -30,22 +47,6 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
     5: { red: 100, green: 0, blue: -1 },
   }
 
-  /**
-   * Returns the RGB value based on the percentage & config property
-   */
-  function getRGBValue(configProperty: ConfigIndicator, percentage: number): number {
-    if (configProperty === 0) return 0
-    if (configProperty === 100) return rgbMax
-
-    // Value is increasing
-    if (configProperty === 1) {
-      return Math.floor(rgbMax * percentage)
-    }
-
-    // Value is decreasing
-    return rgbMax - Math.floor(rgbMax * percentage)
-  }
-
   let x
 
   // distinguish between event types
@@ -59,6 +60,8 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
   const partition = Math.floor(x / widthSixth)
   // Select partition config
   const partitionConfig = config[partition]
+
+  if (!partitionConfig) return
 
   // Determine percentage of partition
   const percentage = +((x - partition * widthSixth) / widthSixth).toFixed(2)
