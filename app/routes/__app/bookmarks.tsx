@@ -35,7 +35,7 @@ export default function Bookmarks() {
     .sort()
 
   return (
-    <>
+    <div className="w-full">
       <div className="max-w-screen-md mx-auto mb-6">
         <Link to="./add">
           <Button>Add Bookmark</Button>
@@ -58,6 +58,6 @@ export default function Bookmarks() {
         </div>
       ))}
       <Outlet />
-    </>
+    </div>
   )
 }
