@@ -1,14 +1,11 @@
 import { useState } from 'react'
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
-import { Header } from '~/components/header'
 import { ShadesAndTints } from '~/components/shades-and-tints'
 import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } from '~/utils/colors'
-import { authenticated } from '~/utils/supabase/authenticated'
 
 type LoaderData = {
   initialColor: string
-  authorized: boolean
 }
 
 export const meta: MetaFunction = () => {
@@ -61,18 +58,16 @@ const getDefaultColor = (hex: string | null, rgb: string | null): string => {
  * Returns HEX and RGB query params
  */
 export const loader: LoaderFunction = ({ request }) => {
-  return authenticated(request, false, ({ authorized }) => {
-    const url = new URL(request.url)
-    const rgb = url.searchParams.get('rgb')
-    const hex = url.searchParams.get('hex')
-    const initialColor = getDefaultColor(hex, rgb)
+  const url = new URL(request.url)
+  const rgb = url.searchParams.get('rgb')
+  const hex = url.searchParams.get('hex')
+  const initialColor = getDefaultColor(hex, rgb)
 
-    return Promise.resolve({ initialColor, authorized })
-  })
+  return json({ initialColor })
 }
 
 export default function Color() {
-  const { initialColor, authorized } = useLoaderData<LoaderData>()
+  const { initialColor } = useLoaderData<LoaderData>()
 
   const [color, setColor] = useState<string>(initialColor)
 
@@ -101,50 +96,47 @@ export default function Color() {
   }
 
   return (
-    <div className="flex flex-col">
-      <Header authorized={authorized} title="Convert Colors" />
-      <div className="flex flex-col text-center max-w-2xl mx-auto gap-8 w-full">
-        <section className="text-left">
-          <h2 className="text-2xl">Usage:</h2>
-          <p>Enter a HEX, RGB, or RGBA value to convert the color to the other format.</p>
-          <br />
-          <p>
-            This can be via the URL using query params: <br />
-            <code>/color?hex=323299</code> <br />
-            <code>/color?rgb=233,123,9</code> <br />
-            <code>/color?rgb=22,123,229,.45</code> <br />
-          </p>
-        </section>
-        <div className="flex flex-wrap gap-4 w-full">
-          <Field
-            labelProps={{ htmlFor: 'hex-input' }}
-            inputProps={{
-              type: 'text',
-              id: 'hex-input',
-              defaultValue: color,
-              onBlur: (e) => hexChange(e.target.value),
-            }}
-          >
-            HEX
-          </Field>
-          <Field
-            labelProps={{ htmlFor: 'rgb-input' }}
-            inputProps={{
-              type: 'text',
-              id: 'rgb-input',
-              defaultValue: HEXtoRGB(color) ?? fallbackRGBColor,
-              onBlur: (e) => rgbChange(e.target.value),
-            }}
-          >
-            RGB / RGBA
-          </Field>
-        </div>
-        <div
-          className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
-          style={{ backgroundColor: color }}
-        ></div>
-        <ShadesAndTints color={color} />
+    <div className="flex flex-col text-center max-w-2xl mx-auto gap-8 w-full">
+      <section className="text-left">
+        <h2 className="text-2xl">Usage:</h2>
+        <p>Enter a HEX, RGB, or RGBA value to convert the color to the other format.</p>
+        <br />
+        <p>
+          This can be via the URL using query params: <br />
+          <code>/color?hex=323299</code> <br />
+          <code>/color?rgb=233,123,9</code> <br />
+          <code>/color?rgb=22,123,229,.45</code> <br />
+        </p>
+      </section>
+      <div className="flex flex-wrap gap-4 w-full">
+        <Field
+          labelProps={{ htmlFor: 'hex-input' }}
+          inputProps={{
+            type: 'text',
+            id: 'hex-input',
+            defaultValue: color,
+            onBlur: (e) => hexChange(e.target.value),
+          }}
+        >
+          HEX
+        </Field>
+        <Field
+          labelProps={{ htmlFor: 'rgb-input' }}
+          inputProps={{
+            type: 'text',
+            id: 'rgb-input',
+            defaultValue: HEXtoRGB(color) ?? fallbackRGBColor,
+            onBlur: (e) => rgbChange(e.target.value),
+          }}
+        >
+          RGB / RGBA
+        </Field>
       </div>
+      <div
+        className="w-full max-w-full h-48 border-solid border-2 border-gray-800 dark:border-gray-200 rounded-md"
+        style={{ backgroundColor: color }}
+      ></div>
+      <ShadesAndTints color={color} />
     </div>
   )
 }

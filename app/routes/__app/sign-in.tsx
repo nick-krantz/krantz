@@ -1,13 +1,11 @@
 import { User } from '@supabase/supabase-js'
-import { ActionFunction, Form, LoaderFunction, MetaFunction, redirect, useActionData, useLoaderData } from 'remix'
+import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
 import { ErrorMessage } from '~/components/error-message'
-import { Header } from '~/components/header'
 import { PasswordInput } from '~/components/password-input'
 import { ACCESS_TOKEN } from '~/constants/access-token'
 import { badRequest } from '~/utils/network'
-import { authenticated } from '~/utils/supabase/authenticated'
 import { commitSession, getSession } from '~/utils/supabase/get-session.server'
 import { supabase } from '~/utils/supabase/index.server'
 import { validateEmail, validatePassword } from '~/utils/validation'
@@ -30,15 +28,6 @@ export const meta: MetaFunction = () => {
     title: 'Nick Krantz - Sign In',
     description: 'Sign in to Krantz.app using an email and password',
   }
-}
-
-export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(request, false, ({ authorized }) => {
-    if (authorized) {
-      return Promise.resolve(redirect('./'))
-    }
-    return Promise.resolve({ authorized })
-  })
 }
 
 export const action: ActionFunction = async ({ request }) => {
@@ -88,22 +77,20 @@ export const action: ActionFunction = async ({ request }) => {
  */
 export default function SignIn() {
   const actionData = useActionData<ActionData>()
-  const { authorized } = useLoaderData()
   const hasError = Boolean(actionData?.formError)
 
   return (
-    <>
-      <Header authorized={authorized} title="Sign In" />
-      <div className="mt-20 px-4 mx-auto max-w-lg">
-        <Form method="post" aria-describedby={hasError ? 'form-error-message' : undefined}>
-          <div className="flex align-stretch flex-col gap-6">
-            <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
-            <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
-            <ErrorMessage id="form-error-message">{actionData?.formError}</ErrorMessage>
-            <Button type="submit">Sign In</Button>
-          </div>
-        </Form>
+    <Form
+      className="mt-20 px-4 mx-auto max-w-lg w-full"
+      method="post"
+      aria-describedby={hasError ? 'form-error-message' : undefined}
+    >
+      <div className="flex align-stretch flex-col gap-6">
+        <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
+        <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
+        <ErrorMessage id="form-error-message">{actionData?.formError}</ErrorMessage>
+        <Button type="submit">Sign In</Button>
       </div>
-    </>
+    </Form>
   )
 }

@@ -3,7 +3,6 @@ import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'rem
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
 import { ErrorMessage } from '~/components/error-message'
-import { Header } from '~/components/header'
 import { PasswordInput } from '~/components/password-input'
 import { ACCESS_TOKEN } from '~/constants/access-token'
 import { badRequest } from '~/utils/network'
@@ -83,19 +82,18 @@ export default function SignUp() {
   const hasError = Boolean(actionData?.formError)
 
   return (
-    <>
-      <Header authorized={false} title="Sign Up" />
-      <div className="mt-20 px-4 mx-auto max-w-lg">
-        <Form method="post" aria-describedby={hasError ? 'form-error-message' : undefined}>
-          <div className="flex align-stretch flex-col gap-6">
-            <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
-            <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
-            <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
-            <ErrorMessage id="form-error-message">{actionData?.formError}</ErrorMessage>
-            <Button type="submit">Sign Up</Button>
-          </div>
-        </Form>
+    <Form
+      className="mt-20 px-4 mx-auto max-w-lg w-full"
+      method="post"
+      aria-describedby={hasError ? 'form-error-message' : undefined}
+    >
+      <div className="flex align-stretch flex-col gap-6">
+        <input type="hidden" name="redirectTo" value="http://localhost:3000/recipes" />
+        <EmailInput email={actionData?.fields?.email} errorMessage={actionData?.fieldErrors?.email} />
+        <PasswordInput password={actionData?.fields?.password} errorMessage={actionData?.fieldErrors?.password} />
+        <ErrorMessage id="form-error-message">{actionData?.formError}</ErrorMessage>
+        <Button type="submit">Sign Up</Button>
       </div>
-    </>
+    </Form>
   )
 }

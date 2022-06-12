@@ -8,7 +8,6 @@ import { Modal } from '~/components/modal'
 import { Select } from '~/components/select'
 import { BookmarkCategories } from '~/types'
 import { badRequest } from '~/utils/network'
-import { authenticated } from '~/utils/supabase/authenticated'
 import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
 
@@ -20,12 +19,10 @@ type LoaderData = {
   bookmarkCategories: BookmarkCategories[]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(request, true, async ({ authorized }) => {
-    const { data } = await supabase.from<BookmarkCategories>('bookmark-categories').select()
+export const loader: LoaderFunction = async () => {
+  const { data } = await supabase.from<BookmarkCategories>('bookmark-categories').select()
 
-    return { bookmarkCategories: data, authorized }
-  })
+  return { bookmarkCategories: data }
 }
 
 export const action: ActionFunction = async ({ request }) => {

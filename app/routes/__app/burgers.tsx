@@ -1,13 +1,10 @@
 import { HTMLMotionProps, motion } from 'framer-motion'
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
-import { Header } from '~/components/header'
 import { Burger } from '~/types'
-import { authenticated } from '~/utils/supabase/authenticated'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
   burgers: Burger[] | null
-  authorized: boolean
 }
 
 export const meta: MetaFunction = () => {
@@ -17,12 +14,10 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(request, false, async ({ authorized }) => {
-    const { data: burgers } = await supabase.from<Burger>('burgers').select()
-    burgers?.sort((a, b) => a.rank - b.rank)
-    return { burgers, authorized }
-  })
+export const loader: LoaderFunction = async () => {
+  const { data: burgers } = await supabase.from<Burger>('burgers').select()
+  burgers?.sort((a, b) => a.rank - b.rank)
+  return { burgers }
 }
 
 const staggerChildrenVariants: HTMLMotionProps<'ul'>['variants'] = {
@@ -45,11 +40,10 @@ const itemVariants = (direction: 1 | -1): HTMLMotionProps<'li'>['variants'] => {
  * Burger page
  */
 export default function Burgers() {
-  const { burgers, authorized } = useLoaderData<LoaderData>()
+  const { burgers } = useLoaderData<LoaderData>()
 
   return (
     <>
-      <Header authorized={authorized} title="Best Burgers I've Ever Had" />
       <div className="flex flex-col max-w-2xl mx-auto gap-8 w-full">
         <p className="text-center">
           I've thought more than once that I've had the best burger, so I started to track all of them. Why put it

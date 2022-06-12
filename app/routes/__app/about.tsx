@@ -1,18 +1,10 @@
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
-import { Header } from '~/components/header'
-import { authenticated } from '~/utils/supabase/authenticated'
+import { MetaFunction } from 'remix'
 
 export const meta: MetaFunction = () => {
   return {
     title: 'Nick Krantz - About',
     description: 'The who, what, why, when, where, and how of Krantz.app',
   }
-}
-
-export const loader: LoaderFunction = ({ request }) => {
-  return authenticated(request, false, ({ authorized }) => {
-    return Promise.resolve({ authorized })
-  })
 }
 
 const technologies: { key: string; title: string; items: { name: string; link: string; image: string }[] }[] = [
@@ -53,11 +45,8 @@ const imageClass = 'max-h-8 max-w-[2rem]'
  * About Page
  */
 export default function About() {
-  const { authorized } = useLoaderData()
-
   return (
     <>
-      <Header authorized={authorized} title="About" />
       <section className="mt-16 px-4 mx-auto max-w-2xl">
         <h2>About me</h2>
         <p>Hi, I'm Nick and I love to build things.</p>

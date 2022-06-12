@@ -1,13 +1,10 @@
 import { Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
 import { Button } from '~/components/button'
-import { Header } from '~/components/header'
 import { Bookmark } from '~/types'
-import { authenticated } from '~/utils/supabase/authenticated'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
   bookmarks: Bookmark[] | null
-  authorized: boolean
 }
 
 export const meta: MetaFunction = () => {
@@ -17,18 +14,16 @@ export const meta: MetaFunction = () => {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  return authenticated(request, true, async ({ authorized }) => {
-    const { data: bookmarks } = await supabase.from<Bookmark>('bookmarks').select()
-    return { bookmarks, authorized }
-  })
+export const loader: LoaderFunction = async () => {
+  const { data: bookmarks } = await supabase.from<Bookmark>('bookmarks').select()
+  return { bookmarks }
 }
 
 /**
  * Bookmark page
  */
 export default function Bookmarks() {
-  const { bookmarks, authorized } = useLoaderData<LoaderData>()
+  const { bookmarks } = useLoaderData<LoaderData>()
 
   const categories = bookmarks
     ?.reduce((accum: string[], bookmark) => {
@@ -41,7 +36,6 @@ export default function Bookmarks() {
 
   return (
     <>
-      <Header authorized={authorized} title="Bookmarks" />
       <div className="max-w-screen-md mx-auto mb-6">
         <Link to="./add">
           <Button>Add Bookmark</Button>
