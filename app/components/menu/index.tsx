@@ -55,6 +55,10 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
     setMenu(!isOpen)
   }
 
+  const closeMenu = () => {
+    setMenu(false)
+  }
+
   useEffect(() => {
     // Add class to disable background caret color when menu is open
     if (isOpen) {
@@ -98,31 +102,31 @@ export const Menu: React.FC<{ authorized: boolean }> = ({ authorized }) => {
                   exit="closed"
                   variants={navVariants}
                 >
-                  <NavItem to="/" icon={FiHome}>
+                  <NavItem to="/" icon={FiHome} onClick={closeMenu}>
                     Home
                   </NavItem>
-                  <NavItem to="../about" icon={FiCode}>
+                  <NavItem to="../about" icon={FiCode} onClick={closeMenu}>
                     About
                   </NavItem>
-                  <NavItem to="../burgers" icon={BurgerIcon}>
+                  <NavItem to="../burgers" icon={BurgerIcon} onClick={closeMenu}>
                     Burgers
                   </NavItem>
-                  <NavItem to="../color" icon={FiPenTool}>
+                  <NavItem to="../color" icon={FiPenTool} onClick={closeMenu}>
                     Colors
                   </NavItem>
                   {authorized && (
-                    <NavItem to="../recipes" icon={FiInbox}>
+                    <NavItem to="../recipes" icon={FiInbox} onClick={closeMenu}>
                       Recipes
                     </NavItem>
                   )}
                   {authorized && (
-                    <NavItem to="../bookmarks" icon={FiBookmark}>
+                    <NavItem to="../bookmarks" icon={FiBookmark} onClick={closeMenu}>
                       Bookmarks
                     </NavItem>
                   )}
 
                   {!authorized && (
-                    <NavItem to="../sign-in" icon={FiLogIn} className="mt-auto">
+                    <NavItem to="../sign-in" icon={FiLogIn} className="mt-auto" onClick={closeMenu}>
                       Sign In
                     </NavItem>
                   )}

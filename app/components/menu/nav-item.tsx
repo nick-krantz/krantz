@@ -9,11 +9,12 @@ const itemVariants: HTMLMotionProps<'li'>['variants'] = {
   open: { opacity: 1 },
 }
 
-export const NavItem: React.FC<{ to: string; icon: IconType | React.FC; className?: string }> = ({
+export const NavItem: React.FC<{ to: string; icon: IconType | React.FC; className?: string; onClick: () => void }> = ({
   children,
   to,
   icon,
   className,
+  onClick,
 }) => {
   return (
     <motion.li
@@ -24,6 +25,7 @@ export const NavItem: React.FC<{ to: string; icon: IconType | React.FC; classNam
     >
       <NavLink
         to={to}
+        onClick={onClick}
         className="flex items-center gap-6 p-2 rounded-md"
         style={({ isActive }) =>
           isActive
