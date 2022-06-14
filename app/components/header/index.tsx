@@ -12,6 +12,7 @@ const pageTitles: { [key: string]: string } = {
   '/burgers': "The Best Burgers I've Ever Had",
   '/color': 'Convert Colors',
   '/recipes': 'Recipes',
+  '/recipes/add': 'Add Recipe',
   '/bookmarks': 'Bookmarks',
   '/sign-in': 'Sign In',
   '/sign-up': 'Sign Up',

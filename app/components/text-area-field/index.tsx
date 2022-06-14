@@ -2,10 +2,10 @@ type Props = {
   hiddenLabel?: boolean
   className?: string
   labelProps: React.LabelHTMLAttributes<HTMLLabelElement>
-  inputProps: React.InputHTMLAttributes<HTMLInputElement>
+  textAreaProps: React.TextareaHTMLAttributes<HTMLTextAreaElement>
 }
 
-export const Field: React.FC<Props> = ({ children, hiddenLabel, className, labelProps, inputProps }) => {
+export const TextAreaField: React.FC<Props> = ({ children, hiddenLabel, className, labelProps, textAreaProps }) => {
   return (
     <div className={`flex flex-col items-start w-inherit ${className || ''}`}>
       <label
@@ -16,7 +16,10 @@ export const Field: React.FC<Props> = ({ children, hiddenLabel, className, label
       >
         {children}
       </label>
-      <input {...inputProps} className="w-full rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200" />
+      <textarea
+        {...textAreaProps}
+        className="w-full rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
+      />
     </div>
   )
 }
