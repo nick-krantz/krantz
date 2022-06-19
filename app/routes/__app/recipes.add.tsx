@@ -3,7 +3,11 @@ import { v4 as uuidv4 } from 'uuid'
 import { Button } from '~/components/button'
 import { Field } from '~/components/field'
 import { RecipeWithId } from '~/types'
+import { badRequest } from '~/utils/network'
 import { getRecipe } from '~/utils/recipe-scraper'
+import { getToken } from '~/utils/supabase/get-token'
+import { getUser } from '~/utils/supabase/get-user'
+import { supabase } from '~/utils/supabase/index.server'
 import { IngredientList } from './_recipe.components/ingredient-list'
 import { InstructionList } from './_recipe.components/instruction-list'
 
@@ -21,7 +25,26 @@ export const action: ActionFunction = async ({ request }) => {
   const imageUrl = formData.get('image-url')
   const instructions = formData.getAll('instructions')
   const ingredients = formData.getAll('ingredients')
-  console.log({ title, url, imageUrl, instructions, ingredients })
+
+  if (!title || !url) {
+    return badRequest({
+      error: { message: 'Please enter all details: recipe title & url' },
+      data: { title, url },
+    })
+  }
+
+  const token = await getToken(request)
+
+  supabase.auth.setAuth(token)
+
+  const created_by = (await getUser(request))?.id
+
+  const { error } = await supabase
+    .from('detailed-recipes')
+    .insert([{ title, url, image_url: imageUrl, instructions, ingredients, created_by }], { returning: 'minimal' })
+  if (error) {
+    return badRequest({ error, data: { title, url, 'image-url': imageUrl, instructions, ingredients } })
+  }
 
   return null
 }
@@ -54,8 +77,12 @@ export default function Recipes() {
 
   return (
     <>
-      <Form id="add-recipe-form" className="flex gap-12 w-full max-w-screen-xl mx-auto" method="post">
-        <div className="w-5/12">
+      <Form
+        id="add-recipe-form"
+        className="flex gap-12 w-full max-w-screen-xl mx-auto flex-wrap justify-center"
+        method="post"
+      >
+        <div className="w-5/12 min-w-[420px]">
           <Field
             labelProps={{ htmlFor: 'title-input', className: 'text-xl' }}
             inputProps={{
@@ -94,11 +121,11 @@ export default function Recipes() {
           </Field>
           <IngredientList initialIngredients={data?.recipe?.ingredients} />
         </div>
-        <div className="w-5/12">
+        <div className="w-5/12 min-w-[420px]">
           <InstructionList initialInstructions={data?.recipe?.instructions} />
         </div>
       </Form>
-      <Button type="submit" form="add-recipe-form" className="w-fit self-center mt-8">
+      <Button type="submit" form="add-recipe-form" className="mt-8">
         Add Recipe
       </Button>
     </>

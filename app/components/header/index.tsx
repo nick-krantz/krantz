@@ -6,28 +6,13 @@ type Props = {
   authorized: boolean
 }
 
-const pageTitles: { [key: string]: string } = {
-  '/': '',
-  '/about': 'About',
-  '/burgers': "The Best Burgers I've Ever Had",
-  '/color': 'Convert Colors',
-  '/recipes': 'Recipes',
-  '/recipes/add': 'Add Recipe',
-  '/bookmarks': 'Bookmarks',
-  '/sign-in': 'Sign In',
-  '/sign-up': 'Sign Up',
-}
-
 export const Header: React.FC<Props> = ({ authorized }) => {
   const matches = useMatches()
 
   const title = useMemo(() => {
-    if (matches.length >= 3) {
-      // Skip root & layout __app matchers
-      const { pathname } = matches[2]
-      return pageTitles[pathname]
-    }
-    return ''
+    const header = [...matches].reverse().find((m) => m?.data?.header)?.data.header
+
+    return header ?? ''
   }, [matches])
 
   return (

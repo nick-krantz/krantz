@@ -1,5 +1,5 @@
 import { User } from '@supabase/supabase-js'
-import { ActionFunction, Form, MetaFunction, redirect, useActionData } from 'remix'
+import { ActionFunction, Form, LoaderFunction, MetaFunction, redirect, useActionData } from 'remix'
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
 import { ErrorMessage } from '~/components/error-message'
@@ -70,6 +70,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   // TODO: Can this happen? User/session are null without an error?
   return null
+}
+
+export const loader: LoaderFunction = () => {
+  return { header: 'Sign In' }
 }
 
 /**

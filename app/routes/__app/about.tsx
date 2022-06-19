@@ -1,4 +1,4 @@
-import { MetaFunction } from 'remix'
+import { LoaderFunction, MetaFunction } from 'remix'
 
 export const meta: MetaFunction = () => {
   return {
@@ -40,6 +40,10 @@ const technologies: { key: string; title: string; items: { name: string; link: s
 
 const anchorClass = 'underline decoration-2 flex items-center gap-4'
 const imageClass = 'max-h-8 max-w-[2rem]'
+
+export const loader: LoaderFunction = () => {
+  return { header: 'About' }
+}
 
 /**
  * About Page

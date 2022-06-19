@@ -17,7 +17,7 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async () => {
   const { data: burgers } = await supabase.from<Burger>('burgers').select()
   burgers?.sort((a, b) => a.rank - b.rank)
-  return { burgers }
+  return { burgers, header: "The Best Burgers I've Ever Had" }
 }
 
 const staggerChildrenVariants: HTMLMotionProps<'ul'>['variants'] = {

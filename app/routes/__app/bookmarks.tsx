@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async () => {
   const { data: bookmarks } = await supabase.from<Bookmark>('bookmarks').select()
-  return { bookmarks }
+  return { bookmarks, header: 'Bookmarks' }
 }
 
 /**

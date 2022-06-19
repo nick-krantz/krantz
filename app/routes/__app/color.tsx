@@ -63,7 +63,7 @@ export const loader: LoaderFunction = ({ request }) => {
   const hex = url.searchParams.get('hex')
   const initialColor = getDefaultColor(hex, rgb)
 
-  return json({ initialColor })
+  return json({ initialColor, header: 'Convert Colors' })
 }
 
 export default function Color() {

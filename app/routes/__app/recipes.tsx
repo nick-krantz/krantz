@@ -22,7 +22,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   supabase.auth.setAuth(token)
 
   const { data: recipes } = await supabase.from<Recipe>('recipes').select()
-  return { recipes }
+  return { recipes, header: 'Recipes' }
 }
 
 /**
