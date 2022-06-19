@@ -7,5 +7,10 @@ export interface RecipeWithId {
   url: string
   image: string | null
   instructions: { instruction: string; id: string }[]
-  ingredients: { ingredient: string; id: string }[]
+  ingredientSections: { title: string; id: string; ingredients: { id: string; ingredient: string }[] }[]
+}
+
+export type IngredientSections = {
+  title?: string
+  ingredients: string[]
 }

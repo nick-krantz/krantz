@@ -1,3 +1,4 @@
+import { cleanText } from '~/utils/clean-text'
 import { createScraper, Scraper } from './_base'
 
 export const bonAppetitScraper: Scraper = async (url) => {
@@ -7,17 +8,21 @@ export const bonAppetitScraper: Scraper = async (url) => {
   const ingredientNames = $('[data-testid="IngredientList"] div div')
   const ingredients = ingredientUnits
     .map((i, element) => {
-      return `${$(element).text()} ${$(ingredientNames[i]).text()}`.trim()
+      return cleanText(`${$(element).text()} ${$(ingredientNames[i]).text()}`)
     })
     .toArray()
 
   const instructions = $('[data-testid="InstructionsWrapper"] p')
-    .map((_, element) => `${$(element).text()}`)
+    .map((_, element) => cleanText($(element).text()))
     .toArray()
 
   return {
     ...baseRecipe,
-    ingredients,
+    ingredients: [
+      {
+        ingredients,
+      },
+    ],
     instructions,
   }
 }

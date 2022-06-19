@@ -1,11 +1,13 @@
+import { IngredientSections } from '~/types/recipe-with-id'
 import { CheerioAPI, load } from 'cheerio'
+import { cleanText } from '~/utils/clean-text'
 
 export type FullRecipe = {
   title: string
   url: string
   image: string | null
   instructions: string[]
-  ingredients: string[]
+  ingredients: IngredientSections[]
 }
 
 type BaseScraper = {
@@ -17,7 +19,17 @@ export type ScraperCreator = (url: string) => Promise<BaseScraper>
 export type Scraper = (url: string) => Promise<FullRecipe>
 
 const getTitle = ($: CheerioAPI): string => {
-  return $('head title').text().trim() || $('head meta[property="og:title"]').text().trim()
+  const title = $('head title').text() || $('head meta[property="og:title"]').text() || ''
+
+  if (title.includes(' | ')) {
+    return cleanText(title.split(' | ')[0])
+  }
+
+  if (title.includes(' - ')) {
+    return cleanText(title.split(' - ')[0])
+  }
+
+  return title
 }
 
 const getImage = ($: CheerioAPI): string | undefined => {

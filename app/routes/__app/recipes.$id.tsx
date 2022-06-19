@@ -1,5 +1,6 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { RecipeWithId } from '~/types'
 import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
 
@@ -8,7 +9,6 @@ export const handle = {
 }
 
 export const meta: MetaFunction = ({ data }) => {
-  console.log(data)
   return {
     title: `Nick Krantz - ${data?.recipe.title}`,
   }
@@ -38,7 +38,7 @@ export const loader: LoaderFunction = async ({ request }) => {
  * Recipe Detail page
  */
 export default function RecipeDetail() {
-  const { recipe } = useLoaderData()
+  const { recipe } = useLoaderData<RecipeWithId>()
 
   const domain = useMemo(() => {
     if (recipe.url) {
@@ -48,18 +48,25 @@ export default function RecipeDetail() {
   }, [recipe.url])
 
   return (
-    <>
-      <img className="rounded-2xl" src={recipe?.image_url} />
+    <div className=" max-w-2xl mx-auto">
+      <img className="rounded-2xl max-h-[300px] w-full object-cover" src={recipe?.image_url} />
       {domain ? <a href={recipe.url}>{domain}</a> : null}
       <section>
         <h2>Ingredients</h2>
-        <ul className="list mb-2 list-[square] list-outside ml-6">
-          {recipe.ingredients.map((ingredient) => (
-            <li className="list-item mb-2" key={ingredient}>
-              {ingredient}
-            </li>
-          ))}
-        </ul>
+        {recipe.ingredients.map((section) => (
+          // the key here is a little wonky, but we shouldn't have multiple sections without a title
+          // kicking the can down the road...
+          <React.Fragment key={section.title ?? `section-${section.ingredients.length}`}>
+            {section.title ? <h3>{section.title}</h3> : null}
+            <ul className="list mb-2 list-[square] list-outside ml-6">
+              {section.ingredients.map((ingredient) => (
+                <li className="list-item mb-2" key={ingredient}>
+                  {ingredient}
+                </li>
+              ))}
+            </ul>
+          </React.Fragment>
+        ))}
       </section>
       <section>
         <h2>Instructions</h2>
@@ -71,6 +78,6 @@ export default function RecipeDetail() {
           ))}
         </ol>
       </section>
-    </>
+    </div>
   )
 }

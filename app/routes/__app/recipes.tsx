@@ -33,7 +33,7 @@ export default function Recipes() {
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
-        <Link to="./fetch-recipe">
+        <Link to="./fetch">
           <Button>Add Recipe</Button>
         </Link>
       </div>

@@ -1,4 +1,4 @@
-import { ActionFunction, Form, json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { ActionFunction, Form, json, LoaderFunction, MetaFunction, redirect, useLoaderData } from 'remix'
 import { v4 as uuidv4 } from 'uuid'
 import { Button } from '~/components/button'
 import { Field } from '~/components/field'
@@ -24,14 +24,33 @@ export const action: ActionFunction = async ({ request }) => {
   const url = formData.get('url')
   const imageUrl = formData.get('image-url')
   const instructions = formData.getAll('instructions')
-  const ingredients = formData.getAll('ingredients')
+  const sectionKeys: string[] = []
+  const ingredientKeys: string[] = []
 
-  if (!title || !url) {
+  for (const key of formData.keys()) {
+    if (/ingredient-section\[[0-9]\]/.test(key)) {
+      sectionKeys.push(key)
+    }
+    if (/ingredients\[[0-9]\]/.test(key)) {
+      ingredientKeys.push(key)
+    }
+  }
+
+  if (sectionKeys.length !== ingredientKeys.length) {
     return badRequest({
-      error: { message: 'Please enter all details: recipe title & url' },
-      data: { title, url },
+      error: { message: 'Ingredients found and number of sections are not the same' },
     })
   }
+
+  const ingredientSections = sectionKeys.map((sectionKey, i) => {
+    const sectionTitle = formData.get(sectionKey)
+    const ingredients = formData.getAll(ingredientKeys[i])
+
+    return {
+      title: sectionTitle || '',
+      ingredients,
+    }
+  })
 
   const token = await getToken(request)
 
@@ -39,14 +58,17 @@ export const action: ActionFunction = async ({ request }) => {
 
   const created_by = (await getUser(request))?.id
 
-  const { error } = await supabase
+  const { error, data } = await supabase
     .from('detailed-recipes')
-    .insert([{ title, url, image_url: imageUrl, instructions, ingredients, created_by }], { returning: 'minimal' })
+    .insert([{ title, url, image_url: imageUrl, instructions, ingredients: ingredientSections, created_by }])
   if (error) {
-    return badRequest({ error, data: { title, url, 'image-url': imageUrl, instructions, ingredients } })
+    return badRequest({
+      error,
+      data: { title, url, 'image-url': imageUrl, instructions, ingredients: ingredientSections },
+    })
   }
 
-  return null
+  return redirect(`/recipes/${data[0].id}`)
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -60,9 +82,14 @@ export const loader: LoaderFunction = async ({ request }) => {
     return json({
       recipe: {
         ...baseRecipe,
-        ingredients: baseRecipe.ingredients.map((i) => ({ ingredient: i, id: uuidv4() })),
+        ingredientSections: baseRecipe.ingredients.map((section) => ({
+          title: section.title,
+          id: uuidv4(),
+          ingredients: section.ingredients.map((i) => ({ ingredient: i, id: uuidv4() })),
+        })),
         instructions: baseRecipe.instructions.map((i) => ({ instruction: i, id: uuidv4() })),
       },
+      header: 'Add Recipe',
     })
   } else {
     return json({ recipe: null })
@@ -82,7 +109,7 @@ export default function Recipes() {
         className="flex gap-12 w-full max-w-screen-xl mx-auto flex-wrap justify-center"
         method="post"
       >
-        <div className="w-5/12 min-w-[420px]">
+        <div className="w-full md:w-5/12 md:min-w-[420px]">
           <Field
             labelProps={{ htmlFor: 'title-input', className: 'text-xl' }}
             inputProps={{
@@ -119,9 +146,9 @@ export default function Recipes() {
           >
             Image URL
           </Field>
-          <IngredientList initialIngredients={data?.recipe?.ingredients} />
+          <IngredientList initialIngredients={data?.recipe?.ingredientSections} />
         </div>
-        <div className="w-5/12 min-w-[420px]">
+        <div className="w-full md:w-5/12 md:min-w-[420px]">
           <InstructionList initialInstructions={data?.recipe?.instructions} />
         </div>
       </Form>
