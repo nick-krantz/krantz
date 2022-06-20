@@ -2,21 +2,32 @@ import { FullRecipe, Scraper } from './scrapers/_base'
 import { bonAppetitScraper } from './scrapers/bon-appetit'
 import { cookieAndKateScraper } from './scrapers/cookie-and-kate'
 import { cookiesAndCupsScraper } from './scrapers/cookies-and-cups'
-import { cupcakesAndKaleChipsScraper } from './scrapers/cupcakes-and-kale-chips'
+import { delishScraper } from './scrapers/delish'
+import { foodNetworkScraper } from './scrapers/food-network'
 import { halfBakedHarvestScraper } from './scrapers/half-baked-harvest'
 import { newYorkTimesScraper } from './scrapers/new-york-times'
+import { proHomeCooksScraper } from './scrapers/pro-home-cooks'
+import { seriousEatsScraper } from './scrapers/serious-eats'
 import { thatSkinnyChickCanBakeScraper } from './scrapers/that-skinny-chick-can-bake'
-import { twoPeasAndTheirPodScraper } from './scrapers/two-peas-and-their-pod'
+import { theModernProperScraper } from './scrapers/the-modern-proper'
+import { wordPressDefaultScraper } from './scrapers/wordpress/wordpress.scraper'
 
 const scrapers: { [key: string]: Scraper } = {
   'bonappetit.com': bonAppetitScraper,
+  'chelseasmessyapron.com': wordPressDefaultScraper,
   'cookieandkate.com': cookieAndKateScraper,
   'cookiesandcups.com': cookiesAndCupsScraper,
-  'cupcakesandkalechips.com': cupcakesAndKaleChipsScraper,
-  'halfbakedharvest.com': halfBakedHarvestScraper,
   'cooking.nytimes.com': newYorkTimesScraper,
+  'cupcakesandkalechips.com': wordPressDefaultScraper,
+  'delish.com': delishScraper,
+  'foodnetwork.com': foodNetworkScraper,
+  'halfbakedharvest.com': halfBakedHarvestScraper,
+  'prohomecooks.com': proHomeCooksScraper,
+  'realsimplegood.com': wordPressDefaultScraper,
+  'seriouseats.com': seriousEatsScraper,
   'thatskinnychickcanbake.com': thatSkinnyChickCanBakeScraper,
-  'twopeasandtheirpod.com': twoPeasAndTheirPodScraper,
+  'themodernproper.com': theModernProperScraper,
+  'twopeasandtheirpod.com': wordPressDefaultScraper,
 }
 
 const getScraper = (url: string): Scraper | undefined => {

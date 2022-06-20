@@ -152,7 +152,7 @@ export default function Recipes() {
           <InstructionList initialInstructions={data?.recipe?.instructions} />
         </div>
       </Form>
-      <Button type="submit" form="add-recipe-form" className="mt-8">
+      <Button type="submit" form="add-recipe-form" className="mt-8 md:w-[50%] md:self-center">
         Add Recipe
       </Button>
     </>

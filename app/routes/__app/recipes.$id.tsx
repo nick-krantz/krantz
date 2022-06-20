@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
-import { RecipeWithId } from '~/types'
 import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
 
@@ -38,7 +37,7 @@ export const loader: LoaderFunction = async ({ request }) => {
  * Recipe Detail page
  */
 export default function RecipeDetail() {
-  const { recipe } = useLoaderData<RecipeWithId>()
+  const { recipe } = useLoaderData<{ recipe: any }>()
 
   const domain = useMemo(() => {
     if (recipe.url) {
@@ -49,7 +48,7 @@ export default function RecipeDetail() {
 
   return (
     <div className=" max-w-2xl mx-auto">
-      <img className="rounded-2xl max-h-[300px] w-full object-cover" src={recipe?.image_url} />
+      {recipe?.image_url && <img className="rounded-2xl max-h-[300px] w-full object-cover" src={recipe.image_url} />}
       {domain ? <a href={recipe.url}>{domain}</a> : null}
       <section>
         <h2>Ingredients</h2>
