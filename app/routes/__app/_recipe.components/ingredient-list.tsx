@@ -1,20 +1,20 @@
+import { ScraperRecipeWithIds } from '~/types/utility-types'
 import { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 import { Button } from '~/components/button'
 import { Field } from '~/components/field'
 import { Icon } from '~/components/icon'
-import { RecipeWithId } from '~/types'
 
 interface IngredientListProps {
-  initialIngredients?: RecipeWithId['ingredientSections']
+  initialIngredients?: ScraperRecipeWithIds['ingredients']
 }
 
 /**
  * Ingredient list
  */
 export const IngredientList: React.FC<IngredientListProps> = ({ initialIngredients }) => {
-  const [sections, setIngredients] = useState<RecipeWithId['ingredientSections']>(initialIngredients ?? [])
+  const [sections, setIngredients] = useState<ScraperRecipeWithIds['ingredients']>(initialIngredients ?? [])
 
   const addIngredientSection = () => {
     setIngredients([...sections, { id: uuidv4(), title: '', ingredients: [] }])

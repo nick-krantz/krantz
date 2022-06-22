@@ -3,7 +3,7 @@ import { Header } from '~/components/header'
 import { authenticated } from '~/utils/supabase/authenticated'
 
 export const loader: LoaderFunction = ({ request }) => {
-  return authenticated(request, false, ({ authorized }) => {
+  return authenticated(request, ({ authorized }) => {
     return Promise.resolve({ authorized })
   })
 }

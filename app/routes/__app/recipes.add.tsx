@@ -1,8 +1,8 @@
+import { ScraperRecipeWithIds } from '~/types/utility-types'
 import { ActionFunction, Form, json, LoaderFunction, MetaFunction, redirect, useLoaderData } from 'remix'
 import { v4 as uuidv4 } from 'uuid'
 import { Button } from '~/components/button'
 import { Field } from '~/components/field'
-import { RecipeWithId } from '~/types'
 import { badRequest } from '~/utils/network'
 import { getRecipe } from '~/utils/recipe-scraper'
 import { getToken } from '~/utils/supabase/get-token'
@@ -71,6 +71,11 @@ export const action: ActionFunction = async ({ request }) => {
   return redirect(`/recipes/${data[0].id}`)
 }
 
+interface LoaderData {
+  recipe: ScraperRecipeWithIds
+  header: string
+}
+
 export const loader: LoaderFunction = async ({ request }) => {
   const { searchParams } = new URL(request.url)
   const url = decodeURIComponent(searchParams.get('url') ?? '')
@@ -79,11 +84,11 @@ export const loader: LoaderFunction = async ({ request }) => {
   }
   const baseRecipe = await getRecipe(url)
   if (baseRecipe) {
-    return json({
+    return json<LoaderData>({
       recipe: {
         ...baseRecipe,
-        ingredientSections: baseRecipe.ingredients.map((section) => ({
-          title: section.title,
+        ingredients: baseRecipe.ingredients.map((section) => ({
+          title: section.title || '',
           id: uuidv4(),
           ingredients: section.ingredients.map((i) => ({ ingredient: i, id: uuidv4() })),
         })),
@@ -100,7 +105,7 @@ export const loader: LoaderFunction = async ({ request }) => {
  * Recipe page
  */
 export default function Recipes() {
-  const data = useLoaderData<{ recipe: RecipeWithId } | null>()
+  const data = useLoaderData<LoaderData>()
 
   return (
     <>
@@ -141,12 +146,12 @@ export default function Recipes() {
               type: 'url',
               name: 'image-url',
               id: 'image-url-input',
-              defaultValue: data?.recipe?.image ?? '',
+              defaultValue: data?.recipe?.image_url ?? '',
             }}
           >
             Image URL
           </Field>
-          <IngredientList initialIngredients={data?.recipe?.ingredientSections} />
+          <IngredientList initialIngredients={data?.recipe?.ingredients} />
         </div>
         <div className="w-full md:w-5/12 md:min-w-[420px]">
           <InstructionList initialInstructions={data?.recipe?.instructions} />

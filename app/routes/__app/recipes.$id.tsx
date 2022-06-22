@@ -1,16 +1,19 @@
 import React, { useMemo } from 'react'
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { Recipe, SupabaseRecipe } from '~/types'
 import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
-
-export const handle = {
-  header: 'Recipe Details',
-}
+import { parseRecipe } from '~/utils/supabase/parse-recipe'
 
 export const meta: MetaFunction = ({ data }) => {
   return {
     title: `Nick Krantz - ${data?.recipe.title}`,
   }
+}
+
+interface LoaderData {
+  recipe: Recipe
+  header: string
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -22,22 +25,24 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   supabase.auth.setAuth(token)
 
-  const { data: recipe } = await supabase.from<any>('detailed-recipes').select().eq('id', recipeId)
+  const { data: recipes } = await supabase.from<SupabaseRecipe>('full_recipes').select().eq('id', recipeId)
 
-  if (recipe === null || recipe.length === 0) {
+  if (recipes === null || recipes.length === 0) {
     throw new Response('Recipe Not Found', {
       status: 404,
     })
   }
 
-  return { recipe: recipe[0], header: recipe[0].title }
+  const recipe = recipes[0]
+
+  return json<LoaderData>({ recipe: parseRecipe(recipe), header: recipe.title })
 }
 
 /**
  * Recipe Detail page
  */
 export default function RecipeDetail() {
-  const { recipe } = useLoaderData<{ recipe: any }>()
+  const { recipe } = useLoaderData<LoaderData>()
 
   const domain = useMemo(() => {
     if (recipe.url) {

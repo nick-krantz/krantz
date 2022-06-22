@@ -1,5 +1,5 @@
-import { IngredientSections } from '~/types/recipe-with-id'
 import { Cheerio, CheerioAPI, Element } from 'cheerio'
+import { IngredientsWithSections } from '~/types'
 import { cleanText } from '~/utils/clean-text'
 
 const getIngredientArray = (ele: Cheerio<Element>, $: CheerioAPI): string[] => {
@@ -9,8 +9,8 @@ const getIngredientArray = (ele: Cheerio<Element>, $: CheerioAPI): string[] => {
     .map((c) => cleanText($(c).text()))
 }
 
-export const tastyIngredients = (containerClass: string, $: CheerioAPI): IngredientSections[] => {
-  const ingredients: IngredientSections[] = []
+export const tastyIngredients = (containerClass: string, $: CheerioAPI): IngredientsWithSections[] => {
+  const ingredients: IngredientsWithSections[] = []
   let addToPrevious = false
 
   const ingredientContainer = $(containerClass)

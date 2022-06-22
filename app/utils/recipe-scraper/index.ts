@@ -1,4 +1,4 @@
-import { FullRecipe, Scraper } from './scrapers/_base'
+import { Scraper, ScraperRecipe } from './scrapers/_base'
 import { bonAppetitScraper } from './scrapers/bon-appetit'
 import { cookieAndKateScraper } from './scrapers/cookie-and-kate'
 import { cookiesAndCupsScraper } from './scrapers/cookies-and-cups'
@@ -36,7 +36,7 @@ const getScraper = (url: string): Scraper | undefined => {
   return scrapers[hostname]
 }
 
-export const getRecipe = async (url: string): Promise<FullRecipe | null> => {
+export const getRecipe = async (url: string): Promise<ScraperRecipe | null> => {
   const scraper = getScraper(url.replace('www.', ''))
 
   if (!scraper) {

@@ -4,12 +4,15 @@ import { ACCESS_TOKEN } from '~/constants/access-token'
 import { getSession } from './get-session.server'
 import { supabase } from './index.server'
 
+const guardedRoutes = ['/recipes', '/bookmarks']
+
+const isGuardedRoute = (path: string): boolean => Boolean(guardedRoutes.find((route) => path.startsWith(route)))
+
 /**
  * Checks if the user has an ACCESS_TOKEN cookie to verify that they are authorized
  */
 export async function authenticated<T>(
   request: Request,
-  guardedRoute: boolean,
   callback: (params: { user: User | null; authorized: boolean }) => Promise<T | Response>,
 ) {
   const session = await getSession(request.headers.get('Cookie'))
@@ -18,7 +21,7 @@ export async function authenticated<T>(
 
     const { user, error } = await supabase.auth.api.getUser(token)
 
-    if (!guardedRoute && user === null) {
+    if (!isGuardedRoute(new URL(request.url).pathname) && user === null) {
       return await callback({ user, authorized: false })
     }
 

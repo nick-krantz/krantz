@@ -1,11 +1,11 @@
-import { IngredientSections } from '~/types/recipe-with-id'
+import { IngredientsWithSections } from '~/types'
 import { cleanText } from '~/utils/clean-text'
 import { createScraper, Scraper } from './_base'
 
 export const seriousEatsScraper: Scraper = async (url) => {
   const { baseRecipe, $ } = await createScraper(url)
 
-  const ingredients: IngredientSections[] = []
+  const ingredients: IngredientsWithSections[] = []
 
   const ingredientSections = $('.structured-ingredients__list-heading')
   const ingredientLists = $('.structured-ingredients__list')

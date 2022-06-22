@@ -1,8 +1,8 @@
-import { IngredientSections } from '~/types/recipe-with-id'
 import { CheerioAPI } from 'cheerio'
+import { IngredientsWithSections } from '~/types'
 import { cleanText } from '~/utils/clean-text'
 
-export const wordpressIngredients = ($: CheerioAPI): IngredientSections[] => {
+export const wordpressIngredients = ($: CheerioAPI): IngredientsWithSections[] => {
   return $('.wprm-recipe-ingredient-group')
     .map((_, ele) => ({
       title: cleanText($(ele).children('.wprm-recipe-ingredient-group-name').text()),

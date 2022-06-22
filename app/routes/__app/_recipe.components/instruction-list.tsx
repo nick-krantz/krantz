@@ -1,20 +1,20 @@
+import { ScraperRecipeWithIds } from '~/types/utility-types'
 import { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import { v4 as uuidv4 } from 'uuid'
 import { Button } from '~/components/button'
 import { Icon } from '~/components/icon'
 import { TextAreaField } from '~/components/text-area-field'
-import { RecipeWithId } from '~/types'
 
 interface InstructionListProps {
-  initialInstructions?: RecipeWithId['instructions']
+  initialInstructions?: ScraperRecipeWithIds['instructions']
 }
 
 /**
  * Instruction list
  */
 export const InstructionList: React.FC<InstructionListProps> = ({ initialInstructions }) => {
-  const [instructions, setInstructions] = useState<RecipeWithId['instructions']>(initialInstructions ?? [])
+  const [instructions, setInstructions] = useState<ScraperRecipeWithIds['instructions']>(initialInstructions ?? [])
 
   const addInstruction = () => {
     setInstructions([...instructions, { id: uuidv4(), instruction: '' }])
