@@ -4,7 +4,7 @@ import { Navigation } from '~/components/navigation'
 import { authenticated } from '~/utils/supabase/authenticated'
 
 export const loader: LoaderFunction = ({ request }) => {
-  return authenticated(request, false, ({ authorized }) => {
+  return authenticated(request, ({ authorized }) => {
     return Promise.resolve({ authorized })
   })
 }
@@ -13,9 +13,11 @@ export default function Index() {
   const { authorized } = useLoaderData<{ authorized: boolean }>()
 
   return (
-    <div className="grid grid-rows-[80px_auto_72px] h-full">
+    <div className="flex flex-col h-full">
       <Header authorized={authorized} />
-      <Outlet />
+      <div className="flex-1">
+        <Outlet />
+      </div>
       <Navigation authorized={authorized} />
     </div>
   )
