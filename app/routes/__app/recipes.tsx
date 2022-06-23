@@ -32,7 +32,7 @@ export default function Recipes() {
   const { recipes } = useLoaderData<LoaderData>()
   return (
     <>
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-screen-xl mx-auto text-center">
         <Link to="./fetch">
           <Button>Add Recipe</Button>
         </Link>

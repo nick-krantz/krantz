@@ -44,7 +44,7 @@ export default function Bookmarks() {
       {categories?.map((category) => (
         <div className="max-w-screen-md mx-auto mb-6" key={category}>
           <h3 className="capitalize">{category}</h3>
-          <ul className="marker:text-sky-400 list-disc pl-5 space-y-3">
+          <ul className="marker:text-sky-800 dark:marker:text-sky-400 list-disc pl-5 space-y-3">
             {bookmarks
               ?.filter((b) => b.category === category)
               .map((bookmark) => (

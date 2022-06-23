@@ -14,12 +14,12 @@ Animation: [framer motion](https://www.framer.com/motion/)
 
 ## TODOs
 
-- [ ] make dark/light mode toggle
-- [ ] add sign out
-- [ ] recipes without images
-- [ ] only load recipe images that are in view
-- [ ] increase recipe scrapers
 - [ ] style recipe detail page
+- [ ] increase recipe scrapers
+- [ ] only load recipe images that are in view
+- [ ] recipes without images
+- [ ] add sign out
+- [ ] make dark/light mode toggle
 - [x] ~~Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)~~ script to do it locally
 - [x] update detailed recipe type
 - [x] convert existing recipes to stored
