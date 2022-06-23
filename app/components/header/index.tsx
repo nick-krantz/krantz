@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft, FiUser } from 'react-icons/fi'
 import { Link, useMatches } from 'remix'
 import { Icon } from '../icon'
 
@@ -31,7 +31,7 @@ export const Header: React.FC<Props> = ({ authorized }) => {
 
   return (
     <div className="flex py-5">
-      <div className="flex-1">
+      <div className="flex flex-1 items-center">
         {pathname !== '/' && (
           <Link to=".." aria-label="go back">
             <Icon Icon={FiArrowLeft} />
@@ -46,12 +46,15 @@ export const Header: React.FC<Props> = ({ authorized }) => {
               <Link
                 to="/sign-in"
                 className={`
-                py-2 px-4 border rounded-md
+                py-2 px-2 md:px-4 border rounded-md
                 border-gray-800/50 hover:border-gray-800 hover:bg-gray-800/[.2] focus:bg-gray-800[.02]
                 dark:border-white/50 dark:hover:border-white dark:hover:bg-white/[.2] dark:focus:bg-white/[.2]
               `}
               >
-                Sign In
+                <span className="hidden md:block">Sign In</span>
+                <span className="md:hidden">
+                  <FiUser />
+                </span>
               </Link>
             ))}
         </div>
