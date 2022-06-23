@@ -99,7 +99,13 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
         <Meta />
         <Links />
       </head>
-      <body className="bg-gray-200 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+      <body
+        className={`
+          bg-fixed text-gray-800 bg-gradient-to-bl
+          from-[#cfcfde] via-[#e5e7eb] to-[#80a6ac]
+          dark:from-[#020024] dark:via-[#1f2937] dark:to-[#1b3d44]  dark:text-gray-200
+        `}
+      >
         {children}
         <ScrollRestoration />
         <Scripts />
