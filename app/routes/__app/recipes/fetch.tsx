@@ -1,12 +1,10 @@
-import { fetch } from '@remix-run/node'
-import * as cheerio from 'cheerio'
 import { FiX } from 'react-icons/fi'
 import { ActionFunction, Form, redirect, useActionData, useNavigate } from 'remix'
 import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'
 import { Field } from '~/components/field'
 import { Modal } from '~/components/modal'
-import { badRequest, createQueryParams } from '~/utils/network'
+import { badRequest } from '~/utils/network'
 
 type ActionData = {
   error?: {
@@ -24,21 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
     })
   }
 
-  try {
-    const response = await fetch(url)
-    const webHTML = await response.text()
-    const $ = cheerio.load(webHTML)
-
-    const queryParamString = createQueryParams({
-      name: $('head title').text(),
-      image: $('head meta[property="og:image"]').attr('content') || '',
-      url,
-    })
-
-    return redirect(`recipes/submit-recipe${queryParamString}`)
-  } catch (error) {
-    return badRequest({ error })
-  }
+  return redirect(`recipes/add?url=${encodeURIComponent(url)}`)
 }
 
 export default function FetchRecipe() {

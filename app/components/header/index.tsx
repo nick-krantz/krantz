@@ -7,33 +7,28 @@ type Props = {
   authorized: boolean
 }
 
-const pageTitles: { [key: string]: string } = {
-  '/': '',
-  '/burgers': "The Best Burgers I've Ever Had",
-  '/color': 'Convert Colors',
-  '/recipes': 'Recipes',
-  '/bookmarks': 'Bookmarks',
-  '/sign-in': 'Sign In',
-  '/sign-up': 'Sign Up',
+export type PageDetails = {
+  header?: string
+  backLink?: string
 }
 
 export const Header: React.FC<Props> = ({ authorized }) => {
   const matches = useMatches()
 
-  const [title, pathname] = useMemo(() => {
-    if (matches.length >= 3) {
-      // Skip root & layout __app matchers
-      const { pathname } = matches[2]
-      return [pageTitles[pathname], pathname]
-    }
-    return ''
+  const [title, pathname, backLink] = useMemo(() => {
+    const reverseMatches = [...matches].reverse()
+
+    const header = reverseMatches.find((m) => m?.data?.pageDetails?.header)?.data.pageDetails.header
+    const backLink = reverseMatches.find((m) => m?.data?.pageDetails?.backLink)?.data.pageDetails.backLink
+    const pathname = matches[matches.length - 1].pathname
+    return [header ?? '', pathname, backLink]
   }, [matches])
 
   return (
     <div className="flex py-5">
       <div className="flex flex-1 items-center">
         {pathname !== '/' && (
-          <Link to=".." aria-label="go back">
+          <Link to={backLink ?? '/'} aria-label="go back">
             <Icon Icon={FiArrowLeft} />
           </Link>
         )}

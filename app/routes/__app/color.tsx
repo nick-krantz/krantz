@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
+import { PageDetails } from '~/components/header'
 import { ShadesAndTints } from '~/components/shades-and-tints'
 import { HEXtoRGB, isValidHEXValue, RGBToHEX, rgbToRGBArray, standardizeHEX } from '~/utils/colors'
 
 type LoaderData = {
   initialColor: string
+  pageDetails: PageDetails
 }
 
 export const meta: MetaFunction = () => {
@@ -63,7 +65,7 @@ export const loader: LoaderFunction = ({ request }) => {
   const hex = url.searchParams.get('hex')
   const initialColor = getDefaultColor(hex, rgb)
 
-  return json({ initialColor })
+  return json<LoaderData>({ initialColor, pageDetails: { header: 'Convert Colors' } })
 }
 
 export default function Color() {
