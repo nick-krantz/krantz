@@ -1,10 +1,12 @@
 import { HTMLMotionProps, motion } from 'framer-motion'
-import { LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { PageDetails } from '~/components/header'
 import { Burger } from '~/types'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
   burgers: Burger[] | null
+  pageDetails: PageDetails
 }
 
 export const meta: MetaFunction = () => {
@@ -17,7 +19,7 @@ export const meta: MetaFunction = () => {
 export const loader: LoaderFunction = async () => {
   const { data: burgers } = await supabase.from<Burger>('burgers').select()
   burgers?.sort((a, b) => a.rank - b.rank)
-  return { burgers, header: "The Best Burgers I've Ever Had" }
+  return json<LoaderData>({ burgers, pageDetails: { header: "The Best Burgers I've Ever Had" } })
 }
 
 const staggerChildrenVariants: HTMLMotionProps<'ul'>['variants'] = {

@@ -1,5 +1,5 @@
 import { User } from '@supabase/supabase-js'
-import { ActionFunction, Form, LoaderFunction, MetaFunction, redirect, useActionData } from 'remix'
+import { ActionFunction, Form, json, LoaderFunction, MetaFunction, redirect, useActionData } from 'remix'
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
 import { ErrorMessage } from '~/components/error-message'
@@ -75,7 +75,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export const loader: LoaderFunction = () => {
-  return { header: 'Sign In' }
+  return json({ pageDetails: { header: 'Sign Up' } })
 }
 
 /**

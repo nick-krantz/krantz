@@ -1,10 +1,12 @@
-import { Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
+import { json, Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
 import { Button } from '~/components/button'
+import { PageDetails } from '~/components/header'
 import { Bookmark } from '~/types'
 import { supabase } from '~/utils/supabase/index.server'
 
 type LoaderData = {
   bookmarks: Bookmark[] | null
+  pageDetails: PageDetails
 }
 
 export const meta: MetaFunction = () => {
@@ -16,7 +18,7 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async () => {
   const { data: bookmarks } = await supabase.from<Bookmark>('bookmarks').select()
-  return { bookmarks, header: 'Bookmarks' }
+  return json<LoaderData>({ bookmarks, pageDetails: { header: 'Bookmarks' } })
 }
 
 /**

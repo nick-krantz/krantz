@@ -1,9 +1,10 @@
 import { HTMLMotionProps, motion } from 'framer-motion'
 import React, { forwardRef } from 'react'
-import { FiBookmark, FiInbox, FiPenTool } from 'react-icons/fi'
+import { FiBookmark, FiPenTool } from 'react-icons/fi'
 import { Link } from 'remix'
 import { Icon } from '../icon'
 import { BurgerIcon } from '../icon/burger'
+import { RecipeIcon } from '../icon/recipe'
 
 const anchorMotion: HTMLMotionProps<'a'> = {
   whileHover: { scale: 1.2 },
@@ -45,7 +46,7 @@ const ColorLink = motion(
 const RecipeLink = motion(
   forwardRef<HTMLAnchorElement>((props, ref) => (
     <Link to="/recipes" ref={ref} {...props} aria-label="recipes">
-      <Icon Icon={FiInbox} />
+      <Icon Icon={RecipeIcon} />
     </Link>
   )),
 )

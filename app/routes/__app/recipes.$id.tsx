@@ -1,19 +1,20 @@
 import React, { useMemo } from 'react'
-import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
-import { Recipe, SupabaseRecipe } from '~/types'
+import { json, Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { buttonClasses } from '~/components/button'
+import { PageDetails } from '~/components/header'
+import { Recipe } from '~/types'
 import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
-import { parseRecipe } from '~/utils/supabase/parse-recipe'
 
 export const meta: MetaFunction = ({ data }) => {
   return {
-    title: `Nick Krantz - ${data?.recipe.title}`,
+    title: `Nick Krantz - ${data?.recipe?.title}`,
   }
 }
 
 interface LoaderData {
   recipe: Recipe
-  header: string
+  pageDetails: PageDetails
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -25,7 +26,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   supabase.auth.setAuth(token)
 
-  const { data: recipes } = await supabase.from<SupabaseRecipe>('full_recipes').select().eq('id', recipeId)
+  const { data: recipes } = await supabase.from<Recipe>('full_recipes').select().eq('id', recipeId)
 
   if (recipes === null || recipes.length === 0) {
     throw new Response('Recipe Not Found', {
@@ -35,7 +36,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   const recipe = recipes[0]
 
-  return json<LoaderData>({ recipe: parseRecipe(recipe), header: recipe.title })
+  return json<LoaderData>({ recipe, pageDetails: { header: recipe.title, backLink: '/recipes' } })
 }
 
 /**
@@ -46,15 +47,27 @@ export default function RecipeDetail() {
 
   const domain = useMemo(() => {
     if (recipe.url) {
-      return new URL(recipe.url).hostname
+      return new URL(recipe.url).hostname.replace('www.', '')
     }
     return ''
   }, [recipe.url])
 
+  const linkButtonClasses = useMemo(() => `${buttonClasses()} min-w-[180px] overflow-hidden`, [])
+
   return (
     <div className=" max-w-2xl mx-auto">
       {recipe?.image_url && <img className="rounded-2xl max-h-[300px] w-full object-cover" src={recipe.image_url} />}
-      {domain ? <a href={recipe.url}>{domain}</a> : null}
+      <div className="flex flex-wrap py-4 justify-around gap-4">
+        {domain ? (
+          <Link className={linkButtonClasses} to={recipe.url}>
+            {domain}
+          </Link>
+        ) : null}
+        <Link className={linkButtonClasses} to={'./edit'}>
+          Edit
+        </Link>
+      </div>
+
       <section>
         <h2>Ingredients</h2>
         {recipe.ingredients.map((section) => (
