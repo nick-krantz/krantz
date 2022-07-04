@@ -14,7 +14,7 @@ export type ScraperCreator = (url: string) => Promise<BaseScraper>
 export type Scraper = (url: string) => Promise<ScraperRecipe>
 
 const getTitle = ($: CheerioAPI): string => {
-  const title = $('head title').text() || $('head meta[property="og:title"]').text() || ''
+  const title = $('head meta[property="og:title"]').text() || $('head title').text() || ''
 
   if (title.includes(' | ')) {
     return cleanText(title.split(' | ')[0])

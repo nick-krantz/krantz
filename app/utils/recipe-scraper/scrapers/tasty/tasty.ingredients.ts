@@ -2,6 +2,18 @@ import { Cheerio, CheerioAPI, Element } from 'cheerio'
 import { IngredientsWithSections } from '~/types'
 import { cleanText } from '~/utils/clean-text'
 
+const ingredientContainerClasses = [
+  '.tasty-recipe-ingredients',
+  '.tasty-recipes-ingredients-detail',
+  '.mv-create-ingredients',
+  '.recipe-ingredients',
+  '.tasty-recipes-ingredients-body',
+]
+
+const getContainerClass = ($: CheerioAPI): string | undefined => {
+  return ingredientContainerClasses.find((className) => $(className).length > 0)
+}
+
 const getIngredientArray = (ele: Cheerio<Element>, $: CheerioAPI): string[] => {
   return ele
     .children('li')
@@ -9,9 +21,20 @@ const getIngredientArray = (ele: Cheerio<Element>, $: CheerioAPI): string[] => {
     .map((c) => cleanText($(c).text()))
 }
 
-export const tastyIngredients = (containerClass: string, $: CheerioAPI): IngredientsWithSections[] => {
+export const tastyIngredients = ($: CheerioAPI): IngredientsWithSections[] => {
   const ingredients: IngredientsWithSections[] = []
   let addToPrevious = false
+
+  const containerClass = getContainerClass($)
+
+  // When a container for ingredients isn't found return empty ingredients
+  if (!containerClass) {
+    return [
+      {
+        ingredients: [],
+      },
+    ]
+  }
 
   const ingredientContainer = $(containerClass)
   const containerChildren = ingredientContainer.children().toArray()

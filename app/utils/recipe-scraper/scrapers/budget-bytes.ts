@@ -1,6 +1,6 @@
 import { createScraper, Scraper } from './_base'
 import { wordpressIngredients } from './wordpress/wordpress.ingredients'
-import { wordpressStructuredInstructions } from './wordpress/wordpress.instructions'
+import { wordpressInstructions } from './wordpress/wordpress.instructions'
 
 export const budgetByteScraper: Scraper = async (url) => {
   const { baseRecipe, $ } = await createScraper(url)
@@ -13,6 +13,6 @@ export const budgetByteScraper: Scraper = async (url) => {
         ingredients: section.ingredients.map((ingredient) => ingredient.replace(/\(\$.*\)/g, '')),
       }
     }),
-    instructions: wordpressStructuredInstructions($),
+    instructions: wordpressInstructions($),
   }
 }
