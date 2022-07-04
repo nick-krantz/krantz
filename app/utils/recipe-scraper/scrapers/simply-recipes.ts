@@ -2,7 +2,7 @@ import { IngredientsWithSections } from '~/types'
 import { cleanText } from '~/utils/clean-text'
 import { createScraper, Scraper } from './_base'
 
-export const seriousEatsScraper: Scraper = async (url) => {
+export const simplyRecipesScraper: Scraper = async (url) => {
   const { baseRecipe, $ } = await createScraper(url)
 
   const ingredients: IngredientsWithSections[] = []

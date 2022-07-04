@@ -14,12 +14,12 @@ Animation: [framer motion](https://www.framer.com/motion/)
 
 ## TODOs
 
-- [ ] add labels for recipes
-- [ ] trap focus inside of modals
-- [ ] increase recipe scrapers
-- [ ] only load recipe images that are in view
-- [ ] add sign out
 - [ ] make dark/light mode toggle
+- [ ] add sign out
+- [ ] only load recipe images that are in view
+- [ ] increase recipe scrapers
+- [ ] trap focus inside of modals
+- [ ] add labels for recipes
 - [x] recipes without images
 - [x] style recipe detail page
 - [x] ~~Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)~~ script to do it locally

@@ -28,7 +28,7 @@ const getTitle = ($: CheerioAPI): string => {
 }
 
 const getImage = ($: CheerioAPI): string | undefined => {
-  return $('head meta[property="og:image"]').attr('content') || $("meta[name='og:image']").attr('content')
+  return $('head meta[property="og:image"]').attr('content') || $("head meta[name='og:image']").attr('content')
 }
 
 export const createScraper: ScraperCreator = async (url) => {
@@ -39,7 +39,7 @@ export const createScraper: ScraperCreator = async (url) => {
     $,
     baseRecipe: {
       title: getTitle($),
-      image: getImage($) ?? null,
+      image_url: getImage($) ?? undefined,
       url,
     },
   }
