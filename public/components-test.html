@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>&lt;my-element> Demo</title>
+
+  <script type="module" src="https://www.krantz.app/components/my-login.js"></script>
+  <script type="module" src="https://www.krantz.app/components/my-logout.js"></script>
+  <style>
+    body {
+      padding: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      min-height: 100vh;
+    }
+
+    .button-container {
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="button-container">
+    <my-login></my-login>
+    <my-logout></my-logout>
+  </div>
+  <div>
+    <h3>User Email: <span id="email"></span></h3>
+
+  </div>
+
+  <script>
+    window.addEventListener('login', async () => {
+      const user = await window.authClient.getUser()
+      document.querySelector('#email').textContent = user.name
+    })
+  </script>
+</body>
+
+</html>
