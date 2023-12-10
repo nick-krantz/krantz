@@ -23,7 +23,7 @@ export const action: ActionFunction = async ({ request }) => {
     })
   }
 
-  return redirect(`recipes/add?url=${encodeURIComponent(url)}`)
+  return redirect(`../../recipes/add?url=${encodeURIComponent(url)}`)
 }
 
 export default function FetchRecipe() {

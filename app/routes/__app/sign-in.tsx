@@ -62,7 +62,7 @@ export const action: ActionFunction = async ({ request }) => {
   if (user !== null && supabaseSession !== null) {
     const session = await getSession(request.headers.get('Cookie'))
     session.set(ACCESS_TOKEN, supabaseSession.access_token)
-    return redirect('recipes', {
+    return redirect('../', {
       headers: {
         'Set-Cookie': await commitSession(session),
       },
