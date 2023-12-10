@@ -5,7 +5,6 @@ import globalStylesUrl from '~/styles/global.css'
 import { Header } from './components/header'
 import styles from './tailwind.css'
 
-// https://remix.run/api/app#links
 export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: globalStylesUrl },
@@ -14,24 +13,22 @@ export const links: LinksFunction = () => {
     { rel: 'manifest', href: '/manifest.json' },
     {
       rel: 'icon',
-      href: 'favicon-dark.ico',
+      href: '/favicon-dark.ico',
       media: '(prefers-color-scheme: dark)',
     },
     {
       rel: 'icon',
-      href: 'favicon-light.ico',
+      href: '/favicon-light.ico',
       media: '(prefers-color-scheme: light)',
     },
     {
       rel: 'icon',
-      href: 'favicon.ico',
+      href: '/favicon.ico',
       media: '(prefers-color-scheme: no-preference)',
     },
   ]
 }
 
-// https://remix.run/api/conventions#default-export
-// https://remix.run/api/conventions#route-filenames
 export default function App() {
   return (
     <Document>
@@ -42,7 +39,6 @@ export default function App() {
   )
 }
 
-// https://remix.run/docs/en/v1/api/conventions#errorboundary
 export function ErrorBoundary() {
   const error = useRouteError()
 
