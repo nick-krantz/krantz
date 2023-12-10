@@ -9,8 +9,6 @@ const { getSession, commitSession, destroySession } = createCookieSessionStorage
   cookie: {
     name: 'sb:token',
 
-    // all of these are optional
-    expires: new Date(Date.now() + 604800),
     httpOnly: true,
     maxAge: 604800,
     path: '/',
