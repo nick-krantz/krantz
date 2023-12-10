@@ -10,3 +10,4 @@ api/_build
 yarn-error.log
 .env
 /app/tailwind.css
+build/

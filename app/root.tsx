@@ -1,8 +1,20 @@
-import { useRouteError, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
-import { LinksFunction } from '@remix-run/server-runtime'
+import {
+  useRouteError,
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from '@remix-run/react'
+import { LinksFunction, LoaderFunction } from '@remix-run/server-runtime'
 import { Footer } from '~/components/footer'
+import { Header } from '~/components/header'
 import globalStylesUrl from '~/styles/global.css'
-import { Header } from './components/header'
+import { authenticated } from '~/utils/supabase/authenticated'
+import { Navigation } from './components/navigation'
+
 import styles from './tailwind.css'
 
 export const links: LinksFunction = () => {
@@ -29,14 +41,10 @@ export const links: LinksFunction = () => {
   ]
 }
 
-export default function App() {
-  return (
-    <Document>
-      <Layout>
-        <Outlet />
-      </Layout>
-    </Document>
-  )
+export const loader: LoaderFunction = ({ request }) => {
+  return authenticated(request, ({ authorized }) => {
+    return Promise.resolve({ authorized })
+  })
 }
 
 export function ErrorBoundary() {
@@ -59,6 +67,16 @@ export function ErrorBoundary() {
           <br></br>
           <code>Error: {errorMessage}</code>
         </div>
+      </Layout>
+    </Document>
+  )
+}
+
+export default function Root() {
+  return (
+    <Document>
+      <Layout>
+        <Outlet />
       </Layout>
     </Document>
   )
@@ -104,9 +122,17 @@ function Document({ children, title }: { children: React.ReactNode; title?: stri
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
+  const { authorized } = useLoaderData<{ authorized: boolean }>()
+
   return (
     <div className="flex flex-col h-full w-full p-5">
-      <div className="flex-1">{children}</div>
+      <div className="flex-1">
+        <div className="flex flex-col h-full">
+          <Header authorized={authorized} />
+          <div className="flex-1">{children}</div>
+          <Navigation authorized={authorized} />
+        </div>
+      </div>
       <Footer />
     </div>
   )

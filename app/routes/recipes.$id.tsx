@@ -1,5 +1,5 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
+import { Link, MetaFunction, useLoaderData } from '@remix-run/react'
+import { json, LoaderFunction } from '@remix-run/server-runtime'
 import React, { useMemo } from 'react'
 import { buttonClasses } from '~/components/button'
 import { PageDetails } from '~/components/header'
@@ -7,10 +7,12 @@ import { Recipe } from '~/types'
 import { getToken } from '~/utils/supabase/get-token'
 import { supabase } from '~/utils/supabase/index.server'
 
-export const meta: MetaFunction = ({ data }) => {
-  return {
-    title: `Nick Krantz - ${data?.recipe?.title}`,
-  }
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    {
+      title: `Nick Krantz - ${data?.recipe?.title}`,
+    },
+  ]
 }
 
 interface LoaderData {

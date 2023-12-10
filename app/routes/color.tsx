@@ -1,5 +1,5 @@
-import { useLoaderData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
+import { useLoaderData, MetaFunction } from '@remix-run/react'
+import { json, LoaderFunction } from '@remix-run/server-runtime'
 import { useState } from 'react'
 import { Field } from '~/components/field'
 import { PageDetails } from '~/components/header'
@@ -12,10 +12,12 @@ type LoaderData = {
 }
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Nick Krantz - Color Converter',
-    description: 'Convert colors between their Hexadecimal & RGB representation',
-  }
+  return [
+    {
+      title: 'Nick Krantz - Color Converter',
+      description: 'Convert colors between their Hexadecimal & RGB representation',
+    },
+  ]
 }
 
 /**

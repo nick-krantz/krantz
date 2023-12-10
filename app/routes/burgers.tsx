@@ -1,5 +1,5 @@
-import { useLoaderData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
+import { useLoaderData, MetaFunction } from '@remix-run/react'
+import { json, LoaderFunction } from '@remix-run/server-runtime'
 import { HTMLMotionProps, motion } from 'framer-motion'
 import { PageDetails } from '~/components/header'
 import { Burger } from '~/types'
@@ -11,10 +11,12 @@ type LoaderData = {
 }
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Nick Krantz - Favorite Burgers',
-    description: "A list of the best burgers I've ever ate.",
-  }
+  return [
+    {
+      title: 'Nick Krantz - Favorite Burgers',
+      description: "A list of the best burgers I've ever ate.",
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async () => {

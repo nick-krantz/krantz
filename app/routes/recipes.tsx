@@ -1,5 +1,5 @@
-import { Link, Outlet, useLoaderData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
+import { Link, Outlet, useLoaderData, MetaFunction } from '@remix-run/react'
+import { json, LoaderFunction } from '@remix-run/server-runtime'
 import { Button } from '~/components/button'
 import { PageDetails } from '~/components/header'
 import { RecipeList } from '~/components/recipe-list'
@@ -13,10 +13,12 @@ type LoaderData = {
 }
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Nick Krantz - Recipes',
-    description: 'Recipes worth making',
-  }
+  return [
+    {
+      title: 'Nick Krantz - Recipes',
+      description: 'Recipes worth making',
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async ({ request }) => {

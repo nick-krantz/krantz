@@ -1,5 +1,5 @@
-import { useLoaderData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
+import { useLoaderData, MetaFunction } from '@remix-run/react'
+import { json, LoaderFunction } from '@remix-run/server-runtime'
 import { Recipe } from '~/types'
 
 import { addIdToIngredients, addIdToInstructions } from '~/utils/add-ids-to-recipe'
@@ -8,10 +8,12 @@ import { supabase } from '~/utils/supabase/index.server'
 
 import { RecipeForm } from './_recipe.components/recipe-form'
 
-export const meta: MetaFunction = ({ data }) => {
-  return {
-    title: `Nick Krantz - Edit ${data?.recipe?.title}`,
-  }
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    {
+      title: `Nick Krantz - Edit ${data?.recipe?.title}`,
+    },
+  ]
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -47,7 +49,7 @@ export const loader: LoaderFunction = async ({ request }) => {
  * Edit Recipe page
  */
 export default function EditRecipes() {
-  const { recipe } = useLoaderData()
+  const { recipe } = useLoaderData<typeof loader>()
 
   return <RecipeForm type="edit" recipe={recipe} recipeId={recipe.id} />
 }

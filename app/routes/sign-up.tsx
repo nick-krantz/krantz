@@ -1,5 +1,5 @@
-import { Form, useActionData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction, redirect, ActionFunction } from '@remix-run/server-runtime'
+import { Form, useActionData, MetaFunction } from '@remix-run/react'
+import { json, LoaderFunction, redirect, ActionFunction } from '@remix-run/server-runtime'
 import { User } from '@supabase/supabase-js'
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
@@ -25,10 +25,12 @@ type ActionData = {
 }
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Nick Krantz - Sign Up',
-    description: 'Sign up for Krantz.app using an email and password',
-  }
+  return [
+    {
+      title: 'Nick Krantz - Sign Up',
+      description: 'Sign up for Krantz.app using an email and password',
+    },
+  ]
 }
 
 export const action: ActionFunction = async ({ request }) => {

@@ -1,13 +1,16 @@
-import { MetaFunction } from '@remix-run/server-runtime'
+import { MetaFunction } from '@remix-run/react'
 import { useEffect } from 'react'
 import { Logo } from '~/components/logo'
 import { changeCaretColor } from '~/utils/change-caret-color'
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Nick Krantz',
-    description: 'Krantz.app - A website built with React & Remix to utilize some functionality for my everyday life.',
-  }
+  return [
+    {
+      title: 'Nick Krantz',
+      description:
+        'Krantz.app - A website built with React & Remix to utilize some functionality for my everyday life.',
+    },
+  ]
 }
 
 export default function Index() {

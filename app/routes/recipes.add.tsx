@@ -1,6 +1,6 @@
 import { ScraperRecipeWithIds } from '~/types/utility-types'
-import { useLoaderData } from '@remix-run/react'
-import { json, LoaderFunction, MetaFunction, ActionFunction, redirect } from '@remix-run/server-runtime'
+import { useLoaderData, MetaFunction } from '@remix-run/react'
+import { json, LoaderFunction, ActionFunction, redirect } from '@remix-run/server-runtime'
 import { PageDetails } from '~/components/header'
 import { addIdToIngredients, addIdToInstructions } from '~/utils/add-ids-to-recipe'
 import { badRequest } from '~/utils/network'
@@ -11,10 +11,12 @@ import { supabase } from '~/utils/supabase/index.server'
 import { RecipeForm } from './_recipe.components/recipe-form'
 
 export const meta: MetaFunction = () => {
-  return {
-    title: 'Nick Krantz - Add Recipe',
-    description: 'Add Recipe',
-  }
+  return [
+    {
+      title: 'Nick Krantz - Add Recipe',
+      description: 'Add Recipe',
+    },
+  ]
 }
 
 interface LoaderData {

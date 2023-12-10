@@ -1,5 +1,7 @@
-module.exports = {
+import TailwindForms from '@tailwindcss/forms'
+
+export default {
   content: ['./app/**/*.{ts,tsx}'],
   theme: {},
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp')],
+  plugins: [TailwindForms],
 }
