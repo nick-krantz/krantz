@@ -8,6 +8,7 @@ module.exports = {
   serverBuildDirectory: "api/_build",
   ignoredRouteFiles: [".*", "_*.components"],
   future: {
+    v2_dev: true,
     v2_errorBoundary: true,
   }
 };

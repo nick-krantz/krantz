@@ -6,7 +6,7 @@
   "scripts": {
     "build": "yarn build:css && remix build",
     "build:css": "tailwindcss -i ./app/styles/global.css -o ./app/tailwind.css --minify",
-    "dev": "concurrently \"yarn dev:css\" \"node -r dotenv/config ./node_modules/@remix-run/dev/cli.js\"",
+    "dev": "concurrently \"yarn dev:css\" \"remix dev\"",
     "dev:css": "tailwindcss -i ./app/styles/global.css -o ./app/tailwind.css --watch",
     "generate-types": "node ./scripts/generate-types.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet --fix",
