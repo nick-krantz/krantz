@@ -5,7 +5,8 @@
   "license": "",
   "type": "module",
   "scripts": {
-    "build": "remix build",
+    "build": "yarn build:css && remix build",
+    "build:css": "tailwindcss -i ./app/styles/global.css -o ./app/tailwind.css --minify",
     "dev": "remix dev",
     "generate-types": "node ./scripts/generate-types.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet --fix",
