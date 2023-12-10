@@ -1,5 +1,5 @@
 import { ScraperRecipeWithIds } from '~/types/utility-types'
-import { Form } from 'remix'
+import { Form } from '@remix-run/react'
 import { Button } from '~/components/button'
 import { Field } from '~/components/field'
 import { IngredientList } from './ingredient-list'

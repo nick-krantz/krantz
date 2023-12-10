@@ -1,5 +1,5 @@
+import { Link } from '@remix-run/react'
 import { FiShare2 } from 'react-icons/fi'
-import { Link } from 'remix'
 import { Recipe } from '~/types'
 
 type Props = {
@@ -15,7 +15,7 @@ export const RecipeCard: React.FC<Props> = ({ recipe: { title, image_url, url, i
       navigator
         .share({
           title,
-          text: `Check out ${name}`,
+          text: `Check out ${title}`,
           url: url,
         })
         .catch((error) => console.log('Error sharing', error))

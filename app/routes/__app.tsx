@@ -1,4 +1,5 @@
-import { LoaderFunction, Outlet, useLoaderData } from 'remix'
+import { Outlet, useLoaderData } from '@remix-run/react'
+import { LoaderFunction } from '@remix-run/server-runtime'
 import { Header } from '~/components/header'
 import { Navigation } from '~/components/navigation'
 import { authenticated } from '~/utils/supabase/authenticated'

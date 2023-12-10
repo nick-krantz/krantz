@@ -1,5 +1,6 @@
+import { Form, useActionData, useNavigate } from '@remix-run/react'
+import { redirect, ActionFunction } from '@remix-run/server-runtime'
 import { FiX } from 'react-icons/fi'
-import { ActionFunction, Form, redirect, useActionData, useNavigate } from 'remix'
 import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'
 import { Field } from '~/components/field'

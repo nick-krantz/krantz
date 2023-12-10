@@ -1,5 +1,6 @@
 import { ScraperRecipeWithIds } from '~/types/utility-types'
-import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { useLoaderData } from '@remix-run/react'
+import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
 import { PageDetails } from '~/components/header'
 import { addIdToIngredients, addIdToInstructions } from '~/utils/add-ids-to-recipe'
 import { getRecipe } from '~/utils/recipe-scraper'

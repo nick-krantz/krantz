@@ -1,7 +1,7 @@
+import { Link } from '@remix-run/react'
 import { HTMLMotionProps, motion } from 'framer-motion'
 import React, { forwardRef } from 'react'
 import { FiBookmark, FiPenTool } from 'react-icons/fi'
-import { Link } from 'remix'
 import { Icon } from '../icon'
 import { BurgerIcon } from '../icon/burger'
 import { RecipeIcon } from '../icon/recipe'

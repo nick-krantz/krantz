@@ -1,5 +1,6 @@
+import { Link, useLoaderData } from '@remix-run/react'
+import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
 import React, { useMemo } from 'react'
-import { json, Link, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { buttonClasses } from '~/components/button'
 import { PageDetails } from '~/components/header'
 import { Recipe } from '~/types'

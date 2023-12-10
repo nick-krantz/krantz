@@ -1,4 +1,5 @@
-import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
+import { useLoaderData } from '@remix-run/react'
+import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
 import { Recipe } from '~/types'
 
 import { addIdToIngredients, addIdToInstructions } from '~/utils/add-ids-to-recipe'

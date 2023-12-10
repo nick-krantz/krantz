@@ -1,5 +1,6 @@
+import { useLoaderData } from '@remix-run/react'
+import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
 import { useState } from 'react'
-import { json, LoaderFunction, MetaFunction, useLoaderData } from 'remix'
 import { Field } from '~/components/field'
 import { PageDetails } from '~/components/header'
 import { ShadesAndTints } from '~/components/shades-and-tints'
@@ -27,7 +28,8 @@ const fallbackRGBColor = '240,128,0'
  * Sets the value of input of the given ID
  */
 const setFieldValue = (id: string, hex: string): void => {
-  ;(document.querySelector(id) as HTMLInputElement).value = hex
+  const field = document.querySelector(id) as HTMLInputElement
+  field.value = hex
 }
 
 /**

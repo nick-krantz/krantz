@@ -1,4 +1,4 @@
-import { json } from 'remix'
+import { json } from '@remix-run/server-runtime'
 
 /**
  * Sets network response status to 400, or custom status when provided

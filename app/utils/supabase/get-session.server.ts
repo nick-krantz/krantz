@@ -1,4 +1,4 @@
-import { createCookieSessionStorage } from 'remix'
+import { createCookieSessionStorage } from '@remix-run/node'
 
 //
 // lifted directly from the remix documentation

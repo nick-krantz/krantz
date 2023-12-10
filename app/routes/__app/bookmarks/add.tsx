@@ -1,6 +1,7 @@
+import { Form, useActionData, useLoaderData, useNavigate } from '@remix-run/react'
+import { LoaderFunction, redirect, ActionFunction } from '@remix-run/server-runtime'
 import { PostgrestError } from '@supabase/supabase-js'
 import { FiX } from 'react-icons/fi'
-import { ActionFunction, Form, LoaderFunction, redirect, useActionData, useLoaderData, useNavigate } from 'remix'
 import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'
 import { Field } from '~/components/field'

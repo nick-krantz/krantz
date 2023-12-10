@@ -1,6 +1,6 @@
+import { Link, useMatches } from '@remix-run/react'
 import { useMemo } from 'react'
 import { FiArrowLeft, FiUser } from 'react-icons/fi'
-import { Link, useMatches } from 'remix'
 import { Icon } from '../icon'
 
 type Props = {

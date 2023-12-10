@@ -1,4 +1,4 @@
-import { ActionFunction, redirect } from 'remix'
+import { ActionFunction, redirect } from '@remix-run/server-runtime'
 import { badRequest } from '~/utils/network'
 import { getToken } from '~/utils/supabase/get-token'
 import { getUser } from '~/utils/supabase/get-user'

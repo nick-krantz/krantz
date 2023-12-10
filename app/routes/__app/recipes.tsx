@@ -1,4 +1,5 @@
-import { json, Link, LoaderFunction, MetaFunction, Outlet, useLoaderData } from 'remix'
+import { Link, Outlet, useLoaderData } from '@remix-run/react'
+import { json, LoaderFunction, MetaFunction } from '@remix-run/server-runtime'
 import { Button } from '~/components/button'
 import { PageDetails } from '~/components/header'
 import { RecipeList } from '~/components/recipe-list'

@@ -1,5 +1,5 @@
+import { redirect, Session } from '@remix-run/server-runtime'
 import { User } from '@supabase/supabase-js'
-import { redirect, Session } from 'remix'
 import { ACCESS_TOKEN } from '~/constants/access-token'
 import { getSession } from './get-session.server'
 import { supabase } from './index.server'

@@ -1,5 +1,5 @@
+import { MetaFunction } from '@remix-run/server-runtime'
 import { useEffect } from 'react'
-import { MetaFunction } from 'remix'
 import { Logo } from '~/components/logo'
 import { changeCaretColor } from '~/utils/change-caret-color'
 

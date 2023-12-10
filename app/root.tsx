@@ -1,5 +1,5 @@
-import { useRouteError } from '@remix-run/react'
-import { LinksFunction, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
+import { useRouteError, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react'
+import { LinksFunction } from '@remix-run/server-runtime'
 import { Footer } from '~/components/footer'
 import globalStylesUrl from '~/styles/global.css'
 import { Header } from './components/header'
