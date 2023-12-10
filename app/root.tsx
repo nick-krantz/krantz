@@ -8,7 +8,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-import { LinksFunction, LoaderFunction } from '@remix-run/server-runtime'
+import { LinksFunction, LoaderFunction } from '@vercel/remix'
 import { Footer } from '~/components/footer'
 import { Header } from '~/components/header'
 import globalStylesUrl from '~/styles/global.css'

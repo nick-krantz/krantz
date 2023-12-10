@@ -1,5 +1,5 @@
 import { useLoaderData, MetaFunction } from '@remix-run/react'
-import { json, LoaderFunction } from '@remix-run/server-runtime'
+import { json, LoaderFunction } from '@vercel/remix'
 import { useState } from 'react'
 import { Field } from '~/components/field'
 import { PageDetails } from '~/components/header'

@@ -1,5 +1,5 @@
 import { Link, Outlet, useLoaderData, MetaFunction } from '@remix-run/react'
-import { json, LoaderFunction } from '@remix-run/server-runtime'
+import { json, LoaderFunction } from '@vercel/remix'
 import { Button } from '~/components/button'
 import { PageDetails } from '~/components/header'
 import { Bookmark } from '~/types'

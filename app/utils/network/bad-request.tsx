@@ -1,4 +1,4 @@
-import { json } from '@remix-run/server-runtime'
+import { json } from '@vercel/remix'
 
 /**
  * Sets network response status to 400, or custom status when provided

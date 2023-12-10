@@ -1,5 +1,5 @@
 import { Form, useActionData, useNavigate } from '@remix-run/react'
-import { redirect, ActionFunction } from '@remix-run/server-runtime'
+import { redirect, ActionFunction } from '@vercel/remix'
 import { FiX } from 'react-icons/fi'
 import { Button } from '~/components/button'
 import { ErrorMessage } from '~/components/error-message'

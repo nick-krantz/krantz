@@ -1,6 +1,6 @@
 import { ScraperRecipeWithIds } from '~/types/utility-types'
 import { useLoaderData, MetaFunction } from '@remix-run/react'
-import { json, LoaderFunction, ActionFunction, redirect } from '@remix-run/server-runtime'
+import { json, LoaderFunction, ActionFunction, redirect } from '@vercel/remix'
 import { PageDetails } from '~/components/header'
 import { addIdToIngredients, addIdToInstructions } from '~/utils/add-ids-to-recipe'
 import { badRequest } from '~/utils/network'

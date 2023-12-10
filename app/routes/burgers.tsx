@@ -1,5 +1,5 @@
 import { useLoaderData, MetaFunction } from '@remix-run/react'
-import { json, LoaderFunction } from '@remix-run/server-runtime'
+import { json, LoaderFunction } from '@vercel/remix'
 import { HTMLMotionProps, motion } from 'framer-motion'
 import { PageDetails } from '~/components/header'
 import { Burger } from '~/types'

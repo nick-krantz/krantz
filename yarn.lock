@@ -1186,6 +1186,15 @@
   resolved "https://registry.yarnpkg.com/@vanilla-extract/private/-/private-1.0.3.tgz#7ec72bc2ff6fe51f9d650f962e8d1989b073690f"
   integrity sha512-17kVyLq3ePTKOkveHxXuIJZtGYs+cSoev7BlP+Lf4916qfDhk/HBjvlYDe8egrea7LNPHKwSZJK/bzZC+Q6AwQ==
 
+"@vercel/remix@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@vercel/remix/-/remix-2.3.1.tgz#bd0218266927b733c865694912208d60171464f9"
+  integrity sha512-5ywdcJ2lqM348qhenKiBghiA4WbFRLQIsVkeWQhKWmpspYnSQMnTNsLe3hTUh5jgdJYey5eldObCKtkb7wCwTw==
+  dependencies:
+    "@remix-run/node" "2.3.1"
+    "@remix-run/server-runtime" "2.3.1"
+    isbot "^3.6.8"
+
 "@web3-storage/multipart-parser@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@web3-storage/multipart-parser/-/multipart-parser-1.0.0.tgz#6b69dc2a32a5b207ba43e556c25cc136a56659c4"
@@ -3327,6 +3336,11 @@ isarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
   integrity sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==
+
+isbot@^3.6.8:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/isbot/-/isbot-3.7.1.tgz#83655e59bfae8cd410d3c63b398c8ad813bf3fdf"
+  integrity sha512-JfqOaY3O1lcWt2nc+D6Mq231CNpwZrBboLa59Go0J8hjGH+gY/Sy0CA/YLUSIScINmAVwTdJZIsOTk4PfBtRuw==
 
 isexe@^2.0.0:
   version "2.0.0"

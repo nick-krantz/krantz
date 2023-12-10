@@ -1,6 +1,6 @@
 import { Form, useActionData, MetaFunction } from '@remix-run/react'
-import { json, LoaderFunction, redirect, ActionFunction } from '@remix-run/server-runtime'
 import { User } from '@supabase/supabase-js'
+import { json, LoaderFunction, redirect, ActionFunction } from '@vercel/remix'
 import { Button } from '~/components/button'
 import { EmailInput } from '~/components/email-input'
 import { ErrorMessage } from '~/components/error-message'
