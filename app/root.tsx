@@ -1,4 +1,5 @@
-import { LinksFunction, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch } from 'remix'
+import { useRouteError } from '@remix-run/react'
+import { LinksFunction, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
 import { Footer } from '~/components/footer'
 import globalStylesUrl from '~/styles/global.css'
 import { Header } from './components/header'
@@ -42,7 +43,15 @@ export default function App() {
 }
 
 // https://remix.run/docs/en/v1/api/conventions#errorboundary
-export function ErrorBoundary({ error }: { error: Error }) {
+export function ErrorBoundary() {
+  const error = useRouteError()
+
+  let errorMessage = 'Unknown error'
+
+  if (error instanceof Error) {
+    errorMessage = error.message
+  }
+
   console.error(error)
   return (
     <Document title="Error!">
@@ -52,24 +61,7 @@ export function ErrorBoundary({ error }: { error: Error }) {
           <h1>There was an error</h1>
           <p>Use the menu or your browsers back button to return to your last page.</p>
           <br></br>
-          <code>Error: {error.message}</code>
-        </div>
-      </Layout>
-    </Document>
-  )
-}
-
-// https://remix.run/docs/en/v1/api/conventions#catchboundary
-export function CatchBoundary() {
-  const caught = useCatch()
-  return (
-    <Document title={`${caught.status} ${caught.statusText}`}>
-      <Layout>
-        <Header authorized={false}></Header>
-        <div className="flex items-center justify-center h-full">
-          <h1>
-            {caught.status}: {caught.statusText}
-          </h1>
+          <code>Error: {errorMessage}</code>
         </div>
       </Layout>
     </Document>
