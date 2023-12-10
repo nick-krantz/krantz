@@ -57,7 +57,9 @@ export default function RecipeDetail() {
 
   return (
     <div className=" max-w-2xl mx-auto">
-      {recipe?.image_url && <img className="rounded-2xl max-h-[300px] w-full object-cover" src={recipe.image_url} />}
+      {recipe?.image_url && (
+        <img className="rounded-2xl max-h-[300px] w-full object-cover" src={recipe.image_url} alt="" />
+      )}
       <div className="flex flex-wrap py-4 justify-around gap-4">
         {domain ? (
           <a className={linkButtonClasses} href={recipe.url}>
