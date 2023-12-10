@@ -87,7 +87,7 @@ export default function SignIn() {
   return (
     <Form
       className="mt-20 px-4 mx-auto max-w-lg w-full"
-      method="post"
+      method="POST"
       aria-describedby={hasError ? 'form-error-message' : undefined}
     >
       <div className="flex align-stretch flex-col gap-6">

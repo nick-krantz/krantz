@@ -90,7 +90,7 @@ export default function AddBookmark() {
       </h2>
       <Form
         id="submit-bookmark-form"
-        method="post"
+        method="POST"
         aria-describedby={actionData?.error?.message ? 'form-error-message' : undefined}
       >
         <div className="flex flex-col gap-5">

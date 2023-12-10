@@ -49,7 +49,7 @@ export default function FetchRecipe() {
         </button>
       </h2>
       <Form
-        method="post"
+        method="POST"
         id="fetch-recipe-form"
         aria-describedby={actionData?.error?.message ? 'form-error-message' : undefined}
       >
