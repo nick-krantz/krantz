@@ -1,7 +1,7 @@
-import TailwindForms from '@tailwindcss/forms'
+import TailwindForms from "@tailwindcss/forms";
 
 export default {
-  content: ['./app/**/*.{ts,tsx}'],
-  theme: {},
-  plugins: [TailwindForms],
-}
+	content: ["./app/**/*.{ts,tsx}"],
+	theme: {},
+	plugins: [TailwindForms],
+};

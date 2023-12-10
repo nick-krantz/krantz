@@ -4,943 +4,939 @@
  */
 
 export interface paths {
-  '/': {
-    get: {
-      responses: {
-        /** OK */
-        200: unknown
-      }
-    }
-  }
-  '/bookmark-categories': {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.bookmark-categories.id']
-          created_at?: parameters['rowFilter.bookmark-categories.created_at']
-          category?: parameters['rowFilter.bookmark-categories.category']
-          /** Filtering Columns */
-          select?: parameters['select']
-          /** Ordering */
-          order?: parameters['order']
-          /** Limiting and Pagination */
-          offset?: parameters['offset']
-          /** Limiting and Pagination */
-          limit?: parameters['limit']
-        }
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters['range']
-          /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
-          /** Preference */
-          Prefer?: parameters['preferCount']
-        }
-      }
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions['bookmark-categories'][]
-        }
-        /** Partial Content */
-        206: unknown
-      }
-    }
-    post: {
-      parameters: {
-        body: {
-          /** bookmark-categories */
-          'bookmark-categories'?: definitions['bookmark-categories']
-        }
-        query: {
-          /** Filtering Columns */
-          select?: parameters['select']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** Created */
-        201: unknown
-      }
-    }
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.bookmark-categories.id']
-          created_at?: parameters['rowFilter.bookmark-categories.created_at']
-          category?: parameters['rowFilter.bookmark-categories.category']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.bookmark-categories.id']
-          created_at?: parameters['rowFilter.bookmark-categories.created_at']
-          category?: parameters['rowFilter.bookmark-categories.category']
-        }
-        body: {
-          /** bookmark-categories */
-          'bookmark-categories'?: definitions['bookmark-categories']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-  }
-  '/bookmarks': {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.bookmarks.id']
-          created_at?: parameters['rowFilter.bookmarks.created_at']
-          title?: parameters['rowFilter.bookmarks.title']
-          url?: parameters['rowFilter.bookmarks.url']
-          category?: parameters['rowFilter.bookmarks.category']
-          /** Filtering Columns */
-          select?: parameters['select']
-          /** Ordering */
-          order?: parameters['order']
-          /** Limiting and Pagination */
-          offset?: parameters['offset']
-          /** Limiting and Pagination */
-          limit?: parameters['limit']
-        }
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters['range']
-          /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
-          /** Preference */
-          Prefer?: parameters['preferCount']
-        }
-      }
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions['bookmarks'][]
-        }
-        /** Partial Content */
-        206: unknown
-      }
-    }
-    post: {
-      parameters: {
-        body: {
-          /** bookmarks */
-          bookmarks?: definitions['bookmarks']
-        }
-        query: {
-          /** Filtering Columns */
-          select?: parameters['select']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** Created */
-        201: unknown
-      }
-    }
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.bookmarks.id']
-          created_at?: parameters['rowFilter.bookmarks.created_at']
-          title?: parameters['rowFilter.bookmarks.title']
-          url?: parameters['rowFilter.bookmarks.url']
-          category?: parameters['rowFilter.bookmarks.category']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.bookmarks.id']
-          created_at?: parameters['rowFilter.bookmarks.created_at']
-          title?: parameters['rowFilter.bookmarks.title']
-          url?: parameters['rowFilter.bookmarks.url']
-          category?: parameters['rowFilter.bookmarks.category']
-        }
-        body: {
-          /** bookmarks */
-          bookmarks?: definitions['bookmarks']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-  }
-  '/burgers': {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.burgers.id']
-          created_at?: parameters['rowFilter.burgers.created_at']
-          name?: parameters['rowFilter.burgers.name']
-          restaurant?: parameters['rowFilter.burgers.restaurant']
-          description?: parameters['rowFilter.burgers.description']
-          rank?: parameters['rowFilter.burgers.rank']
-          url?: parameters['rowFilter.burgers.url']
-          location?: parameters['rowFilter.burgers.location']
-          /** Filtering Columns */
-          select?: parameters['select']
-          /** Ordering */
-          order?: parameters['order']
-          /** Limiting and Pagination */
-          offset?: parameters['offset']
-          /** Limiting and Pagination */
-          limit?: parameters['limit']
-        }
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters['range']
-          /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
-          /** Preference */
-          Prefer?: parameters['preferCount']
-        }
-      }
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions['burgers'][]
-        }
-        /** Partial Content */
-        206: unknown
-      }
-    }
-    post: {
-      parameters: {
-        body: {
-          /** burgers */
-          burgers?: definitions['burgers']
-        }
-        query: {
-          /** Filtering Columns */
-          select?: parameters['select']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** Created */
-        201: unknown
-      }
-    }
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.burgers.id']
-          created_at?: parameters['rowFilter.burgers.created_at']
-          name?: parameters['rowFilter.burgers.name']
-          restaurant?: parameters['rowFilter.burgers.restaurant']
-          description?: parameters['rowFilter.burgers.description']
-          rank?: parameters['rowFilter.burgers.rank']
-          url?: parameters['rowFilter.burgers.url']
-          location?: parameters['rowFilter.burgers.location']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.burgers.id']
-          created_at?: parameters['rowFilter.burgers.created_at']
-          name?: parameters['rowFilter.burgers.name']
-          restaurant?: parameters['rowFilter.burgers.restaurant']
-          description?: parameters['rowFilter.burgers.description']
-          rank?: parameters['rowFilter.burgers.rank']
-          url?: parameters['rowFilter.burgers.url']
-          location?: parameters['rowFilter.burgers.location']
-        }
-        body: {
-          /** burgers */
-          burgers?: definitions['burgers']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-  }
-  '/detailed-recipes': {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.detailed-recipes.id']
-          created_at?: parameters['rowFilter.detailed-recipes.created_at']
-          title?: parameters['rowFilter.detailed-recipes.title']
-          url?: parameters['rowFilter.detailed-recipes.url']
-          image_url?: parameters['rowFilter.detailed-recipes.image_url']
-          instructions?: parameters['rowFilter.detailed-recipes.instructions']
-          created_by?: parameters['rowFilter.detailed-recipes.created_by']
-          ingredients?: parameters['rowFilter.detailed-recipes.ingredients']
-          /** Filtering Columns */
-          select?: parameters['select']
-          /** Ordering */
-          order?: parameters['order']
-          /** Limiting and Pagination */
-          offset?: parameters['offset']
-          /** Limiting and Pagination */
-          limit?: parameters['limit']
-        }
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters['range']
-          /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
-          /** Preference */
-          Prefer?: parameters['preferCount']
-        }
-      }
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions['detailed-recipes'][]
-        }
-        /** Partial Content */
-        206: unknown
-      }
-    }
-    post: {
-      parameters: {
-        body: {
-          /** detailed-recipes */
-          'detailed-recipes'?: definitions['detailed-recipes']
-        }
-        query: {
-          /** Filtering Columns */
-          select?: parameters['select']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** Created */
-        201: unknown
-      }
-    }
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.detailed-recipes.id']
-          created_at?: parameters['rowFilter.detailed-recipes.created_at']
-          title?: parameters['rowFilter.detailed-recipes.title']
-          url?: parameters['rowFilter.detailed-recipes.url']
-          image_url?: parameters['rowFilter.detailed-recipes.image_url']
-          instructions?: parameters['rowFilter.detailed-recipes.instructions']
-          created_by?: parameters['rowFilter.detailed-recipes.created_by']
-          ingredients?: parameters['rowFilter.detailed-recipes.ingredients']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.detailed-recipes.id']
-          created_at?: parameters['rowFilter.detailed-recipes.created_at']
-          title?: parameters['rowFilter.detailed-recipes.title']
-          url?: parameters['rowFilter.detailed-recipes.url']
-          image_url?: parameters['rowFilter.detailed-recipes.image_url']
-          instructions?: parameters['rowFilter.detailed-recipes.instructions']
-          created_by?: parameters['rowFilter.detailed-recipes.created_by']
-          ingredients?: parameters['rowFilter.detailed-recipes.ingredients']
-        }
-        body: {
-          /** detailed-recipes */
-          'detailed-recipes'?: definitions['detailed-recipes']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-  }
-  '/full_recipes': {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.full_recipes.id']
-          created_at?: parameters['rowFilter.full_recipes.created_at']
-          title?: parameters['rowFilter.full_recipes.title']
-          url?: parameters['rowFilter.full_recipes.url']
-          image_url?: parameters['rowFilter.full_recipes.image_url']
-          instructions?: parameters['rowFilter.full_recipes.instructions']
-          created_by?: parameters['rowFilter.full_recipes.created_by']
-          ingredients?: parameters['rowFilter.full_recipes.ingredients']
-          /** Filtering Columns */
-          select?: parameters['select']
-          /** Ordering */
-          order?: parameters['order']
-          /** Limiting and Pagination */
-          offset?: parameters['offset']
-          /** Limiting and Pagination */
-          limit?: parameters['limit']
-        }
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters['range']
-          /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
-          /** Preference */
-          Prefer?: parameters['preferCount']
-        }
-      }
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions['full_recipes'][]
-        }
-        /** Partial Content */
-        206: unknown
-      }
-    }
-    post: {
-      parameters: {
-        body: {
-          /** full_recipes */
-          full_recipes?: definitions['full_recipes']
-        }
-        query: {
-          /** Filtering Columns */
-          select?: parameters['select']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** Created */
-        201: unknown
-      }
-    }
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.full_recipes.id']
-          created_at?: parameters['rowFilter.full_recipes.created_at']
-          title?: parameters['rowFilter.full_recipes.title']
-          url?: parameters['rowFilter.full_recipes.url']
-          image_url?: parameters['rowFilter.full_recipes.image_url']
-          instructions?: parameters['rowFilter.full_recipes.instructions']
-          created_by?: parameters['rowFilter.full_recipes.created_by']
-          ingredients?: parameters['rowFilter.full_recipes.ingredients']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters['rowFilter.full_recipes.id']
-          created_at?: parameters['rowFilter.full_recipes.created_at']
-          title?: parameters['rowFilter.full_recipes.title']
-          url?: parameters['rowFilter.full_recipes.url']
-          image_url?: parameters['rowFilter.full_recipes.image_url']
-          instructions?: parameters['rowFilter.full_recipes.instructions']
-          created_by?: parameters['rowFilter.full_recipes.created_by']
-          ingredients?: parameters['rowFilter.full_recipes.ingredients']
-        }
-        body: {
-          /** full_recipes */
-          full_recipes?: definitions['full_recipes']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-  }
-  '/recipes': {
-    get: {
-      parameters: {
-        query: {
-          /** unique id of the recipe */
-          id?: parameters['rowFilter.recipes.id']
-          /** timestamp of when recipe was created */
-          created_at?: parameters['rowFilter.recipes.created_at']
-          /** Id of the user that created the recipe */
-          created_by?: parameters['rowFilter.recipes.created_by']
-          /** Name of recipe */
-          name?: parameters['rowFilter.recipes.name']
-          /** URL for the recipe image */
-          image?: parameters['rowFilter.recipes.image']
-          /** URL for the recipe */
-          url?: parameters['rowFilter.recipes.url']
-          /** Filtering Columns */
-          select?: parameters['select']
-          /** Ordering */
-          order?: parameters['order']
-          /** Limiting and Pagination */
-          offset?: parameters['offset']
-          /** Limiting and Pagination */
-          limit?: parameters['limit']
-        }
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters['range']
-          /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit']
-          /** Preference */
-          Prefer?: parameters['preferCount']
-        }
-      }
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions['recipes'][]
-        }
-        /** Partial Content */
-        206: unknown
-      }
-    }
-    post: {
-      parameters: {
-        body: {
-          /** recipes */
-          recipes?: definitions['recipes']
-        }
-        query: {
-          /** Filtering Columns */
-          select?: parameters['select']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** Created */
-        201: unknown
-      }
-    }
-    delete: {
-      parameters: {
-        query: {
-          /** unique id of the recipe */
-          id?: parameters['rowFilter.recipes.id']
-          /** timestamp of when recipe was created */
-          created_at?: parameters['rowFilter.recipes.created_at']
-          /** Id of the user that created the recipe */
-          created_by?: parameters['rowFilter.recipes.created_by']
-          /** Name of recipe */
-          name?: parameters['rowFilter.recipes.name']
-          /** URL for the recipe image */
-          image?: parameters['rowFilter.recipes.image']
-          /** URL for the recipe */
-          url?: parameters['rowFilter.recipes.url']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-    patch: {
-      parameters: {
-        query: {
-          /** unique id of the recipe */
-          id?: parameters['rowFilter.recipes.id']
-          /** timestamp of when recipe was created */
-          created_at?: parameters['rowFilter.recipes.created_at']
-          /** Id of the user that created the recipe */
-          created_by?: parameters['rowFilter.recipes.created_by']
-          /** Name of recipe */
-          name?: parameters['rowFilter.recipes.name']
-          /** URL for the recipe image */
-          image?: parameters['rowFilter.recipes.image']
-          /** URL for the recipe */
-          url?: parameters['rowFilter.recipes.url']
-        }
-        body: {
-          /** recipes */
-          recipes?: definitions['recipes']
-        }
-        header: {
-          /** Preference */
-          Prefer?: parameters['preferReturn']
-        }
-      }
-      responses: {
-        /** No Content */
-        204: never
-      }
-    }
-  }
+	"/": {
+		get: {
+			responses: {
+				/** OK */
+				200: unknown;
+			};
+		};
+	};
+	"/bookmark-categories": {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.bookmark-categories.id"];
+					created_at?: parameters["rowFilter.bookmark-categories.created_at"];
+					category?: parameters["rowFilter.bookmark-categories.category"];
+					/** Filtering Columns */
+					select?: parameters["select"];
+					/** Ordering */
+					order?: parameters["order"];
+					/** Limiting and Pagination */
+					offset?: parameters["offset"];
+					/** Limiting and Pagination */
+					limit?: parameters["limit"];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters["range"];
+					/** Limiting and Pagination */
+					"Range-Unit"?: parameters["rangeUnit"];
+					/** Preference */
+					Prefer?: parameters["preferCount"];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions["bookmark-categories"][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** bookmark-categories */
+					"bookmark-categories"?: definitions["bookmark-categories"];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters["select"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.bookmark-categories.id"];
+					created_at?: parameters["rowFilter.bookmark-categories.created_at"];
+					category?: parameters["rowFilter.bookmark-categories.category"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.bookmark-categories.id"];
+					created_at?: parameters["rowFilter.bookmark-categories.created_at"];
+					category?: parameters["rowFilter.bookmark-categories.category"];
+				};
+				body: {
+					/** bookmark-categories */
+					"bookmark-categories"?: definitions["bookmark-categories"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	"/bookmarks": {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.bookmarks.id"];
+					created_at?: parameters["rowFilter.bookmarks.created_at"];
+					title?: parameters["rowFilter.bookmarks.title"];
+					url?: parameters["rowFilter.bookmarks.url"];
+					category?: parameters["rowFilter.bookmarks.category"];
+					/** Filtering Columns */
+					select?: parameters["select"];
+					/** Ordering */
+					order?: parameters["order"];
+					/** Limiting and Pagination */
+					offset?: parameters["offset"];
+					/** Limiting and Pagination */
+					limit?: parameters["limit"];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters["range"];
+					/** Limiting and Pagination */
+					"Range-Unit"?: parameters["rangeUnit"];
+					/** Preference */
+					Prefer?: parameters["preferCount"];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions["bookmarks"][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** bookmarks */
+					bookmarks?: definitions["bookmarks"];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters["select"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.bookmarks.id"];
+					created_at?: parameters["rowFilter.bookmarks.created_at"];
+					title?: parameters["rowFilter.bookmarks.title"];
+					url?: parameters["rowFilter.bookmarks.url"];
+					category?: parameters["rowFilter.bookmarks.category"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.bookmarks.id"];
+					created_at?: parameters["rowFilter.bookmarks.created_at"];
+					title?: parameters["rowFilter.bookmarks.title"];
+					url?: parameters["rowFilter.bookmarks.url"];
+					category?: parameters["rowFilter.bookmarks.category"];
+				};
+				body: {
+					/** bookmarks */
+					bookmarks?: definitions["bookmarks"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	"/burgers": {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.burgers.id"];
+					created_at?: parameters["rowFilter.burgers.created_at"];
+					name?: parameters["rowFilter.burgers.name"];
+					restaurant?: parameters["rowFilter.burgers.restaurant"];
+					description?: parameters["rowFilter.burgers.description"];
+					rank?: parameters["rowFilter.burgers.rank"];
+					url?: parameters["rowFilter.burgers.url"];
+					location?: parameters["rowFilter.burgers.location"];
+					/** Filtering Columns */
+					select?: parameters["select"];
+					/** Ordering */
+					order?: parameters["order"];
+					/** Limiting and Pagination */
+					offset?: parameters["offset"];
+					/** Limiting and Pagination */
+					limit?: parameters["limit"];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters["range"];
+					/** Limiting and Pagination */
+					"Range-Unit"?: parameters["rangeUnit"];
+					/** Preference */
+					Prefer?: parameters["preferCount"];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions["burgers"][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** burgers */
+					burgers?: definitions["burgers"];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters["select"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.burgers.id"];
+					created_at?: parameters["rowFilter.burgers.created_at"];
+					name?: parameters["rowFilter.burgers.name"];
+					restaurant?: parameters["rowFilter.burgers.restaurant"];
+					description?: parameters["rowFilter.burgers.description"];
+					rank?: parameters["rowFilter.burgers.rank"];
+					url?: parameters["rowFilter.burgers.url"];
+					location?: parameters["rowFilter.burgers.location"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.burgers.id"];
+					created_at?: parameters["rowFilter.burgers.created_at"];
+					name?: parameters["rowFilter.burgers.name"];
+					restaurant?: parameters["rowFilter.burgers.restaurant"];
+					description?: parameters["rowFilter.burgers.description"];
+					rank?: parameters["rowFilter.burgers.rank"];
+					url?: parameters["rowFilter.burgers.url"];
+					location?: parameters["rowFilter.burgers.location"];
+				};
+				body: {
+					/** burgers */
+					burgers?: definitions["burgers"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	"/detailed-recipes": {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.detailed-recipes.id"];
+					created_at?: parameters["rowFilter.detailed-recipes.created_at"];
+					title?: parameters["rowFilter.detailed-recipes.title"];
+					url?: parameters["rowFilter.detailed-recipes.url"];
+					image_url?: parameters["rowFilter.detailed-recipes.image_url"];
+					instructions?: parameters["rowFilter.detailed-recipes.instructions"];
+					created_by?: parameters["rowFilter.detailed-recipes.created_by"];
+					ingredients?: parameters["rowFilter.detailed-recipes.ingredients"];
+					/** Filtering Columns */
+					select?: parameters["select"];
+					/** Ordering */
+					order?: parameters["order"];
+					/** Limiting and Pagination */
+					offset?: parameters["offset"];
+					/** Limiting and Pagination */
+					limit?: parameters["limit"];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters["range"];
+					/** Limiting and Pagination */
+					"Range-Unit"?: parameters["rangeUnit"];
+					/** Preference */
+					Prefer?: parameters["preferCount"];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions["detailed-recipes"][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** detailed-recipes */
+					"detailed-recipes"?: definitions["detailed-recipes"];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters["select"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.detailed-recipes.id"];
+					created_at?: parameters["rowFilter.detailed-recipes.created_at"];
+					title?: parameters["rowFilter.detailed-recipes.title"];
+					url?: parameters["rowFilter.detailed-recipes.url"];
+					image_url?: parameters["rowFilter.detailed-recipes.image_url"];
+					instructions?: parameters["rowFilter.detailed-recipes.instructions"];
+					created_by?: parameters["rowFilter.detailed-recipes.created_by"];
+					ingredients?: parameters["rowFilter.detailed-recipes.ingredients"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.detailed-recipes.id"];
+					created_at?: parameters["rowFilter.detailed-recipes.created_at"];
+					title?: parameters["rowFilter.detailed-recipes.title"];
+					url?: parameters["rowFilter.detailed-recipes.url"];
+					image_url?: parameters["rowFilter.detailed-recipes.image_url"];
+					instructions?: parameters["rowFilter.detailed-recipes.instructions"];
+					created_by?: parameters["rowFilter.detailed-recipes.created_by"];
+					ingredients?: parameters["rowFilter.detailed-recipes.ingredients"];
+				};
+				body: {
+					/** detailed-recipes */
+					"detailed-recipes"?: definitions["detailed-recipes"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	"/full_recipes": {
+		get: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.full_recipes.id"];
+					created_at?: parameters["rowFilter.full_recipes.created_at"];
+					title?: parameters["rowFilter.full_recipes.title"];
+					url?: parameters["rowFilter.full_recipes.url"];
+					image_url?: parameters["rowFilter.full_recipes.image_url"];
+					instructions?: parameters["rowFilter.full_recipes.instructions"];
+					created_by?: parameters["rowFilter.full_recipes.created_by"];
+					ingredients?: parameters["rowFilter.full_recipes.ingredients"];
+					/** Filtering Columns */
+					select?: parameters["select"];
+					/** Ordering */
+					order?: parameters["order"];
+					/** Limiting and Pagination */
+					offset?: parameters["offset"];
+					/** Limiting and Pagination */
+					limit?: parameters["limit"];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters["range"];
+					/** Limiting and Pagination */
+					"Range-Unit"?: parameters["rangeUnit"];
+					/** Preference */
+					Prefer?: parameters["preferCount"];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions["full_recipes"][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** full_recipes */
+					full_recipes?: definitions["full_recipes"];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters["select"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.full_recipes.id"];
+					created_at?: parameters["rowFilter.full_recipes.created_at"];
+					title?: parameters["rowFilter.full_recipes.title"];
+					url?: parameters["rowFilter.full_recipes.url"];
+					image_url?: parameters["rowFilter.full_recipes.image_url"];
+					instructions?: parameters["rowFilter.full_recipes.instructions"];
+					created_by?: parameters["rowFilter.full_recipes.created_by"];
+					ingredients?: parameters["rowFilter.full_recipes.ingredients"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					id?: parameters["rowFilter.full_recipes.id"];
+					created_at?: parameters["rowFilter.full_recipes.created_at"];
+					title?: parameters["rowFilter.full_recipes.title"];
+					url?: parameters["rowFilter.full_recipes.url"];
+					image_url?: parameters["rowFilter.full_recipes.image_url"];
+					instructions?: parameters["rowFilter.full_recipes.instructions"];
+					created_by?: parameters["rowFilter.full_recipes.created_by"];
+					ingredients?: parameters["rowFilter.full_recipes.ingredients"];
+				};
+				body: {
+					/** full_recipes */
+					full_recipes?: definitions["full_recipes"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
+	"/recipes": {
+		get: {
+			parameters: {
+				query: {
+					/** unique id of the recipe */
+					id?: parameters["rowFilter.recipes.id"];
+					/** timestamp of when recipe was created */
+					created_at?: parameters["rowFilter.recipes.created_at"];
+					/** Id of the user that created the recipe */
+					created_by?: parameters["rowFilter.recipes.created_by"];
+					/** Name of recipe */
+					name?: parameters["rowFilter.recipes.name"];
+					/** URL for the recipe image */
+					image?: parameters["rowFilter.recipes.image"];
+					/** URL for the recipe */
+					url?: parameters["rowFilter.recipes.url"];
+					/** Filtering Columns */
+					select?: parameters["select"];
+					/** Ordering */
+					order?: parameters["order"];
+					/** Limiting and Pagination */
+					offset?: parameters["offset"];
+					/** Limiting and Pagination */
+					limit?: parameters["limit"];
+				};
+				header: {
+					/** Limiting and Pagination */
+					Range?: parameters["range"];
+					/** Limiting and Pagination */
+					"Range-Unit"?: parameters["rangeUnit"];
+					/** Preference */
+					Prefer?: parameters["preferCount"];
+				};
+			};
+			responses: {
+				/** OK */
+				200: {
+					schema: definitions["recipes"][];
+				};
+				/** Partial Content */
+				206: unknown;
+			};
+		};
+		post: {
+			parameters: {
+				body: {
+					/** recipes */
+					recipes?: definitions["recipes"];
+				};
+				query: {
+					/** Filtering Columns */
+					select?: parameters["select"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** Created */
+				201: unknown;
+			};
+		};
+		delete: {
+			parameters: {
+				query: {
+					/** unique id of the recipe */
+					id?: parameters["rowFilter.recipes.id"];
+					/** timestamp of when recipe was created */
+					created_at?: parameters["rowFilter.recipes.created_at"];
+					/** Id of the user that created the recipe */
+					created_by?: parameters["rowFilter.recipes.created_by"];
+					/** Name of recipe */
+					name?: parameters["rowFilter.recipes.name"];
+					/** URL for the recipe image */
+					image?: parameters["rowFilter.recipes.image"];
+					/** URL for the recipe */
+					url?: parameters["rowFilter.recipes.url"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+		patch: {
+			parameters: {
+				query: {
+					/** unique id of the recipe */
+					id?: parameters["rowFilter.recipes.id"];
+					/** timestamp of when recipe was created */
+					created_at?: parameters["rowFilter.recipes.created_at"];
+					/** Id of the user that created the recipe */
+					created_by?: parameters["rowFilter.recipes.created_by"];
+					/** Name of recipe */
+					name?: parameters["rowFilter.recipes.name"];
+					/** URL for the recipe image */
+					image?: parameters["rowFilter.recipes.image"];
+					/** URL for the recipe */
+					url?: parameters["rowFilter.recipes.url"];
+				};
+				body: {
+					/** recipes */
+					recipes?: definitions["recipes"];
+				};
+				header: {
+					/** Preference */
+					Prefer?: parameters["preferReturn"];
+				};
+			};
+			responses: {
+				/** No Content */
+				204: never;
+			};
+		};
+	};
 }
 
 export interface definitions {
-  'bookmark-categories': {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string
-    /** Format: text */
-    category: string
-  }
-  bookmarks: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string
-    /** Format: text */
-    title: string
-    /** Format: text */
-    url: string
-    /**
-     * Format: text
-     * @description Note:
-     * This is a Foreign Key to `bookmark-categories.category`.<fk table='bookmark-categories' column='category'/>
-     */
-    category: string
-  }
-  burgers: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string
-    /** Format: text */
-    name: string
-    /** Format: text */
-    restaurant: string
-    /** Format: text */
-    description: string
-    /** Format: smallint */
-    rank: number
-    /** Format: text */
-    url: string
-    /** Format: text */
-    location: string
-  }
-  /** @description Recipes including full ingredients & instructions */
-  'detailed-recipes': {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string
-    /** Format: text */
-    title: string
-    /** Format: text */
-    url: string
-    /** Format: text */
-    image_url?: string
-    /** Format: ARRAY */
-    instructions: unknown[]
-    /** Format: uuid */
-    created_by: string
-    /** Format: ARRAY */
-    ingredients: unknown[]
-  }
-  full_recipes: {
-    /**
-     * Format: bigint
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number
-    /** Format: timestamp with time zone */
-    created_at: string
-    /** Format: text */
-    title: string
-    /** Format: text */
-    url: string
-    /** Format: text */
-    image_url?: string
-    /** Format: jsonb */
-    instructions: string
-    /** Format: text */
-    created_by: string
-    /** Format: jsonb */
-    ingredients: string
-  }
-  recipes: {
-    /**
-     * Format: bigint
-     * @description unique id of the recipe
-     *
-     * Note:
-     * This is a Primary Key.<pk/>
-     */
-    id: number
-    /**
-     * Format: timestamp with time zone
-     * @description timestamp of when recipe was created
-     * @default now()
-     */
-    created_at?: string
-    /**
-     * Format: uuid
-     * @description Id of the user that created the recipe
-     */
-    created_by?: string
-    /**
-     * Format: text
-     * @description Name of recipe
-     */
-    name: string
-    /**
-     * Format: text
-     * @description URL for the recipe image
-     */
-    image?: string
-    /**
-     * Format: text
-     * @description URL for the recipe
-     */
-    url: string
-  }
+	"bookmark-categories": {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/** Format: text */
+		category: string;
+	};
+	bookmarks: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/** Format: text */
+		title: string;
+		/** Format: text */
+		url: string;
+		/**
+		 * Format: text
+		 * @description Note:
+		 * This is a Foreign Key to `bookmark-categories.category`.<fk table='bookmark-categories' column='category'/>
+		 */
+		category: string;
+	};
+	burgers: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/** Format: text */
+		name: string;
+		/** Format: text */
+		restaurant: string;
+		/** Format: text */
+		description: string;
+		/** Format: smallint */
+		rank: number;
+		/** Format: text */
+		url: string;
+		/** Format: text */
+		location: string;
+	};
+	/** @description Recipes including full ingredients & instructions */
+	"detailed-recipes": {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @default now()
+		 */
+		created_at?: string;
+		/** Format: text */
+		title: string;
+		/** Format: text */
+		url: string;
+		/** Format: text */
+		image_url?: string;
+		/** Format: ARRAY */
+		instructions: unknown[];
+		/** Format: uuid */
+		created_by: string;
+		/** Format: ARRAY */
+		ingredients: unknown[];
+	};
+	full_recipes: {
+		/**
+		 * Format: bigint
+		 * @description Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/** Format: timestamp with time zone */
+		created_at: string;
+		/** Format: text */
+		title: string;
+		/** Format: text */
+		url: string;
+		/** Format: text */
+		image_url?: string;
+		/** Format: jsonb */
+		instructions: string;
+		/** Format: text */
+		created_by: string;
+		/** Format: jsonb */
+		ingredients: string;
+	};
+	recipes: {
+		/**
+		 * Format: bigint
+		 * @description unique id of the recipe
+		 *
+		 * Note:
+		 * This is a Primary Key.<pk/>
+		 */
+		id: number;
+		/**
+		 * Format: timestamp with time zone
+		 * @description timestamp of when recipe was created
+		 * @default now()
+		 */
+		created_at?: string;
+		/**
+		 * Format: uuid
+		 * @description Id of the user that created the recipe
+		 */
+		created_by?: string;
+		/**
+		 * Format: text
+		 * @description Name of recipe
+		 */
+		name: string;
+		/**
+		 * Format: text
+		 * @description URL for the recipe image
+		 */
+		image?: string;
+		/**
+		 * Format: text
+		 * @description URL for the recipe
+		 */
+		url: string;
+	};
 }
 
 export interface parameters {
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferParams: 'params=single-object'
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferReturn: 'return=representation' | 'return=minimal' | 'return=none'
-  /**
-   * @description Preference
-   * @enum {string}
-   */
-  preferCount: 'count=none'
-  /** @description Filtering Columns */
-  select: string
-  /** @description On Conflict */
-  on_conflict: string
-  /** @description Ordering */
-  order: string
-  /** @description Limiting and Pagination */
-  range: string
-  /**
-   * @description Limiting and Pagination
-   * @default items
-   */
-  rangeUnit: string
-  /** @description Limiting and Pagination */
-  offset: string
-  /** @description Limiting and Pagination */
-  limit: string
-  /** @description bookmark-categories */
-  'body.bookmark-categories': definitions['bookmark-categories']
-  /** Format: bigint */
-  'rowFilter.bookmark-categories.id': string
-  /** Format: timestamp with time zone */
-  'rowFilter.bookmark-categories.created_at': string
-  /** Format: text */
-  'rowFilter.bookmark-categories.category': string
-  /** @description bookmarks */
-  'body.bookmarks': definitions['bookmarks']
-  /** Format: bigint */
-  'rowFilter.bookmarks.id': string
-  /** Format: timestamp with time zone */
-  'rowFilter.bookmarks.created_at': string
-  /** Format: text */
-  'rowFilter.bookmarks.title': string
-  /** Format: text */
-  'rowFilter.bookmarks.url': string
-  /** Format: text */
-  'rowFilter.bookmarks.category': string
-  /** @description burgers */
-  'body.burgers': definitions['burgers']
-  /** Format: bigint */
-  'rowFilter.burgers.id': string
-  /** Format: timestamp with time zone */
-  'rowFilter.burgers.created_at': string
-  /** Format: text */
-  'rowFilter.burgers.name': string
-  /** Format: text */
-  'rowFilter.burgers.restaurant': string
-  /** Format: text */
-  'rowFilter.burgers.description': string
-  /** Format: smallint */
-  'rowFilter.burgers.rank': string
-  /** Format: text */
-  'rowFilter.burgers.url': string
-  /** Format: text */
-  'rowFilter.burgers.location': string
-  /** @description detailed-recipes */
-  'body.detailed-recipes': definitions['detailed-recipes']
-  /** Format: bigint */
-  'rowFilter.detailed-recipes.id': string
-  /** Format: timestamp with time zone */
-  'rowFilter.detailed-recipes.created_at': string
-  /** Format: text */
-  'rowFilter.detailed-recipes.title': string
-  /** Format: text */
-  'rowFilter.detailed-recipes.url': string
-  /** Format: text */
-  'rowFilter.detailed-recipes.image_url': string
-  /** Format: ARRAY */
-  'rowFilter.detailed-recipes.instructions': string
-  /** Format: uuid */
-  'rowFilter.detailed-recipes.created_by': string
-  /** Format: ARRAY */
-  'rowFilter.detailed-recipes.ingredients': string
-  /** @description full_recipes */
-  'body.full_recipes': definitions['full_recipes']
-  /** Format: bigint */
-  'rowFilter.full_recipes.id': string
-  /** Format: timestamp with time zone */
-  'rowFilter.full_recipes.created_at': string
-  /** Format: text */
-  'rowFilter.full_recipes.title': string
-  /** Format: text */
-  'rowFilter.full_recipes.url': string
-  /** Format: text */
-  'rowFilter.full_recipes.image_url': string
-  /** Format: jsonb */
-  'rowFilter.full_recipes.instructions': string
-  /** Format: text */
-  'rowFilter.full_recipes.created_by': string
-  /** Format: jsonb */
-  'rowFilter.full_recipes.ingredients': string
-  /** @description recipes */
-  'body.recipes': definitions['recipes']
-  /**
-   * Format: bigint
-   * @description unique id of the recipe
-   */
-  'rowFilter.recipes.id': string
-  /**
-   * Format: timestamp with time zone
-   * @description timestamp of when recipe was created
-   */
-  'rowFilter.recipes.created_at': string
-  /**
-   * Format: uuid
-   * @description Id of the user that created the recipe
-   */
-  'rowFilter.recipes.created_by': string
-  /**
-   * Format: text
-   * @description Name of recipe
-   */
-  'rowFilter.recipes.name': string
-  /**
-   * Format: text
-   * @description URL for the recipe image
-   */
-  'rowFilter.recipes.image': string
-  /**
-   * Format: text
-   * @description URL for the recipe
-   */
-  'rowFilter.recipes.url': string
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferParams: "params=single-object";
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferReturn: "return=representation" | "return=minimal" | "return=none";
+	/**
+	 * @description Preference
+	 * @enum {string}
+	 */
+	preferCount: "count=none";
+	/** @description Filtering Columns */
+	select: string;
+	/** @description On Conflict */
+	on_conflict: string;
+	/** @description Ordering */
+	order: string;
+	/** @description Limiting and Pagination */
+	range: string;
+	/**
+	 * @description Limiting and Pagination
+	 * @default items
+	 */
+	rangeUnit: string;
+	/** @description Limiting and Pagination */
+	offset: string;
+	/** @description Limiting and Pagination */
+	limit: string;
+	/** @description bookmark-categories */
+	"body.bookmark-categories": definitions["bookmark-categories"];
+	/** Format: bigint */
+	"rowFilter.bookmark-categories.id": string;
+	/** Format: timestamp with time zone */
+	"rowFilter.bookmark-categories.created_at": string;
+	/** Format: text */
+	"rowFilter.bookmark-categories.category": string;
+	/** @description bookmarks */
+	"body.bookmarks": definitions["bookmarks"];
+	/** Format: bigint */
+	"rowFilter.bookmarks.id": string;
+	/** Format: timestamp with time zone */
+	"rowFilter.bookmarks.created_at": string;
+	/** Format: text */
+	"rowFilter.bookmarks.title": string;
+	/** Format: text */
+	"rowFilter.bookmarks.url": string;
+	/** Format: text */
+	"rowFilter.bookmarks.category": string;
+	/** @description burgers */
+	"body.burgers": definitions["burgers"];
+	/** Format: bigint */
+	"rowFilter.burgers.id": string;
+	/** Format: timestamp with time zone */
+	"rowFilter.burgers.created_at": string;
+	/** Format: text */
+	"rowFilter.burgers.name": string;
+	/** Format: text */
+	"rowFilter.burgers.restaurant": string;
+	/** Format: text */
+	"rowFilter.burgers.description": string;
+	/** Format: smallint */
+	"rowFilter.burgers.rank": string;
+	/** Format: text */
+	"rowFilter.burgers.url": string;
+	/** Format: text */
+	"rowFilter.burgers.location": string;
+	/** @description detailed-recipes */
+	"body.detailed-recipes": definitions["detailed-recipes"];
+	/** Format: bigint */
+	"rowFilter.detailed-recipes.id": string;
+	/** Format: timestamp with time zone */
+	"rowFilter.detailed-recipes.created_at": string;
+	/** Format: text */
+	"rowFilter.detailed-recipes.title": string;
+	/** Format: text */
+	"rowFilter.detailed-recipes.url": string;
+	/** Format: text */
+	"rowFilter.detailed-recipes.image_url": string;
+	/** Format: ARRAY */
+	"rowFilter.detailed-recipes.instructions": string;
+	/** Format: uuid */
+	"rowFilter.detailed-recipes.created_by": string;
+	/** Format: ARRAY */
+	"rowFilter.detailed-recipes.ingredients": string;
+	/** @description full_recipes */
+	"body.full_recipes": definitions["full_recipes"];
+	/** Format: bigint */
+	"rowFilter.full_recipes.id": string;
+	/** Format: timestamp with time zone */
+	"rowFilter.full_recipes.created_at": string;
+	/** Format: text */
+	"rowFilter.full_recipes.title": string;
+	/** Format: text */
+	"rowFilter.full_recipes.url": string;
+	/** Format: text */
+	"rowFilter.full_recipes.image_url": string;
+	/** Format: jsonb */
+	"rowFilter.full_recipes.instructions": string;
+	/** Format: text */
+	"rowFilter.full_recipes.created_by": string;
+	/** Format: jsonb */
+	"rowFilter.full_recipes.ingredients": string;
+	/** @description recipes */
+	"body.recipes": definitions["recipes"];
+	/**
+	 * Format: bigint
+	 * @description unique id of the recipe
+	 */
+	"rowFilter.recipes.id": string;
+	/**
+	 * Format: timestamp with time zone
+	 * @description timestamp of when recipe was created
+	 */
+	"rowFilter.recipes.created_at": string;
+	/**
+	 * Format: uuid
+	 * @description Id of the user that created the recipe
+	 */
+	"rowFilter.recipes.created_by": string;
+	/**
+	 * Format: text
+	 * @description Name of recipe
+	 */
+	"rowFilter.recipes.name": string;
+	/**
+	 * Format: text
+	 * @description URL for the recipe image
+	 */
+	"rowFilter.recipes.image": string;
+	/**
+	 * Format: text
+	 * @description URL for the recipe
+	 */
+	"rowFilter.recipes.url": string;
 }
-
-export interface operations {}
-
-export interface external {}

@@ -1,16 +1,17 @@
 {
-  "workbench.colorCustomizations": {
-    "sash.hoverBorder": "#08d2d0",
-    "statusBar.background": "#06a19f",
-    "statusBar.foreground": "#e7e7e7",
-    "statusBarItem.hoverBackground": "#08d2d0",
-    "statusBarItem.remoteBackground": "#06a19f",
-    "statusBarItem.remoteForeground": "#e7e7e7",
-    "titleBar.activeBackground": "#06a19f",
-    "titleBar.activeForeground": "#e7e7e7",
-    "titleBar.inactiveBackground": "#06a19f99",
-    "titleBar.inactiveForeground": "#e7e7e799",
-    "commandCenter.border": "#e7e7e799"
-  },
-  "peacock.color": "#06a19f"
+	"workbench.colorCustomizations": {
+		"sash.hoverBorder": "#08d2d0",
+		"statusBar.background": "#06a19f",
+		"statusBar.foreground": "#e7e7e7",
+		"statusBarItem.hoverBackground": "#08d2d0",
+		"statusBarItem.remoteBackground": "#06a19f",
+		"statusBarItem.remoteForeground": "#e7e7e7",
+		"titleBar.activeBackground": "#06a19f",
+		"titleBar.activeForeground": "#e7e7e7",
+		"titleBar.inactiveBackground": "#06a19f99",
+		"titleBar.inactiveForeground": "#e7e7e799",
+		"commandCenter.border": "#e7e7e799"
+	},
+	"peacock.color": "#06a19f",
+	"typescript.tsdk": "node_modules/typescript/lib"
 }

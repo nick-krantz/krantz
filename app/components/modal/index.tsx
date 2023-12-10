@@ -1,27 +1,44 @@
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
-export const Modal: React.FC = ({ children }) => {
-  // Disable scrolling while modals are open
-  useEffect(() => {
-    document.querySelector('body')?.classList.add('overflow-hidden')
+type Props = {
+	children: React.ReactNode;
+};
 
-    return () => {
-      document.querySelector('body')?.classList.remove('overflow-hidden')
-    }
-  }, [])
+export const Modal: React.FC<Props> = ({ children }) => {
+	// Disable scrolling while modals are open
+	useEffect(() => {
+		document.querySelector("body")?.classList.add("overflow-hidden");
 
-  return (
-    <div className="fixed z-10 inset-0" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-      <div className="flex items-center sm:items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-          &#8203;
-        </span>
+		return () => {
+			document.querySelector("body")?.classList.remove("overflow-hidden");
+		};
+	}, []);
 
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-11/12 sm:w-full">
-          <div className="flex flex-col gap-4 p-4 bg-gray-200 dark:bg-gray-800">{children}</div>
-        </div>
-      </div>
-    </div>
-  )
-}
+	return (
+		<div
+			className="fixed z-10 inset-0"
+			aria-labelledby="modal-title"
+			role="dialog"
+			aria-modal="true"
+		>
+			<div className="flex items-center sm:items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+				<div
+					className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+					aria-hidden="true"
+				/>
+				<span
+					className="hidden sm:inline-block sm:align-middle sm:h-screen"
+					aria-hidden="true"
+				>
+					&#8203;
+				</span>
+
+				<div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-11/12 sm:w-full">
+					<div className="flex flex-col gap-4 p-4 bg-gray-200 dark:bg-gray-800">
+						{children}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};

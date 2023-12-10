@@ -1,50 +1,48 @@
-import { Link, Outlet, useLoaderData, MetaFunction } from '@remix-run/react'
-import { json, LoaderFunction } from '@vercel/remix'
-import { Button } from '~/components/button'
-import { PageDetails } from '~/components/header'
-import { RecipeList } from '~/components/recipe-list'
-import { Recipe } from '~/types'
-import { getToken } from '~/utils/supabase/get-token'
-import { supabase } from '~/utils/supabase/index.server'
+import { Link, MetaFunction, Outlet, useLoaderData } from "@remix-run/react";
+import { LoaderFunctionArgs, json } from "@vercel/remix";
+import { Button } from "~/components/button";
+import { RecipeList } from "~/components/recipe-list";
+import { getToken } from "~/utils/supabase/get-token";
+import { supabase } from "~/utils/supabase/index.server";
 
-type LoaderData = {
-  recipes: Recipe[] | null
-  pageDetails: PageDetails
-}
+export const meta: MetaFunction = ({ matches }) => {
+	const parentMeta = matches
+		.flatMap((match) => match.meta ?? [])
+		.filter((meta) => !("title" in meta || "description" in meta));
 
-export const meta: MetaFunction = () => {
-  return [
-    {
-      title: 'Nick Krantz - Recipes',
-      description: 'Recipes worth making',
-    },
-  ]
-}
+	return [
+		...parentMeta,
+		{
+			title: "Nick Krantz - Recipes",
+			description: "Recipes worth making",
+		},
+	];
+};
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const token = await getToken(request)
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	const token = await getToken(request);
 
-  supabase.auth.setAuth(token)
+	supabase.auth.setSession(token);
 
-  const { data: recipes } = await supabase.from<Recipe>('full_recipes').select()
-  return json<LoaderData>({ recipes, pageDetails: { header: 'Recipes' } })
-}
+	const { data: recipes } = await supabase.from("full_recipes").select();
+	return json({ recipes, pageDetails: { header: "Recipes" } });
+};
 
 /**
  * Recipe page
  */
 export default function Recipes() {
-  const { recipes } = useLoaderData<LoaderData>()
+	const { recipes } = useLoaderData<typeof loader>();
 
-  return (
-    <>
-      <div className="max-w-screen-xl mx-auto text-center">
-        <Link to="./fetch">
-          <Button>Add Recipe</Button>
-        </Link>
-      </div>
-      {!!recipes && <RecipeList recipes={recipes} />}
-      <Outlet />
-    </>
-  )
+	return (
+		<>
+			<div className="max-w-screen-xl mx-auto text-center">
+				<Link to="./fetch">
+					<Button>Add Recipe</Button>
+				</Link>
+			</div>
+			{!!recipes && <RecipeList recipes={recipes} />}
+			<Outlet />
+		</>
+	);
 }
