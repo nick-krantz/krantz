@@ -3895,8 +3895,8 @@ __metadata:
     isbot: "npm:latest"
     openapi-typescript: "npm:5.4.0"
     postcss: "npm:8.4.5"
-    react: "npm:18.0.0"
-    react-dom: "npm:18.0.0"
+    react: "npm:canary"
+    react-dom: "npm:canary"
     react-icons: "npm:4.12.0"
     remix: "npm:2.3.1"
     supabase: "npm:1.123.4"
@@ -5702,15 +5702,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:18.0.0":
-  version: 18.0.0
-  resolution: "react-dom@npm:18.0.0"
+"react-dom@npm:canary":
+  version: 18.3.0-canary-c5b937576-20231219
+  resolution: "react-dom@npm:18.3.0-canary-c5b937576-20231219"
   dependencies:
     loose-envify: "npm:^1.1.0"
-    scheduler: "npm:^0.21.0"
+    scheduler: "npm:0.24.0-canary-c5b937576-20231219"
   peerDependencies:
-    react: ^18.0.0
-  checksum: 78aa393ab4ae35f7266ba5cd761ebd35cab8375f63051bda2bb97a27be2622dbd661b24b32b8e55f9365aa027e732251e7d0d754c755f8efb6bd38a72ba03df8
+    react: 18.3.0-canary-c5b937576-20231219
+  checksum: 042c2739fa5390fa8f4179cd7e95e0fa3a19ed0758490db0eefb855d4d1358a1d822bb66dbaae8b5f725dcf6a49a12a903897cd089f3380085e450b04bc96e15
   languageName: node
   linkType: hard
 
@@ -5754,12 +5754,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:18.0.0":
-  version: 18.0.0
-  resolution: "react@npm:18.0.0"
+"react@npm:canary":
+  version: 18.3.0-canary-c5b937576-20231219
+  resolution: "react@npm:18.3.0-canary-c5b937576-20231219"
   dependencies:
     loose-envify: "npm:^1.1.0"
-  checksum: cf55bc7b4315f54321d04cb0b69241c4973a5182d679551b3e6c3f57b312a4fdeac05038ca9502d48ea4d040d7550b0b7f07b3872a19589a5995ee899cc19d2b
+  checksum: bf1d7035c520666823dfa78da8b4eb30305b6370154aa3c957d4e679aec9a665b9556f80494fbfd1e3664652e02530967e7051a92c1389ba49bc61a1c6889153
   languageName: node
   linkType: hard
 
@@ -6002,12 +6002,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scheduler@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "scheduler@npm:0.21.0"
+"scheduler@npm:0.24.0-canary-c5b937576-20231219":
+  version: 0.24.0-canary-c5b937576-20231219
+  resolution: "scheduler@npm:0.24.0-canary-c5b937576-20231219"
   dependencies:
     loose-envify: "npm:^1.1.0"
-  checksum: 083a9a0c83f4923f7f5bb28d8bcf13cff42c90f4303bc187166520fcfc576c97e946d426c707d5a9c0aa0a655819605dd0c741467c626824bbf191251c126f1b
+  checksum: 83734f6b50ddfbe12d528969a67f1d648102ad9058eecf1512fd453a6f00297f9ba4f385ddc00b5d37149f465d0c379dc7eccddb982f011e7bd378bdfae1a7ba
   languageName: node
   linkType: hard
 
