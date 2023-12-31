@@ -11,7 +11,7 @@ const { getSession, commitSession, destroySession } =
 			name: "sb:token",
 
 			httpOnly: true,
-			maxAge: 604800,
+			maxAge: 2592000,
 			path: "/",
 			sameSite: "strict",
 			secrets: ["s3cret1"],
