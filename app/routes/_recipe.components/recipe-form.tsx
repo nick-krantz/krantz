@@ -20,6 +20,7 @@ export const RecipeForm: React.FC<RecipeForm> = ({
 		<Form
 			id={`${type}-recipe-form`}
 			className="flex gap-12 w-full max-w-screen-xl mx-auto flex-wrap justify-center"
+			action="/api/save-recipe"
 			method="POST"
 		>
 			<input name="type" type="text" defaultValue={type} hidden />
