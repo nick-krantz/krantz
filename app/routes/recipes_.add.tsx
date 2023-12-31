@@ -1,7 +1,11 @@
 import { MetaFunction, useLoaderData } from "@remix-run/react";
-import { ActionFunction, LoaderFunction, json, redirect } from "@vercel/remix";
+import {
+	ActionFunction,
+	LoaderFunctionArgs,
+	json,
+	redirect,
+} from "@vercel/remix";
 import { PageDetails } from "~/components/header";
-import { ScraperRecipeWithIds } from "~/types/utility-types";
 import {
 	addIdToIngredients,
 	addIdToInstructions,
@@ -12,6 +16,7 @@ import { getToken } from "~/utils/supabase/get-token";
 import { getUser } from "~/utils/supabase/get-user";
 import { supabase } from "~/utils/supabase/index.server";
 import { RecipeForm } from "./_recipe.components/recipe-form";
+import { Json } from "~/types/supabase";
 
 export const meta: MetaFunction = ({ matches }) => {
 	const parentMeta = matches
@@ -27,23 +32,18 @@ export const meta: MetaFunction = ({ matches }) => {
 	];
 };
 
-interface LoaderData {
-	recipe: ScraperRecipeWithIds | null;
-	pageDetails: PageDetails;
-}
-
 const pageDetails: PageDetails = { header: "Add Recipe", backLink: "/recipes" };
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const { searchParams } = new URL(request.url);
 	const url = decodeURIComponent(searchParams.get("url") ?? "");
 	if (!url) {
-		return json<LoaderData>({ recipe: null, pageDetails });
+		return json({ recipe: null, pageDetails });
 	}
 	const baseRecipe = await getRecipe(url);
 
 	if (baseRecipe) {
-		return json<LoaderData>({
+		return json({
 			recipe: {
 				...baseRecipe,
 				ingredients: addIdToIngredients(baseRecipe.ingredients),
@@ -52,7 +52,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 			pageDetails,
 		});
 	} else {
-		return json<LoaderData>({ recipe: null, pageDetails });
+		return json({ recipe: null, pageDetails });
 	}
 };
 
@@ -118,16 +118,14 @@ export const action: ActionFunction = async ({ request }) => {
 
 		const response = await supabase
 			.from("full_recipes")
-			.insert([
-				{
-					title,
-					url,
-					image_url: imageUrl,
-					instructions,
-					ingredients: ingredientSections,
-					created_by,
-				},
-			])
+			.insert({
+				title: title as string,
+				url: url as string,
+				image_url: imageUrl as string | null,
+				instructions: instructions as Json,
+				ingredients: ingredientSections as Json,
+				created_by: created_by as string,
+			})
 			.select();
 
 		if (response.error) {
@@ -149,13 +147,13 @@ export const action: ActionFunction = async ({ request }) => {
 	const { error } = await supabase
 		.from("full_recipes")
 		.update({
-			title,
-			url,
-			image_url: imageUrl,
-			instructions,
-			ingredients: ingredientSections,
+			title: title as string,
+			url: url as string,
+			image_url: imageUrl as string | null,
+			instructions: instructions as Json,
+			ingredients: ingredientSections as Json,
 		})
-		.eq("id", recipeId);
+		.eq("id", recipeId as string);
 
 	if (error) {
 		return badRequest({
@@ -177,7 +175,7 @@ export const action: ActionFunction = async ({ request }) => {
  * Recipe page
  */
 export default function Recipes() {
-	const { recipe } = useLoaderData<LoaderData>();
+	const { recipe } = useLoaderData<typeof loader>();
 
 	return <RecipeForm type="add" recipe={recipe} />;
 }

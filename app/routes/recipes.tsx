@@ -2,6 +2,7 @@ import { Link, MetaFunction, Outlet, useLoaderData } from "@remix-run/react";
 import { LoaderFunctionArgs, json } from "@vercel/remix";
 import { Button } from "~/components/button";
 import { RecipeList } from "~/components/recipe-list";
+import { Recipe } from "~/types";
 import { getToken } from "~/utils/supabase/get-token";
 import { supabase } from "~/utils/supabase/index.server";
 
@@ -25,7 +26,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 	supabase.auth.setSession(token);
 
 	const { data: recipes } = await supabase.from("full_recipes").select();
-	return json({ recipes, pageDetails: { header: "Recipes" } });
+	return json({
+		recipes: recipes as Recipe[] | null,
+		pageDetails: { header: "Recipes" },
+	});
 };
 
 /**

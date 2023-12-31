@@ -1,9 +1,9 @@
 import { Link, MetaFunction, useLoaderData } from "@remix-run/react";
-import { LoaderFunction, json } from "@vercel/remix";
+import { LoaderFunctionArgs, json } from "@vercel/remix";
 import React, { useMemo } from "react";
 import { buttonClasses } from "~/components/button";
 import { PageDetails } from "~/components/header";
-import { Recipe } from "~/types";
+import { IngredientsWithSections, Recipe } from "~/types";
 import { getToken } from "~/utils/supabase/get-token";
 import { supabase } from "~/utils/supabase/index.server";
 
@@ -20,12 +20,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
 	];
 };
 
-interface LoaderData {
-	recipe: Recipe;
-	pageDetails: PageDetails;
-}
-
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const url = new URL(request.url);
 	const paths = url.pathname.split("/");
 	const recipeId = paths[paths.length - 1];
@@ -47,7 +42,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 	const recipe = recipes[0];
 
-	return json<LoaderData>({
+	return json({
 		recipe,
 		pageDetails: { header: recipe.title, backLink: "/recipes" },
 	});
@@ -57,7 +52,7 @@ export const loader: LoaderFunction = async ({ request }) => {
  * Recipe Detail page
  */
 export default function RecipeDetail() {
-	const { recipe } = useLoaderData<LoaderData>();
+	const { recipe } = useLoaderData<typeof loader>();
 
 	const domain = useMemo(() => {
 		if (recipe.url) {
@@ -93,27 +88,29 @@ export default function RecipeDetail() {
 
 			<section>
 				<h2>Ingredients</h2>
-				{recipe.ingredients.map((section) => (
-					// the key here is a little wonky, but we shouldn't have multiple sections without a title
-					// kicking the can down the road...
-					<React.Fragment
-						key={section.title ?? `section-${section.ingredients.length}`}
-					>
-						{section.title ? <h3>{section.title}</h3> : null}
-						<ul className="list mb-2 list-[square] list-outside ml-6">
-							{section.ingredients.map((ingredient) => (
-								<li className="list-item mb-2" key={ingredient}>
-									{ingredient}
-								</li>
-							))}
-						</ul>
-					</React.Fragment>
-				))}
+				{((recipe.ingredients as IngredientsWithSections[]) ?? []).map(
+					(section) => (
+						// the key here is a little wonky, but we shouldn't have multiple sections without a title
+						// kicking the can down the road...
+						<React.Fragment
+							key={section.title ?? `section-${section.ingredients.length}`}
+						>
+							{section.title ? <h3>{section.title}</h3> : null}
+							<ul className="list mb-2 list-[square] list-outside ml-6">
+								{section.ingredients.map((ingredient) => (
+									<li className="list-item mb-2" key={ingredient}>
+										{ingredient}
+									</li>
+								))}
+							</ul>
+						</React.Fragment>
+					),
+				)}
 			</section>
 			<section>
 				<h2>Instructions</h2>
 				<ol className="list mb-2 list-[decimal] list-outside ml-6 marker:text-xl">
-					{recipe.instructions.map((instruction) => (
+					{(recipe.instructions as string[]).map((instruction) => (
 						<li className="list-item mb-2" key={instruction}>
 							{instruction}
 						</li>

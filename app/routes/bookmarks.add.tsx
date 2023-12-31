@@ -5,14 +5,13 @@ import {
 	useNavigate,
 } from "@remix-run/react";
 import { PostgrestError } from "@supabase/supabase-js";
-import { ActionFunction, LoaderFunction, redirect } from "@vercel/remix";
+import { ActionFunction, redirect } from "@vercel/remix";
 import { FiX } from "react-icons/fi";
 import { Button } from "~/components/button";
 import { ErrorMessage } from "~/components/error-message";
 import { Field } from "~/components/field";
 import { Modal } from "~/components/modal";
 import { Select } from "~/components/select";
-import { BookmarkCategories } from "~/types";
 import { badRequest } from "~/utils/network";
 import { getToken } from "~/utils/supabase/get-token";
 import { supabase } from "~/utils/supabase/index.server";
@@ -21,11 +20,7 @@ type ActionData = {
 	error: PostgrestError;
 };
 
-type LoaderData = {
-	bookmarkCategories: BookmarkCategories[];
-};
-
-export const loader: LoaderFunction = async () => {
+export const loader = async () => {
 	const { data } = await supabase.from("bookmark-categories").select();
 
 	return { bookmarkCategories: data };
@@ -75,7 +70,7 @@ export const action: ActionFunction = async ({ request }) => {
 export default function AddBookmark() {
 	const navigation = useNavigate();
 	const actionData = useActionData<ActionData>();
-	const { bookmarkCategories } = useLoaderData<LoaderData>();
+	const { bookmarkCategories } = useLoaderData<typeof loader>();
 
 	const close = () => {
 		navigation("/bookmarks");
@@ -130,7 +125,7 @@ export default function AddBookmark() {
 							name: "category",
 							id: "category-select",
 						}}
-						options={bookmarkCategories.map((c) => c.category)}
+						options={(bookmarkCategories ?? []).map((c) => c.category)}
 					>
 						Category
 					</Select>

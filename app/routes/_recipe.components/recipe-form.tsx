@@ -7,7 +7,7 @@ import { InstructionList } from "./instruction-list";
 
 interface RecipeForm {
 	recipe?: ScraperRecipeWithIds | null;
-	recipeId?: string;
+	recipeId?: number;
 	type: "add" | "edit";
 }
 
@@ -23,7 +23,7 @@ export const RecipeForm: React.FC<RecipeForm> = ({
 			method="POST"
 		>
 			<input name="type" type="text" defaultValue={type} hidden />
-			{recipeId && (
+			{typeof recipeId !== undefined && (
 				<input name="recipeId" type="text" defaultValue={recipeId} hidden />
 			)}
 			<div className="w-full md:w-5/12 md:min-w-[420px]">

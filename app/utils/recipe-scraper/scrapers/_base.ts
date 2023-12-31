@@ -43,7 +43,7 @@ export const createScraper: ScraperCreator = async (url) => {
 		$,
 		baseRecipe: {
 			title: getTitle($),
-			image_url: getImage($) ?? undefined,
+			image_url: getImage($) ?? null,
 			url,
 		},
 	};

@@ -1,13 +1,6 @@
 import { MetaFunction, useLoaderData } from "@remix-run/react";
-import { LoaderFunction, json } from "@vercel/remix";
-import { PageDetails } from "~/components/header";
-import { Burger } from "~/types";
+import { json } from "@vercel/remix";
 import { supabase } from "~/utils/supabase/index.server";
-
-type LoaderData = {
-	burgers: Burger[] | null;
-	pageDetails: PageDetails;
-};
 
 export const meta: MetaFunction = ({ matches }) => {
 	const parentMeta = matches
@@ -23,10 +16,10 @@ export const meta: MetaFunction = ({ matches }) => {
 	];
 };
 
-export const loader: LoaderFunction = async () => {
+export const loader = async () => {
 	const { data: burgers } = await supabase.from("burgers").select();
 	burgers?.sort((a, b) => a.rank - b.rank);
-	return json<LoaderData>({
+	return json({
 		burgers,
 		pageDetails: { header: "The Best Burgers I've Ever Had" },
 	});
@@ -36,7 +29,7 @@ export const loader: LoaderFunction = async () => {
  * Burger page
  */
 export default function Burgers() {
-	const { burgers } = useLoaderData<LoaderData>();
+	const { burgers } = useLoaderData<typeof loader>();
 
 	return (
 		<div className="flex flex-col max-w-2xl mx-auto gap-8 w-full">

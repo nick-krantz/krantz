@@ -1,14 +1,7 @@
 import { Link, MetaFunction, Outlet, useLoaderData } from "@remix-run/react";
-import { LoaderFunction, json } from "@vercel/remix";
+import { json } from "@vercel/remix";
 import { Button } from "~/components/button";
-import { PageDetails } from "~/components/header";
-import { Bookmark } from "~/types";
 import { supabase } from "~/utils/supabase/index.server";
-
-type LoaderData = {
-	bookmarks: Bookmark[] | null;
-	pageDetails: PageDetails;
-};
 
 export const meta: MetaFunction = ({ matches }) => {
 	const parentMeta = matches
@@ -24,16 +17,16 @@ export const meta: MetaFunction = ({ matches }) => {
 	];
 };
 
-export const loader: LoaderFunction = async () => {
+export const loader = async () => {
 	const { data: bookmarks } = await supabase.from("bookmarks").select();
-	return json<LoaderData>({ bookmarks, pageDetails: { header: "Bookmarks" } });
+	return json({ bookmarks, pageDetails: { header: "Bookmarks" } });
 };
 
 /**
  * Bookmark page
  */
 export default function Bookmarks() {
-	const { bookmarks } = useLoaderData<LoaderData>();
+	const { bookmarks } = useLoaderData<typeof loader>();
 
 	const categories = bookmarks
 		?.reduce((accum: string[], bookmark) => {
