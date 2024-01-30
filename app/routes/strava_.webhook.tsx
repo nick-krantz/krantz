@@ -1,6 +1,19 @@
 import { LoaderFunction, json } from "@vercel/remix";
 
+import { ActionFunction } from "@vercel/remix";
+
+export const action: ActionFunction = async ({ request }) => {
+  console.log("webhook action event received!", request.url, request.body);
+
+  console.log(await request.text());
+  console.log(await request.json());
+
+  return new Response('Event Received!', { status: 200 })
+};
+
 export const loader: LoaderFunction = async ({ request }) => {
+  console.log("webhook loader event received!", request.url);
+
   const req = new URL(request.url);
 
   // Verify token. Should be a random string.
@@ -10,6 +23,11 @@ export const loader: LoaderFunction = async ({ request }) => {
   let mode = req.searchParams.get('hub.mode');
   let token = req.searchParams.get('hub.verify_token');
   let challenge = req.searchParams.get('hub.challenge');
+  console.log({
+    mode,
+    token,
+    challenge,
+  });
 
   // Checks if a token and mode is in the query string of the request
   if (mode && token) {
