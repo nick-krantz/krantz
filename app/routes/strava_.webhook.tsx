@@ -42,4 +42,6 @@ export const loader: LoaderFunction = async ({ request }) => {
       return new Response('', { status: 403 });
     }
   }
+
+  return null;
 };
