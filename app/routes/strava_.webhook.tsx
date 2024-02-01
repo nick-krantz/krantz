@@ -1,18 +1,72 @@
-import { LoaderFunction, json } from "@vercel/remix";
+import { LoaderFunction, json, ActionFunction } from "@vercel/remix";
+import strava from 'strava-v3'
+import { supabase } from "~/utils/supabase/index.server";
 
-import { ActionFunction } from "@vercel/remix";
+// Get initial tokens from env
+let stravaRefreshToken = process.env.STRAVA_REFRESH_TOKEN!;
+let stravaAccessToken = process.env.STRAVA_ACCESS_TOKEN!;
+
+// Get initial tokens from env
+strava.config({
+  client_id: process.env.STRAVA_CLIENT_ID!,
+  client_secret: process.env.STRAVA_CLIENT_SECRET!,
+  redirect_uri: process.env.STRAVA_REDIRECT_URI!,
+  access_token: stravaAccessToken,
+});
+
+const saveWorkoutToDB = async (workoutId: string) => {
+  try {
+    const refreshResponse = await strava.oauth.refreshToken(stravaRefreshToken);
+
+    // Update the local variables
+    stravaRefreshToken = refreshResponse.refresh_token;
+    stravaAccessToken = refreshResponse.access_token;
+
+    const activityResponse = await strava.activities.get({ id: workoutId, includeAllEfforts: true });
+
+    const workout = {
+      average_speed: activityResponse.average_speed,
+      distance: activityResponse.distance,
+      elapsed_time: activityResponse.elapsed_time,
+      strava_id: activityResponse.id,
+      moving_time: activityResponse.moving_time,
+      title: activityResponse.name,
+      start_date: activityResponse.start_date,
+      description: activityResponse.description,
+      sport_type: activityResponse.sport_type,
+      // strava types are a little off here
+      splits_standard: (activityResponse as any).splits_standard,
+    }
+
+    const response = await supabase.from('workouts').insert({
+      ...workout
+    }).select();
+
+    if (response.error) {
+      console.error(response.error)
+      return;
+    }
+
+    console.log(`Added: ${response.data?.[0].id}`)
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export const action: ActionFunction = async ({ request }) => {
-  console.log("webhook action event received!", request.url, request.body);
+  console.log("Strava webhook action received!", request.url);
 
-  console.log(await request.text());
-  console.log(await request.json());
+  const body = await request.json();
+
+  if (body.object_type === "activity" && body.aspect_type === "create") {
+    saveWorkoutToDB(body.object_id);
+  }
 
   return new Response('Event Received!', { status: 200 })
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  console.log("webhook loader event received!", request.url);
+  console.log("Strava webhook loader received!", request.url);
 
   const req = new URL(request.url);
 
@@ -23,11 +77,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   let mode = req.searchParams.get('hub.mode');
   let token = req.searchParams.get('hub.verify_token');
   let challenge = req.searchParams.get('hub.challenge');
-  console.log({
-    mode,
-    token,
-    challenge,
-  });
 
   // Checks if a token and mode is in the query string of the request
   if (mode && token) {
