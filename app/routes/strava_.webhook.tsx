@@ -87,7 +87,7 @@ export const action: ActionFunction = async ({ request }) => {
 	const body = await request.json();
 	console.log({ body });
 	if (body.object_type === "activity" && body.aspect_type === "create") {
-		saveWorkoutToDB(body.object_id);
+		await saveWorkoutToDB(body.object_id);
 	}
 
 	return new Response("Event Received!", { status: 200 });
