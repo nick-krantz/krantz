@@ -17,12 +17,13 @@ strava.config({
 const saveWorkoutToDB = async (workoutId: string) => {
   try {
     const refreshResponse = await strava.oauth.refreshToken(stravaRefreshToken);
-
+    console.log({ refreshResponse })
     // Update the local variables
     stravaRefreshToken = refreshResponse.refresh_token;
     stravaAccessToken = refreshResponse.access_token;
 
-    const activityResponse = await strava.activities.get({ id: workoutId, includeAllEfforts: true });
+    const activityResponse = await strava.activities.get({ id: workoutId, includeAllEfforts: true, 'access_token': stravaAccessToken });
+    console.log({ refreshResponse })
 
     const workout = {
       average_speed: activityResponse.average_speed,
@@ -41,6 +42,7 @@ const saveWorkoutToDB = async (workoutId: string) => {
     const response = await supabase.from('workouts').insert({
       ...workout
     }).select();
+    console.log({ response })
 
     if (response.error) {
       console.error(response.error)
@@ -57,7 +59,7 @@ export const action: ActionFunction = async ({ request }) => {
   console.log("Strava webhook action received!", request.url);
 
   const body = await request.json();
-
+  console.log({ body })
   if (body.object_type === "activity" && body.aspect_type === "create") {
     saveWorkoutToDB(body.object_id);
   }
