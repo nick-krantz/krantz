@@ -28,11 +28,14 @@ const saveWorkoutToDB = async (workoutId: string) => {
 		const refreshResponse = await strava.oauth.refreshToken(data.refresh_token);
 
 		// Update the tokens in the supabase db
-		await supabase.from("strava").update({
-			access_token: refreshResponse.access_token,
-			refresh_token: refreshResponse.refresh_token,
-			expires_at: refreshResponse.expires_at,
-		});
+		await supabase
+			.from("strava")
+			.update({
+				access_token: refreshResponse.access_token,
+				refresh_token: refreshResponse.refresh_token,
+				expires_at: refreshResponse.expires_at,
+			})
+			.eq("id", "1");
 
 		const activityResponse = await strava.activities.get({
 			id: workoutId,
