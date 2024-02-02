@@ -166,6 +166,75 @@ export interface Database {
 					},
 				];
 			};
+			strava: {
+				Row: {
+					access_token: string;
+					created_at: string;
+					expires_at: number;
+					id: number;
+					refresh_token: string;
+				};
+				Insert: {
+					access_token: string;
+					created_at?: string;
+					expires_at: number;
+					id?: number;
+					refresh_token: string;
+				};
+				Update: {
+					access_token?: string;
+					created_at?: string;
+					expires_at?: number;
+					id?: number;
+					refresh_token?: string;
+				};
+				Relationships: [];
+			};
+			workouts: {
+				Row: {
+					average_speed: number | null;
+					created_at: string;
+					description: string | null;
+					distance: number;
+					elapsed_time: number;
+					id: number;
+					moving_time: number;
+					splits_standard: Json;
+					sport_type: string;
+					start_date: string;
+					strava_id: string;
+					title: string;
+				};
+				Insert: {
+					average_speed?: number | null;
+					created_at?: string;
+					description?: string | null;
+					distance: number;
+					elapsed_time: number;
+					id?: number;
+					moving_time: number;
+					splits_standard: Json;
+					sport_type: string;
+					start_date: string;
+					strava_id: string;
+					title: string;
+				};
+				Update: {
+					average_speed?: number | null;
+					created_at?: string;
+					description?: string | null;
+					distance?: number;
+					elapsed_time?: number;
+					id?: number;
+					moving_time?: number;
+					splits_standard?: Json;
+					sport_type?: string;
+					start_date?: string;
+					strava_id?: string;
+					title?: string;
+				};
+				Relationships: [];
+			};
 		};
 		Views: {
 			[_ in never]: never;
