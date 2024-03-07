@@ -59,8 +59,6 @@ const saveWorkoutToDB = async (workoutId: string) => {
       splits_standard: (activityResponse as any).splits_standard,
     };
 
-    console.log({ workout });
-
     const existingWorkout = await supabase
       .from("workouts")
       .select()
@@ -84,8 +82,6 @@ const saveWorkoutToDB = async (workoutId: string) => {
         ...workout,
       })
       .select();
-
-    console.log({ response });
 
     if (response.error) {
       console.error(response.error);
