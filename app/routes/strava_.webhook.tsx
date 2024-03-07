@@ -128,19 +128,23 @@ const updateWorkoutToDB = async (workoutId: string) => {
       splits_standard: (activityResponse as any).splits_standard,
     };
 
+    console.log({ workout })
+
     const response = await supabase
       .from("workouts")
       .update({
         ...workout,
       })
-      .eq('strava_id', workout.strava_id);
+      .eq('strava_id', workoutId);
 
     if (response.error) {
       console.error(response.error);
       return;
     }
 
-    console.log(`Updated Strava Activity: ${workout.strava_id}`);
+    console.log(response)
+
+    console.log(`Updated Strava Activity: ${workoutId}`);
   } catch (error) {
     console.error(error);
   }
