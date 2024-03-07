@@ -2,45 +2,52 @@ import { LoaderFunction, json, ActionFunction } from "@vercel/remix";
 import strava from "strava-v3";
 import { supabase } from "~/utils/supabase/index.server";
 
+/** Initialize strava client and rotate access & refresh tokens */
+const initializeStrava = async () => {
+  // Get tokens from Supabase
+  const { data, error } = await supabase
+    .from("strava")
+    .select()
+    .eq("id", "1")
+    .limit(1)
+    .single();
+
+  if (!data || error) {
+    throw new Error(`No strava data found ${error.message}`);
+  }
+
+  // Set up strava client with attributes
+  strava.config({
+    client_id: process.env.STRAVA_CLIENT_ID!,
+    client_secret: process.env.STRAVA_CLIENT_SECRET!,
+    redirect_uri: process.env.STRAVA_REDIRECT_URI!,
+    access_token: data.access_token,
+  });
+
+  // Refresh the strava tokens
+  const refreshResponse = await strava.oauth.refreshToken(data.refresh_token);
+
+  // Update the tokens in the supabase db
+  await supabase
+    .from("strava")
+    .update({
+      access_token: refreshResponse.access_token,
+      refresh_token: refreshResponse.refresh_token,
+      expires_at: refreshResponse.expires_at,
+    })
+    .eq("id", "1");
+
+  return { strava, accessToken: refreshResponse.access_token };
+}
+
 const saveWorkoutToDB = async (workoutId: string) => {
   try {
-    // Get tokens from Supabase
-    const { data, error } = await supabase
-      .from("strava")
-      .select()
-      .eq("id", "1")
-      .limit(1)
-      .single();
-
-    if (!data || error) {
-      throw new Error(`No strava data found ${error.message}`);
-    }
-
-    // Set up strava client with attributes
-    strava.config({
-      client_id: process.env.STRAVA_CLIENT_ID!,
-      client_secret: process.env.STRAVA_CLIENT_SECRET!,
-      redirect_uri: process.env.STRAVA_REDIRECT_URI!,
-      access_token: data.access_token,
-    });
-
-    // Refresh the strava tokens
-    const refreshResponse = await strava.oauth.refreshToken(data.refresh_token);
-
-    // Update the tokens in the supabase db
-    await supabase
-      .from("strava")
-      .update({
-        access_token: refreshResponse.access_token,
-        refresh_token: refreshResponse.refresh_token,
-        expires_at: refreshResponse.expires_at,
-      })
-      .eq("id", "1");
+    const { strava, accessToken } = await initializeStrava();
 
     const activityResponse = await strava.activities.get({
       id: workoutId,
       includeAllEfforts: true,
-      access_token: refreshResponse.access_token,
+      access_token: accessToken,
     });
 
     const workout = {
@@ -97,43 +104,12 @@ const saveWorkoutToDB = async (workoutId: string) => {
 
 const updateWorkoutToDB = async (workoutId: string) => {
   try {
-    // Get tokens from Supabase
-    const { data, error } = await supabase
-      .from("strava")
-      .select()
-      .eq("id", "1")
-      .limit(1)
-      .single();
-
-    if (!data || error) {
-      throw new Error(`No strava data found ${error.message}`);
-    }
-
-    // Set up strava client with attributes
-    strava.config({
-      client_id: process.env.STRAVA_CLIENT_ID!,
-      client_secret: process.env.STRAVA_CLIENT_SECRET!,
-      redirect_uri: process.env.STRAVA_REDIRECT_URI!,
-      access_token: data.access_token,
-    });
-
-    // Refresh the strava tokens
-    const refreshResponse = await strava.oauth.refreshToken(data.refresh_token);
-
-    // Update the tokens in the supabase db
-    await supabase
-      .from("strava")
-      .update({
-        access_token: refreshResponse.access_token,
-        refresh_token: refreshResponse.refresh_token,
-        expires_at: refreshResponse.expires_at,
-      })
-      .eq("id", "1");
+    const { strava, accessToken } = await initializeStrava();
 
     const activityResponse = await strava.activities.get({
       id: workoutId,
       includeAllEfforts: true,
-      access_token: refreshResponse.access_token,
+      access_token: accessToken,
     });
 
     const workout = {
