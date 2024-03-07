@@ -164,7 +164,7 @@ const updateWorkoutToDB = async (workoutId: string) => {
       return;
     }
 
-    console.log(`Updated Strava Activity: ${response.data?.[0].id}`);
+    console.log(`Updated Strava Activity: ${workout.strava_id}`);
   } catch (error) {
     console.error(error);
   }
