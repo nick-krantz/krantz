@@ -70,7 +70,6 @@ const saveWorkoutToDB = async (workoutId: string) => {
       .from("workouts")
       .select()
       .eq("strava_id", workout.strava_id)
-      .single();
 
     /**
      * Because the server can be in an idle mode which causes a slow response back to Strava,
@@ -78,7 +77,7 @@ const saveWorkoutToDB = async (workoutId: string) => {
      *
      * Check to see if the workout exists in the db already, if it does, don't add it again.
      */
-    if (!existingWorkout.data) {
+    if (existingWorkout.data?.length) {
       console.log("Workout already exists in the db")
       return;
     }
