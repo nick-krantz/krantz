@@ -1,10 +1,8 @@
-import { MetaFunction, useLoaderData } from "@remix-run/react";
+import { MetaFunction, useLoaderData, Form } from "@remix-run/react";
 import { json } from "@vercel/remix";
-import { supabase } from "~/utils/supabase/index.server";
 import { Button } from "~/components/button";
 import { Field } from "~/components/field";
-import { Form, useActionData } from "@remix-run/react";
-import { useState } from "react";
+import { supabase } from "~/utils/supabase/index.server";
 
 export const meta: MetaFunction = ({ matches }) => {
 	const parentMeta = matches
@@ -34,32 +32,6 @@ export const loader = async () => {
  */
 export default function Burgers() {
 	const { burgers } = useLoaderData<typeof loader>();
-	const actionData = useActionData();
-	const [formData, setFormData] = useState({
-		name: "",
-		restaurant: "",
-		location: "",
-		description: "",
-		rank: "",
-		latitude: "",
-		longitude: "",
-	});
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-	};
-
-	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		const response = await fetch("/api/save-burger", {
-			method: "POST",
-			body: new URLSearchParams(formData),
-		});
-		if (response.ok) {
-			window.location.reload();
-		}
-	};
 
 	return (
 		<div className="flex flex-col max-w-2xl mx-auto gap-8 w-full">
@@ -81,15 +53,14 @@ export default function Burgers() {
 					))}
 				</ol>
 			)}
-			<Form method="post" onSubmit={handleSubmit}>
+			<Form method="post" action="/api/save-burger" className="flex flex-col gap-4">
 				<Field
 					labelProps={{ htmlFor: "name-input" }}
 					inputProps={{
 						type: "text",
 						name: "name",
 						id: "name-input",
-						value: formData.name,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Name
@@ -100,8 +71,7 @@ export default function Burgers() {
 						type: "text",
 						name: "restaurant",
 						id: "restaurant-input",
-						value: formData.restaurant,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Restaurant
@@ -112,8 +82,7 @@ export default function Burgers() {
 						type: "text",
 						name: "location",
 						id: "location-input",
-						value: formData.location,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Location
@@ -124,8 +93,7 @@ export default function Burgers() {
 						type: "text",
 						name: "description",
 						id: "description-input",
-						value: formData.description,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Description
@@ -136,8 +104,7 @@ export default function Burgers() {
 						type: "number",
 						name: "rank",
 						id: "rank-input",
-						value: formData.rank,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Rank
@@ -148,8 +115,7 @@ export default function Burgers() {
 						type: "number",
 						name: "latitude",
 						id: "latitude-input",
-						value: formData.latitude,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Latitude
@@ -160,8 +126,7 @@ export default function Burgers() {
 						type: "number",
 						name: "longitude",
 						id: "longitude-input",
-						value: formData.longitude,
-						onChange: handleChange,
+						required: true,
 					}}
 				>
 					Longitude
