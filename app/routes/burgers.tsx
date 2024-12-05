@@ -1,6 +1,8 @@
-import { MetaFunction, useLoaderData } from "@remix-run/react";
+import { MetaFunction, useLoaderData, Link } from "@remix-run/react";
 import { json } from "@vercel/remix";
 import { supabase } from "~/utils/supabase/index.server";
+import { authenticated } from "~/utils/supabase/authenticated";
+import { Button } from "~/components/button";
 
 export const meta: MetaFunction = ({ matches }) => {
 	const parentMeta = matches
@@ -16,12 +18,15 @@ export const meta: MetaFunction = ({ matches }) => {
 	];
 };
 
-export const loader = async () => {
-	const { data: burgers } = await supabase.from("burgers").select();
-	burgers?.sort((a, b) => a.rank - b.rank);
-	return json({
-		burgers,
-		pageDetails: { header: "The Best Burgers I've Ever Had" },
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	return authenticated(request, async ({ authorized }) => {
+		const { data: burgers } = await supabase.from("burgers").select();
+		burgers?.sort((a, b) => a.rank - b.rank);
+		return json({
+			burgers,
+			authorized,
+			pageDetails: { header: "The Best Burgers I've Ever Had" },
+		});
 	});
 };
 
@@ -29,7 +34,7 @@ export const loader = async () => {
  * Burger page
  */
 export default function Burgers() {
-	const { burgers } = useLoaderData<typeof loader>();
+	const { burgers, authorized } = useLoaderData<typeof loader>();
 
 	return (
 		<div className="flex flex-col max-w-2xl mx-auto gap-8 w-full">
@@ -38,6 +43,13 @@ export default function Burgers() {
 				to track all of them. Why put it online? Because version control is cool
 				and this is far more easier to maintain than a piece of paper.
 			</p>
+			{authorized && (
+				<div className="text-center">
+					<Link to="./add">
+						<Button type="button">Add Burger</Button>
+					</Link>
+				</div>
+			)}
 			{!!burgers && (
 				<ol className="list-decimal marker:text-3xl">
 					{burgers.map((burger, i) => (
