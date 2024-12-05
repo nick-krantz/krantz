@@ -5,7 +5,7 @@ import {
   useNavigate,
 } from "@remix-run/react";
 import { PostgrestError } from "@supabase/supabase-js";
-import { ActionFunction, redirect } from "@vercel/remix";
+import { ActionFunction, LoaderFunctionArgs, redirect } from "@vercel/remix";
 import { FiX } from "react-icons/fi";
 import { Button } from "~/components/button";
 import { ErrorMessage } from "~/components/error-message";
