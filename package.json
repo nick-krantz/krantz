@@ -1,51 +1,34 @@
 {
   "private": true,
   "name": "krantz.app",
-  "description": "Personal website built with React/Remix",
+  "description": "Personal website built with Astro",
   "license": "",
   "type": "module",
   "scripts": {
-    "build": "yarn build:css && remix build",
-    "build:css": "tailwindcss -i ./app/styles/global.css -o ./app/tailwind.css --minify",
-    "dev": "remix dev",
-    "lint": "biome check --apply ./app/**/*.{ts,tsx,js,jsx}",
-    "format": "biome format --write ./app/**/*.{ts,tsx,js,jsx}",
-    "start": "remix-serve ./build/index.js"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@remix-run/node": "2.3.1",
-    "@remix-run/react": "2.3.1",
-    "@remix-run/serve": "2.3.1",
     "@supabase/supabase-js": "2.39.1",
-    "@vercel/remix": "2.3.1",
+    "@tailwindcss/vite": "^4.1.3",
+    "astro": "^5.6.1",
     "cheerio": "1.0.0-rc.10",
     "framer-motion": "6.2.4",
-    "isbot": "latest",
-    "react": "canary",
-    "react-dom": "canary",
     "react-icons": "4.12.0",
-    "remix": "2.3.1",
-    "strava-v3": "^2.2.0",
-    "uuid": "8.3.2"
+    "strava-v3": "^2.2.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.4.1",
-    "@remix-run/dev": "2.3.1",
     "@tailwindcss/forms": "0.5.7",
-    "@tailwindcss/typography": "0.5.10",
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "17.0.14",
     "@types/uuid": "8.3.4",
-    "autoprefixer": "10.4.2",
     "openapi-typescript": "5.4.0",
-    "postcss": "8.4.5",
     "supabase": "1.123.4",
-    "tailwindcss": "3.3.6",
-    "typescript": "5.3.3"
+    "tailwindcss": "^4.1.3",
+    "typescript": "5.8.3"
   },
   "engines": {
-    "node": ">=18"
-  },
-  "sideEffects": false,
-  "packageManager": "yarn@4.0.2"
+    "node": ">=20"
+  }
 }
