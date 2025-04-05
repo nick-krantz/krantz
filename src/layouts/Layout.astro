@@ -1,11 +1,21 @@
 ---
 import "./src/styles/global.css";
+
+type Props = {
+  /**
+   * The title of the page, used for the document title and meta tags.
+   * @default "Nick Krantz"
+   */
+  title?: string;
+};
+
+const { title = "Nick Krantz" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Nick Krantz</title>
+    <title>{title}</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
