@@ -1,0 +1,73 @@
+---
+import Email from "../Icon/Email.astro";
+import GitHub from "../Icon/GitHub.astro";
+import LinkedIn from "../Icon/LinkedIn.astro";
+import Twitter from "../Icon/Twitter.astro";
+
+const anchorClasses =
+  "rounded-md focus-within:outline-solid focus-within:outline-current focus-within:outline-offset-3 focus-within:outline-2";
+---
+
+<footer class="flex p-5 my-0 mx-auto max-w-sm w-full justify-around">
+  <a
+    href="mailto:nick@krantz.app"
+    aria-label="Shoot me an email"
+    title="Email me"
+    rel="noopener noreferrer"
+    data-footer-link
+    class={anchorClasses}
+  >
+    <Email />
+  </a>
+  <a
+    href="https://github.com/nick-krantz"
+    aria-label="Check out my GitHub"
+    title="GitHub"
+    rel="noopener noreferrer"
+    data-footer-link
+    class={anchorClasses}
+  >
+    <GitHub />
+  </a>
+  <a
+    href="https://www.linkedin.com/in/nicholaskrantz/"
+    aria-label="Connect on LinkedIn"
+    title="LinkedIn"
+    rel="noopener noreferrer"
+    data-footer-link
+    class={anchorClasses}
+  >
+    <LinkedIn />
+  </a>
+  <a
+    href="https://twitter.com/nick__krantz"
+    aria-label="Follow me on Twitter"
+    title="Twitter"
+    rel="noopener noreferrer"
+    data-footer-link
+    class={anchorClasses}
+  >
+    <Twitter />
+  </a>
+</footer>
+
+<script>
+  import { animate, hover, press, type AnimationOptions } from "motion";
+
+  const animationOptions: AnimationOptions = {
+    type: "spring",
+    bounce: 0.5,
+  };
+
+  hover("[data-footer-link]", (link) => {
+    animate(link, { scale: 1.2 }, animationOptions);
+
+    return () => animate(link, { scale: 1 }, animationOptions);
+  });
+
+  press("[data-footer-link]", (link) => {
+    animate(link, { scale: 0.95 }, animationOptions);
+
+    return () => animate(link, { scale: 1 }, animationOptions);
+  });
+</script>

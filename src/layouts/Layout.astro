@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/Footer/Footer.astro";
 import "./src/styles/global.css";
 
 type Props = {
@@ -63,7 +64,12 @@ const { title = "Nick Krantz" } = Astro.props;
       "dark:from-[#020024] dark:via-[#1f2937] dark:to-[#1b3d44]  dark:text-gray-200",
     ]}
   >
-    <slot />
+    <div class="flex flex-col justify-center align-center h-full w-full">
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
 
