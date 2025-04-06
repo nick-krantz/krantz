@@ -31,10 +31,6 @@ function getRGBValue(
  * Based on the mouse/touch position change the color of the carets
  */
 export function changeCaretColor(e: MouseEvent | TouchEvent) {
-  const body = document.querySelector("body");
-  // Skip color change if menu is open
-  if (body?.classList.contains("overflow-hidden")) return;
-
   // 1/6 of the screen width
   const widthSixth = Math.ceil(window.innerWidth / 6);
 
@@ -54,7 +50,7 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
     5: { red: 100, green: 0, blue: -1 },
   };
 
-  let x;
+  let x: number;
 
   // distinguish between event types
   if ("offsetX" in e) {
@@ -82,7 +78,9 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
   // Set fill of svg image
   const rgb = `rgb(${red}, ${green}, ${blue})`;
 
-  for (const caret of Array.from(document.querySelectorAll(".caret"))) {
-    (caret as HTMLElement).setAttribute("style", `stroke:${rgb};`);
+  for (const caret of Array.from(
+    document.querySelectorAll<SVGPathElement>('path[data-caret="true"]')
+  )) {
+    caret.setAttribute("style", `stroke:${rgb};`);
   }
 }

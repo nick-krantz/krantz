@@ -8,3 +8,10 @@ import NKLogo from "../components/NKLogo/NkLogo.astro";
     <NKLogo />
   </div>
 </Layout>
+
+<script>
+  import { changeCaretColor } from "../utils/change-caret-color.ts";
+
+  window.addEventListener("mousemove", changeCaretColor);
+  window.addEventListener("touchmove", changeCaretColor);
+</script>
