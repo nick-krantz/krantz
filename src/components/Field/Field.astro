@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = {
+  hiddenLabel?: boolean;
+  className?: string;
+  labelProps: HTMLAttributes<"label">;
+  inputProps: HTMLAttributes<"input">;
+};
+
+const { hiddenLabel, className, labelProps, inputProps }: Props = Astro.props;
+const hiddenLabelClass = hiddenLabel
+  ? "overflow-hidden max-h-0 absolute mb-0"
+  : "";
+---
+
+<div class:list={["flex flex-col items-start w-inherit", className]}>
+  <label
+    {...labelProps}
+    class:list={["mb-2 font-semibold", hiddenLabelClass, labelProps.class]}
+  >
+    <slot />
+  </label>
+  <input
+    {...inputProps}
+    class="w-full rounded-md bg-inherit border-1 border-gray-800 dark:border-gray-200"
+  />
+</div>

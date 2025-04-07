@@ -1,4 +1,5 @@
 ---
+import AnimatedAnchor from "../AnimatedAnchor/AnimatedAnchor.astro";
 import ArrowLeft from "../Icon/ArrowLeft.astro";
 
 type Props = {
@@ -11,9 +12,9 @@ const { backLink } = Astro.props;
 
 <header class="flex py-5">
   <div class="flex flex-1 items-center">
-    <a href={backLink} aria-label="go back" data-header-link>
+    <AnimatedAnchor href={backLink} aria-label="go back">
       <ArrowLeft />
-    </a>
+    </AnimatedAnchor>
   </div>
   <div class="flex-[4_2_0%] w-full capitalize">
     <h1 class="text-center mb-0">
@@ -22,24 +23,3 @@ const { backLink } = Astro.props;
   </div>
   <div class="flex-1 w-full"></div>
 </header>
-
-<script>
-  import { animate, hover, press, type AnimationOptions } from "motion";
-
-  const animationOptions: AnimationOptions = {
-    type: "spring",
-    bounce: 0.5,
-  };
-
-  hover("[data-header-link]", (link) => {
-    animate(link, { scale: 1.2 }, animationOptions);
-
-    return () => animate(link, { scale: 1 }, animationOptions);
-  });
-
-  press("[data-header-link]", (link) => {
-    animate(link, { scale: 0.95 }, animationOptions);
-
-    return () => animate(link, { scale: 1 }, animationOptions);
-  });
-</script>

@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = Omit<HTMLAttributes<"a">, "class">;
+
+const props = Astro.props;
+---
+
+<a
+  {...props}
+  data-animate-link
+  class="rounded-md focus-within:outline-solid focus-within:outline-current focus-within:outline-offset-3 focus-within:outline-2"
+>
+  <slot />
+</a>
+
+<script>
+  console.log("AnimatedAnchor script loaded");
+  import { animate, hover, press, type AnimationOptions } from "motion";
+
+  const animationOptions: AnimationOptions = {
+    type: "spring",
+    bounce: 0.5,
+  };
+
+  hover("[data-animate-link]", (link) => {
+    animate(link, { scale: 1.2 }, animationOptions);
+
+    return () => animate(link, { scale: 1 }, animationOptions);
+  });
+
+  press("[data-animate-link]", (link) => {
+    animate(link, { scale: 0.95 }, animationOptions);
+
+    return () => animate(link, { scale: 1 }, animationOptions);
+  });
+</script>
