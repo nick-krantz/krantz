@@ -1,0 +1,85 @@
+---
+import Header from "../../components/Header/Header.astro";
+import Layout from "../../layouts/Layout.astro";
+import { supabase } from "../../supabase/supabase";
+import type { IngredientsWithSections } from "../../types/IngredientsWithSections";
+import type { GetStaticPaths } from "astro";
+
+export const getStaticPaths = (async () => {
+  const { data: recipes } = await supabase.from("full_recipes").select();
+
+  if (!recipes) {
+    throw new Error("Error fetching recipes");
+  }
+
+  return recipes.map((recipe) => ({
+    params: { id: recipe.id },
+    props: { recipe },
+  }));
+}) satisfies GetStaticPaths;
+
+const { recipe } = Astro.props;
+
+let recipeDomain = "";
+try {
+  const url = new URL(recipe.url);
+  recipeDomain = url.hostname.replace("www.", "");
+} catch (e) {
+  console.error("Invalid URL:", recipe.url);
+}
+---
+
+<Layout>
+  <Header backLink="/recipes"> {recipe.title} </Header>
+  <main class="max-w-2xl mx-auto">
+    {
+      recipe?.image_url && (
+        <img
+          class="rounded-2xl max-h-[300px] w-full object-cover"
+          src={recipe.image_url}
+          alt=""
+        />
+      )
+    }
+    {
+      recipeDomain ? (
+        <div class="flex flex-wrap py-4 justify-around gap-4">
+          <a
+            class="inline-flex align-center justify-center rounded-md font-semibold p-2 outline-2 outline-transparent dark:hover:outline-gray-200 dark:focus:outline-gray-200 hover:outline-gray-800 focus:outline-gray-800"
+            href={recipe.url}
+          >
+            {recipeDomain}
+          </a>
+        </div>
+      ) : null
+    }
+
+    <section>
+      <h2>Ingredients</h2>
+      {
+        ((recipe.ingredients as IngredientsWithSections[]) ?? []).map(
+          (section) => (
+            <>
+              {section.title ? <h3>{section.title}</h3> : null}
+              <ul class="list mb-2 list-[square] list-outside ml-6">
+                {section.ingredients.map((ingredient) => (
+                  <li class="list-item mb-2">{ingredient}</li>
+                ))}
+              </ul>
+            </>
+          )
+        )
+      }
+    </section>
+    <section>
+      <h2>Instructions</h2>
+      <ol class="list mb-2 list-[decimal] list-outside ml-6 marker:text-xl">
+        {
+          (recipe.instructions as string[]).map((instruction) => (
+            <li class="list-item mb-2">{instruction}</li>
+          ))
+        }
+      </ol>
+    </section>
+  </main>
+</Layout>
