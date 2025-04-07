@@ -1,4 +1,18 @@
-<div class="h-full w-full flex justify-center items-center max-h-44">
+---
+type Props = {
+  className?: string;
+};
+
+const { className } = Astro.props;
+---
+
+<div
+  class:list={[
+    "h-full w-full flex justify-center items-center max-h-44",
+    className,
+  ]}
+  data-whisk-image
+>
   <svg
     class="w-[65%]"
     x="0px"

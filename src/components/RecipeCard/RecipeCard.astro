@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { Recipe } from "../../supabase/types";
 import Whisk from "../Icon/Whisk.astro";
 import ShareButton from "../ShareButton/ShareButton.astro";
@@ -25,7 +26,16 @@ const { id, title, image_url, url } = recipe;
 >
   {
     image_url ? (
-      <img class="h-full w-full object-cover max-h-44" src={image_url} alt="" />
+      <>
+        <Image
+          class="h-full w-full object-cover max-h-44"
+          src={image_url}
+          alt=""
+          height={174}
+          width={202}
+        />
+        <Whisk className="hidden" />
+      </>
     ) : (
       <Whisk />
     )
@@ -37,3 +47,15 @@ const { id, title, image_url, url } = recipe;
     <ShareButton {title} {url} className="absolute bottom-2 right-2" />
   </div>
 </a>
+
+<script>
+  // Just in case a remote image gets borked... reuse the wisk image and remove the image element
+  document.querySelectorAll("[data-share-card]").forEach((shareCard) => {
+    const image = shareCard.querySelector("img");
+    const whisk = shareCard.querySelector("[data-whisk-image]");
+    image?.addEventListener("error", () => {
+      image.remove();
+      whisk?.classList.remove("hidden");
+    });
+  });
+</script>
