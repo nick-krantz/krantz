@@ -1,0 +1,28 @@
+---
+import Header from "../components/Header/Header.astro";
+import RecipeList from "../components/RecipeList/RecipeList.astro";
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "../supabase/supabase";
+import type { Recipe } from "../supabase/types";
+
+const { data: recipes } = await supabase
+  .from("full_recipes")
+  .select()
+  .order("title", { ascending: true });
+
+if (!recipes) {
+  throw new Error("Error fetching recipes");
+}
+---
+
+<Layout>
+  <Header backLink="/"> Recipes </Header>
+  <main class="flex flex-col mx-auto gap-8 w-full max-w-screen-xl">
+    <p class="text-center">
+      A digital recipe keeper, no ads, no life story, just recipes.
+      <br />
+      Acknowledgement for the source recipe is linked within each recipe.
+    </p>
+    <RecipeList recipes={recipes as Recipe[]} />
+  </main>
+</Layout>

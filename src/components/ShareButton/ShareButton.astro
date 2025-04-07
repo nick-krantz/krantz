@@ -1,0 +1,45 @@
+---
+import Share from "../Icon/Share.astro";
+import { slugify } from "../../utils/slugify.ts";
+
+type Props = {
+  title: string;
+  url: string;
+  /** Optional class name for the button */
+  className?: string;
+};
+
+const { title, url, className } = Astro.props;
+const slugifiedTitle = slugify(title);
+---
+
+<button
+  class:list={[
+    "inline-flex items-center p-2 rounded-md text-gray-800 dark:text-gray-200 self-end cursor-pointer",
+    "outline-none focus:ring-2 focus:ring-gray-600 dark:focus:ring-gray-200",
+    className,
+  ]}
+  aria-label={`Share ${title}`}
+  title={`Share ${title}`}
+  type="button"
+  id={slugifiedTitle}
+>
+  <Share />
+</button>
+
+<script define:vars={{ title, url, slugifiedTitle }}>
+  document.getElementById(slugifiedTitle).addEventListener("click", (e) => {
+    e.preventDefault();
+    if (navigator.share) {
+      navigator
+        .share({
+          title,
+          text: `Check out ${title}`,
+          url: url,
+        })
+        .catch((error) => console.log("Error sharing", error));
+    } else {
+      console.warn("sharing not available");
+    }
+  });
+</script>
