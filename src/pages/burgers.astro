@@ -1,0 +1,39 @@
+---
+import Header from "../components/Header/Header.astro";
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "../supabase/supabase";
+
+const { data: burgers } = await supabase
+  .from("burgers")
+  .select()
+  .order("rank", {
+    ascending: true,
+  });
+
+if (!burgers) {
+  throw new Error("Error fetching burgers");
+}
+---
+
+<Layout>
+  <Header backLink="/"> Burgers </Header>
+  <main class="flex flex-col max-w-2xl mx-auto gap-8 w-full">
+    <p class="text-center">
+      The quest for the best burger never ends, here's how they currently stack
+      up.
+    </p>
+    <ol class="list-decimal marker:text-3xl ps-12">
+      {
+        burgers.map((burger) => (
+          <li class="pb-6">
+            <h2 class="text-3xl	">{burger.name}</h2>
+            <a href={burger.url} class="underline">
+              {burger.restaurant} - {burger.location}
+            </a>
+            <p>{burger.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </main>
+</Layout>

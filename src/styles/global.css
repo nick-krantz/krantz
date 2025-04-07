@@ -3,3 +3,20 @@
 @utility icon {
   @apply inline-block w-8 h-8;
 }
+
+@utility main-grid {
+  @apply grid grid-cols-1;
+  grid-template-rows: 1fr min-content;
+}
+
+h1 {
+  @apply text-3xl lg:text-4xl font-semibold;
+}
+
+h2 {
+  @apply text-2xl lg:text-3xl font-semibold;
+}
+
+h3 {
+  @apply text-lg md:text-xl lg:text-2xl font-semibold;
+}
