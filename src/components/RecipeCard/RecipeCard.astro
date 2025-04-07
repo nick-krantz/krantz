@@ -13,7 +13,7 @@ const { id, title, image_url, url } = recipe;
 ---
 
 <a
-  href={`./recipe/${id}`}
+  href={`./recipes/${id}`}
   aria-label={`open ${title}`}
   class:list={[
     "relative h-full grid grid-cols-2 max-h-44 rounded-md overflow-clip border border-transparent",
@@ -41,7 +41,9 @@ const { id, title, image_url, url } = recipe;
     )
   }
   <div class="p-4 flex-1 flex flex-col justify-between">
-    <h3 class="font-semibold text-left mb-0 text-ellipsis line-clamp-3">
+    <h3
+      class="text-gray-200 font-semibold text-left mb-0 text-ellipsis line-clamp-3"
+    >
       {title}
     </h3>
     <ShareButton {title} {url} className="absolute bottom-2 right-2" />

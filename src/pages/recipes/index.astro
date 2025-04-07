@@ -1,9 +1,9 @@
 ---
-import Header from "../components/Header/Header.astro";
-import RecipeList from "../components/RecipeList/RecipeList.astro";
-import Layout from "../layouts/Layout.astro";
-import { supabase } from "../supabase/supabase";
-import type { Recipe } from "../supabase/types";
+import Header from "../../components/Header/Header.astro";
+import RecipeList from "../../components/RecipeList/RecipeList.astro";
+import Layout from "../../layouts/Layout.astro";
+import { supabase } from "../../supabase/supabase";
+import type { Recipe } from "../../supabase/types";
 
 const { data: recipes } = await supabase
   .from("full_recipes")
