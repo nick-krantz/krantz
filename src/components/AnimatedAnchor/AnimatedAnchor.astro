@@ -1,15 +1,18 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-type Props = Omit<HTMLAttributes<"a">, "class">;
+type Props = HTMLAttributes<"a">;
 
-const props = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
 <a
   {...props}
   data-animate-link
-  class="rounded-md focus-within:outline-solid focus-within:outline-current focus-within:outline-offset-3 focus-within:outline-2"
+  class:list={[
+    "relative rounded-md focus-within:outline-solid focus-within:outline-current focus-within:outline-offset-3 focus-within:outline-2",
+    className,
+  ]}
 >
   <slot />
 </a>

@@ -4,39 +4,63 @@ import Email from "../Icon/Email.astro";
 import GitHub from "../Icon/GitHub.astro";
 import LinkedIn from "../Icon/LinkedIn.astro";
 import Twitter from "../Icon/Twitter.astro";
+import Burger from "../Icon/Burger.astro";
+import Recipe from "../Icon/Recipe.astro";
 ---
 
-<footer class="flex p-5 my-0 mx-auto max-w-sm w-full justify-around">
-  <AnimatedAnchor
-    href="mailto:nick@krantz.app"
-    aria-label="Shoot me an email"
-    title="Email me"
-    rel="noopener noreferrer"
+<footer>
+  <nav
+    class="grid grid-rows-3 grid-cols-2 sm:grid-rows-2 sm:grid-cols-4 gap-y-6 justify-items-center p-5 my-0 mx-auto max-w-sm w-full justify-around"
   >
-    <Email />
-  </AnimatedAnchor>
-  <AnimatedAnchor
-    href="https://github.com/nick-krantz"
-    aria-label="Check out my GitHub"
-    title="GitHub"
-    rel="noopener noreferrer"
-  >
-    <GitHub />
-  </AnimatedAnchor>
-  <AnimatedAnchor
-    href="https://www.linkedin.com/in/nicholaskrantz/"
-    aria-label="Connect on LinkedIn"
-    title="LinkedIn"
-    rel="noopener noreferrer"
-  >
-    <LinkedIn />
-  </AnimatedAnchor>
-  <AnimatedAnchor
-    href="https://twitter.com/nick__krantz"
-    aria-label="Follow me on Twitter"
-    title="Twitter"
-    rel="noopener noreferrer"
-  >
-    <Twitter />
-  </AnimatedAnchor>
+    <AnimatedAnchor
+      href="/burgers"
+      aria-label="Burger List"
+      title="Burger List"
+      class="sm:col-span-2 w-fit"
+    >
+      <Burger />
+    </AnimatedAnchor>
+
+    <AnimatedAnchor
+      href="/recipes"
+      aria-label="Recipe Box"
+      title="Recipe Box"
+      class="sm:col-span-2 w-fit"
+    >
+      <Recipe />
+    </AnimatedAnchor>
+
+    <AnimatedAnchor
+      href="mailto:nick@krantz.app"
+      aria-label="Shoot me an email"
+      title="Email me"
+      rel="noopener noreferrer"
+    >
+      <Email />
+    </AnimatedAnchor>
+    <AnimatedAnchor
+      href="https://github.com/nick-krantz"
+      aria-label="Check out my GitHub"
+      title="GitHub"
+      rel="noopener noreferrer"
+    >
+      <GitHub />
+    </AnimatedAnchor>
+    <AnimatedAnchor
+      href="https://www.linkedin.com/in/nicholaskrantz/"
+      aria-label="Connect on LinkedIn"
+      title="LinkedIn"
+      rel="noopener noreferrer"
+    >
+      <LinkedIn />
+    </AnimatedAnchor>
+    <AnimatedAnchor
+      href="https://twitter.com/nick__krantz"
+      aria-label="Follow me on Twitter"
+      title="Twitter"
+      rel="noopener noreferrer"
+    >
+      <Twitter />
+    </AnimatedAnchor>
+  </nav>
 </footer>
