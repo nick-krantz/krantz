@@ -64,6 +64,7 @@ export type Database = {
           created_at: string | null;
           description: string;
           id: number;
+          kitchen_floor: boolean | null;
           latitude: number;
           location: string;
           longitude: number;
@@ -77,6 +78,7 @@ export type Database = {
           created_at?: string | null;
           description: string;
           id?: number;
+          kitchen_floor?: boolean | null;
           latitude: number;
           location: string;
           longitude: number;
@@ -90,6 +92,7 @@ export type Database = {
           created_at?: string | null;
           description?: string;
           id?: number;
+          kitchen_floor?: boolean | null;
           latitude?: number;
           location?: string;
           longitude?: number;
