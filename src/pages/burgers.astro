@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header/Header.astro";
+import Toggle from "../components/Toggle/Toggle.astro";
 import Layout from "../layouts/Layout.astro";
 import { supabase } from "../supabase/supabase";
 
@@ -16,7 +17,12 @@ if (!burgers) {
 ---
 
 <Layout>
-  <Header backLink="/"> Burgers </Header>
+  <Header backLink="/">
+    <> Burgers </>
+    <div class="float-right" slot="right">
+      <Toggle />
+    </div>
+  </Header>
   <main class="flex flex-col max-w-2xl mx-auto gap-8 w-full">
     <p class="text-center">
       The quest for the best burger never ends, here's how they currently stack

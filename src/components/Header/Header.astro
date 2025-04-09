@@ -21,5 +21,7 @@ const { backLink } = Astro.props;
       <slot />
     </h1>
   </div>
-  <div class="flex-1 w-full"></div>
+  <div class="flex-1 w-full">
+    <slot name="right" />
+  </div>
 </header>
