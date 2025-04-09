@@ -6,45 +6,45 @@ export type ScraperRecipe = Omit<Recipe, "created_at" | "created_by" | "id">;
 type BaseRecipe = Omit<ScraperRecipe, "instructions" | "ingredients">;
 
 type BaseScraper = {
-	baseRecipe: BaseRecipe;
-	$: CheerioAPI;
+  baseRecipe: BaseRecipe;
+  $: CheerioAPI;
 };
 
 export type ScraperCreator = (url: string) => Promise<BaseScraper>;
 export type Scraper = (url: string) => Promise<ScraperRecipe>;
 
 const getTitle = ($: CheerioAPI): string => {
-	const title =
-		$('head meta[property="og:title"]').text() || $("head title").text() || "";
+  const title =
+    $('head meta[property="og:title"]').text() || $("head title").text() || "";
 
-	if (title.includes(" | ")) {
-		return cleanText(title.split(" | ")[0]);
-	}
+  if (title.includes(" | ")) {
+    return cleanText(title.split(" | ")[0]);
+  }
 
-	if (title.includes(" - ")) {
-		return cleanText(title.split(" - ")[0]);
-	}
+  if (title.includes(" - ")) {
+    return cleanText(title.split(" - ")[0]);
+  }
 
-	return title;
+  return title;
 };
 
 const getImage = ($: CheerioAPI): string | undefined => {
-	return (
-		$('head meta[property="og:image"]').attr("content") ||
-		$("head meta[name='og:image']").attr("content")
-	);
+  return (
+    $('head meta[property="og:image"]').attr("content") ||
+    $("head meta[name='og:image']").attr("content")
+  );
 };
 
 export const createScraper: ScraperCreator = async (url) => {
-	const html = await (await fetch(url)).text();
-	const $ = load(html);
+  const html = await (await fetch(url)).text();
+  const $ = load(html);
 
-	return {
-		$,
-		baseRecipe: {
-			title: getTitle($),
-			image_url: getImage($) ?? null,
-			url,
-		},
-	};
+  return {
+    $,
+    baseRecipe: {
+      title: getTitle($),
+      image_url: getImage($) ?? null,
+      url,
+    },
+  };
 };

@@ -6,9 +6,9 @@ const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
 
 // Create supabase client to be used throughout the application
 export const supabase = createClient<Database>(
-	supabaseURL || "",
-	supabaseAnonKey || "",
-	{
-		auth: { persistSession: true },
-	},
+  supabaseURL || "",
+  supabaseAnonKey || "",
+  {
+    auth: { persistSession: true },
+  },
 );

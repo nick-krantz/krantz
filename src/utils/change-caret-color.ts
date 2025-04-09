@@ -13,7 +13,7 @@ const rgbMax = 255;
  */
 function getRGBValue(
   configProperty: ConfigIndicator,
-  percentage: number
+  percentage: number,
 ): number {
   if (configProperty === 0) return 0;
   if (configProperty === 100) return rgbMax;
@@ -79,7 +79,7 @@ export function changeCaretColor(e: MouseEvent | TouchEvent) {
   const rgb = `rgb(${red}, ${green}, ${blue})`;
 
   for (const caret of Array.from(
-    document.querySelectorAll<SVGPathElement>('path[data-caret="true"]')
+    document.querySelectorAll<SVGPathElement>('path[data-caret="true"]'),
   )) {
     caret.setAttribute("style", `stroke:${rgb};`);
   }

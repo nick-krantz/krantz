@@ -8,5 +8,5 @@ export const supabase = createClient<Database>(
   SUPABASE_ANON_KEY,
   {
     auth: { persistSession: true },
-  }
+  },
 );
