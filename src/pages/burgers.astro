@@ -19,8 +19,8 @@ if (!burgers) {
 <Layout>
   <Header backLink="/">
     <> Burgers </>
-    <div class="float-right" slot="right">
-      <Toggle />
+    <div class="hidden sm:block float-right" slot="right">
+      <Toggle id="desktop" />
     </div>
   </Header>
   <main class="flex flex-col max-w-2xl mx-auto gap-8 w-full">
@@ -28,6 +28,9 @@ if (!burgers) {
       The quest for the best burger never ends, here's how they currently stack
       up.
     </p>
+    <div class="sm:hidden self-end">
+      <Toggle id="mobile" />
+    </div>
     <ol class="list-decimal marker:text-3xl ps-12">
       {
         burgers.map((burger) => (
@@ -48,23 +51,25 @@ if (!burgers) {
 </Layout>
 
 <script>
-  const checkbox = document.getElementById("burger-toggle");
+  const checkboxes = document.querySelectorAll("[data-burger-toggle]");
 
-  checkbox?.addEventListener("change", (e) => {
-    // Check if the checkbox is checked
-    const isChecked = (e.target as HTMLInputElement).checked;
+  checkboxes.forEach((checkbox) => {
+    checkbox?.addEventListener("change", (e) => {
+      // Check if the checkbox is checked
+      const isChecked = (e.target as HTMLInputElement).checked;
 
-    // If checked, show only Minnesota burgers; otherwise, show all
-    const foreignBurgers = document.querySelectorAll(
-      '[data-is-minnesota="false"]'
-    );
-    console.log(foreignBurgers);
-    foreignBurgers.forEach((burger) => {
-      if (isChecked) {
-        burger.classList.add("hidden");
-      } else {
-        burger.classList.remove("hidden");
-      }
+      // If checked, show only Minnesota burgers; otherwise, show all
+      const foreignBurgers = document.querySelectorAll(
+        '[data-is-minnesota="false"]'
+      );
+
+      foreignBurgers.forEach((burger) => {
+        if (isChecked) {
+          burger.classList.add("hidden");
+        } else {
+          burger.classList.remove("hidden");
+        }
+      });
     });
   });
 </script>
