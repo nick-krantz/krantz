@@ -31,7 +31,10 @@ if (!burgers) {
     <ol class="list-decimal marker:text-3xl ps-12">
       {
         burgers.map((burger) => (
-          <li class="pb-6">
+          <li
+            class:list={["pb-6", { hidden: !burger.minnesota }]}
+            data-is-minnesota={`${burger.minnesota}`}
+          >
             <h2 class="text-3xl	">{burger.name}</h2>
             <a href={burger.url} class="underline">
               {burger.restaurant} - {burger.location}
@@ -43,3 +46,25 @@ if (!burgers) {
     </ol>
   </main>
 </Layout>
+
+<script>
+  const checkbox = document.getElementById("burger-toggle");
+
+  checkbox?.addEventListener("change", (e) => {
+    // Check if the checkbox is checked
+    const isChecked = (e.target as HTMLInputElement).checked;
+
+    // If checked, show only Minnesota burgers; otherwise, show all
+    const foreignBurgers = document.querySelectorAll(
+      '[data-is-minnesota="false"]'
+    );
+    console.log(foreignBurgers);
+    foreignBurgers.forEach((burger) => {
+      if (isChecked) {
+        burger.classList.add("hidden");
+      } else {
+        burger.classList.remove("hidden");
+      }
+    });
+  });
+</script>
