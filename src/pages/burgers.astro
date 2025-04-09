@@ -14,6 +14,9 @@ const { data: burgers } = await supabase
 if (!burgers) {
   throw new Error("Error fetching burgers");
 }
+
+const kitchenFloor = burgers.filter((burger) => burger.kitchen_floor);
+const currentBurgers = burgers.filter((burger) => !burger.kitchen_floor);
 ---
 
 <Layout>
@@ -31,22 +34,48 @@ if (!burgers) {
     <div class="sm:hidden self-end">
       <BurgerToggle id="mobile" />
     </div>
-    <ol class="list-decimal marker:text-3xl ps-12">
-      {
-        burgers.map((burger) => (
-          <li
-            class:list={["pb-6", { hidden: !burger.minnesota }]}
-            data-is-minnesota={`${burger.minnesota}`}
-          >
-            <h2 class="text-3xl	">{burger.name}</h2>
-            <a href={burger.url} class="underline">
-              {burger.restaurant} - {burger.location}
-            </a>
-            <p>{burger.description}</p>
-          </li>
-        ))
-      }
-    </ol>
+    <section>
+      <h2 class="sr-only">Current Burger List</h2>
+      <ol class="list-decimal marker:text-3xl ps-12">
+        {
+          currentBurgers.map((burger) => (
+            <li
+              class:list={["pb-6", { hidden: !burger.minnesota }]}
+              data-is-minnesota={`${burger.minnesota}`}
+            >
+              <h2 class="text-3xl	">{burger.name}</h2>
+              <a href={burger.url} class="underline">
+                {burger.restaurant} - {burger.location}
+              </a>
+              <p>{burger.description}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+    <section>
+      <h2 id="kitchen-floor" class="text-2xl lg:text-3xl mb-2 text-center">
+        The Kitchen Floor
+      </h2>
+      <p class="text-center pb-8">
+        Restaurants close and menus change, these are the burgers that were on
+        the list but are no longer available.
+      </p>
+      <ul>
+        {
+          kitchenFloor.map((burger) => (
+            <li class="pb-6">
+              <h2 class="text-lg">
+                ({burger.rank}) {burger.name}
+              </h2>
+              <h3 class="text-md">
+                {burger.restaurant} - {burger.location}
+              </h3>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </main>
 </Layout>
 
