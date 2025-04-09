@@ -14,9 +14,9 @@ h1 {
 }
 
 h2 {
-  @apply text-2xl lg:text-3xl font-semibold;
+  @apply font-semibold;
 }
 
 h3 {
-  @apply text-lg md:text-xl lg:text-2xl font-semibold;
+  @apply font-semibold;
 }
