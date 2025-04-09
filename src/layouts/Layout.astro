@@ -8,15 +8,31 @@ type Props = {
    * @default "Nick Krantz"
    */
   title?: string;
+
+  /**
+   * The description of the page, used for meta tags.
+   * @default "Software Engineer, burger connoisseur, semi-decent home cook."
+   */
+  description?: string;
+
+  /**
+   * Adds a noindex meta tag to the page, preventing search engines from indexing it.
+   */
+  noIndex?: true;
 };
 
-const { title = "Nick Krantz" } = Astro.props;
+const {
+  title = "Nick Krantz",
+  description = "Software Engineer, burger connoisseur, semi-decent home cook.",
+  noIndex,
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <title>{title}</title>
+    <meta name="description" content={description} />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta
@@ -40,6 +56,7 @@ const { title = "Nick Krantz" } = Astro.props;
     <meta name="twitter:site" content="@nick__krantz" />
     <meta name="twitter:creator" content="@nick__krantz" />
     <meta name="twitter:image" content="https://www.krantz.app/og-image.png" />
+    {noIndex && <meta name="robots" content="noindex" />}
     <link
       rel="icon"
       href="/favicon.ico"
@@ -69,12 +86,3 @@ const { title = "Nick Krantz" } = Astro.props;
     <Footer />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

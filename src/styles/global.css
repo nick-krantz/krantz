@@ -20,3 +20,10 @@ h2 {
 h3 {
   @apply font-semibold;
 }
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}

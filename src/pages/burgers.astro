@@ -19,7 +19,10 @@ const kitchenFloor = burgers.filter((burger) => burger.kitchen_floor);
 const currentBurgers = burgers.filter((burger) => !burger.kitchen_floor);
 ---
 
-<Layout>
+<Layout
+  title="Burgers - Nick Krantz"
+  description="The quest for the best burger never ends, here's how they currently stack up."
+>
   <Header backLink="/">
     <> Burgers </>
     <div class="float-right" slot="right">
