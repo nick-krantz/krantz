@@ -1,6 +1,6 @@
 ---
 import Header from "../components/Header/Header.astro";
-import Toggle from "../components/Toggle/Toggle.astro";
+import BurgerToggle from "../components/BurgerToggle/BurgerToggle.astro";
 import Layout from "../layouts/Layout.astro";
 import { supabase } from "../supabase/supabase";
 
@@ -20,7 +20,7 @@ if (!burgers) {
   <Header backLink="/">
     <> Burgers </>
     <div class="hidden sm:block float-right" slot="right">
-      <Toggle id="desktop" />
+      <BurgerToggle id="desktop" />
     </div>
   </Header>
   <main class="flex flex-col max-w-2xl mx-auto gap-8 w-full">
@@ -29,7 +29,7 @@ if (!burgers) {
       up.
     </p>
     <div class="sm:hidden self-end">
-      <Toggle id="mobile" />
+      <BurgerToggle id="mobile" />
     </div>
     <ol class="list-decimal marker:text-3xl ps-12">
       {
