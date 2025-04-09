@@ -22,8 +22,8 @@ const currentBurgers = burgers.filter((burger) => !burger.kitchen_floor);
 <Layout>
   <Header backLink="/">
     <> Burgers </>
-    <div class="hidden sm:block float-right" slot="right">
-      <BurgerToggle id="desktop" />
+    <div class="float-right" slot="right">
+      <BurgerToggle />
     </div>
   </Header>
   <main class="flex flex-col max-w-2xl mx-auto gap-8 w-full">
@@ -31,9 +31,6 @@ const currentBurgers = burgers.filter((burger) => !burger.kitchen_floor);
       The quest for the best burger never ends, here's how they currently stack
       up.
     </p>
-    <div class="sm:hidden self-end">
-      <BurgerToggle id="mobile" />
-    </div>
     <section>
       <h2 class="sr-only">Current Burger List</h2>
       <ol class="list-decimal marker:text-3xl ps-12">

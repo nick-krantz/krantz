@@ -1,19 +1,13 @@
----
-type Props = {
-  id: string;
-};
-
-const { id } = Astro.props;
----
-
 <label
   class="w-fit flex items-center justify-end cursor-pointer relative select-none rounded-md outline-current has-focus-visible:outline-offset-3 has-focus-visible:outline-2 has-focus-visible:outline-current"
-  for={id}
+  for="burger-toggle"
   data-burger-toggle
 >
-  <input type="checkbox" id={id} class="sr-only" checked />
+  <input type="checkbox" id="burger-toggle" class="sr-only" checked />
   <span class="sr-only">Show restaurants only in Minnesota</span>
-  <span class="mr-4" aria-hidden data-toggle-text>Minnesota</span>
+  <span class="mr-4 hidden sm:block" aria-hidden data-toggle-text
+    >Minnesota</span
+  >
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
@@ -49,12 +43,12 @@ const { id } = Astro.props;
   import { interpolate } from "flubber";
   import { animate } from "motion";
 
-  const checkboxLabels = document.querySelectorAll<HTMLLabelElement>(
-    "[data-burger-toggle]"
-  );
+  const checkbox = document.getElementById("burger-toggle");
   const globe = document.querySelector("[data-globe]");
   const minnesota = document.querySelector("[data-minnesota]");
-
+  const labelText = document.querySelector<HTMLSpanElement>(
+    "span[data-toggle-text]"
+  );
   const globePath = globe?.getAttribute("d");
   const minnesotaPath = minnesota?.getAttribute("d");
 
@@ -70,24 +64,16 @@ const { id } = Astro.props;
     maxSegmentLength: 1,
   });
 
-  /** Update an individual checkbox to be the current state */
-  function updateCheckboxState(
-    labelElement: HTMLLabelElement,
-    isChecked: boolean
-  ) {
-    const checkbox = labelElement.querySelector("input");
-    checkbox!.checked = isChecked;
-
-    const labelText =
-      labelElement.querySelector<HTMLElement>("[data-toggle-text]");
+  checkbox!.addEventListener("change", (e) => {
+    const isChecked = (e.target as HTMLInputElement).checked;
 
     if (isChecked) {
       labelText!.innerText = "Minnesota";
     } else {
-      labelText!.innerText = "All Burgers";
+      labelText!.innerText = "Global";
     }
 
-    const target = labelElement.querySelector("[data-target]");
+    const target = document.querySelector("[data-target]");
 
     let interpolater = isChecked ? globeToMn : mnToGlobe;
 
@@ -96,25 +82,6 @@ const { id } = Astro.props;
       onUpdate: (progress) => {
         target?.setAttribute("d", interpolater(progress));
       },
-    });
-  }
-
-  // There are multiple checkboxes, one for desktop and one for mobile.
-  // We want to keep them in sync here
-  checkboxLabels!.forEach((labelWrapper, index) => {
-    const checkbox = labelWrapper.querySelector("input");
-
-    checkbox!.addEventListener("change", (e) => {
-      const isChecked = (e.target as HTMLInputElement).checked;
-
-      updateCheckboxState(labelWrapper, isChecked);
-
-      // Update the state of other checkboxes
-      checkboxLabels!.forEach((label, otherIndex) => {
-        if (index !== otherIndex) {
-          updateCheckboxState(label, isChecked);
-        }
-      });
     });
   });
 </script>
