@@ -2,25 +2,21 @@
 
 ## Tooling
 
-Framework: [react](https://reactjs.org/) & [remix](https://remix.run)  
-Auth & Database: [supabase](https://supabase.com/)  
+Framework: [astro](https://astro.build/)  
+Database: [supabase](https://supabase.com/)  
 UI Styling: [tailwindcss](https://tailwindcss.com/)  
 Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)  
 Animation: [framer motion](https://www.framer.com/motion/)  
-
-## Acknowledgements
-
-[Tints and Shades](https://github.com/edelstone/tints-and-shades/): A _lot_ of learning about color manipulation from their examples.
 
 ## TODOs
 
 - [ ] add 404 message for a recipe not found
 - [ ] make dark/light mode toggle
-- [ ] add sign out
-- [ ] only load recipe images that are in view
 - [ ] increase recipe scrapers
-- [ ] trap focus inside of modals
 - [ ] add labels for recipes
+- [x] add sign out
+- [x] only load recipe images that are in view
+- [x] trap focus inside of modals
 - [x] recipes without images
 - [x] style recipe detail page
 - [x] ~~Automatically update types via [github actions](https://supabase.com/docs/reference/javascript/generating-types)~~ script to do it locally
