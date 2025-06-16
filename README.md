@@ -10,6 +10,8 @@ Animation: [framer motion](https://www.framer.com/motion/)
 
 ## TODOs
 
+- [ ] Migrate away from Supabase?
+- [ ] Make UI for recipe scraper
 - [ ] add 404 message for a recipe not found
 - [ ] make dark/light mode toggle
 - [ ] increase recipe scrapers
