@@ -97,9 +97,7 @@
       },
       {
         "title": "Garnish",
-        "ingredients": [
-          "Fun-sized Twix bars, optional"
-        ]
+        "ingredients": ["Fun-sized Twix bars, optional"]
       }
     ]
   },
@@ -1291,17 +1289,11 @@
       },
       {
         "title": "Optional sauce",
-        "ingredients": [
-          "1/4 cup mayo",
-          "1 tbsp hot sauce, (adjust to taste)"
-        ]
+        "ingredients": ["1/4 cup mayo", "1 tbsp hot sauce, (adjust to taste)"]
       },
       {
         "title": "Optional toppings",
-        "ingredients": [
-          "chopped green onions",
-          "sliced avocado"
-        ]
+        "ingredients": ["chopped green onions", "sliced avocado"]
       }
     ]
   },
