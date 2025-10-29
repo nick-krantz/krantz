@@ -1,5 +1,5 @@
 /** Types should be exported from this file, not supabase.ts */
-import type { IngredientsWithSections } from "../../types/IngredientsWithSections";
+import type { IngredientsWithSections } from "./IngredientsWithSections";
 import type { Database } from "./Database";
 
 export type Burger = Database["public"]["Tables"]["burgers"]["Row"];
