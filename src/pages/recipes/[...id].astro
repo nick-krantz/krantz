@@ -1,16 +1,12 @@
 ---
 import Header from "../../components/Header/Header.astro";
 import Layout from "../../layouts/Layout.astro";
-import { supabase } from "../../supabase/supabase";
+import { getRecipes } from "../../utils/local-data";
 import type { IngredientsWithSections } from "../../types/IngredientsWithSections";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
-  const { data: recipes } = await supabase.from("full_recipes").select();
-
-  if (!recipes) {
-    throw new Error("Error fetching recipes");
-  }
+  const recipes = getRecipes();
 
   return recipes.map((recipe) => ({
     params: { id: recipe.id },

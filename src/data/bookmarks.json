@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "created_at": "2022-05-14T21:35:17+00:00",
+    "title": "Custom Elements Everywhere",
+    "url": "https://custom-elements-everywhere.com/",
+    "category": "tech"
+  },
+  {
+    "id": 2,
+    "created_at": "2022-05-14T21:36:19+00:00",
+    "title": "Make Frontend Shit Again",
+    "url": "https://makefrontendshitagain.party/",
+    "category": "misc"
+  },
+  {
+    "id": 3,
+    "created_at": "2022-05-14T21:37:37+00:00",
+    "title": "AFrame - Web VR",
+    "url": "https://aframe.io/",
+    "category": "tech"
+  },
+  {
+    "id": 4,
+    "created_at": "2022-05-14T21:38:44+00:00",
+    "title": "Squoosh - Image Compression",
+    "url": "https://squoosh.app/",
+    "category": "tech"
+  },
+  {
+    "id": 5,
+    "created_at": "2022-05-14T21:39:52+00:00",
+    "title": "Writing Engineering Strategy",
+    "url": "https://staffeng.com/guides/engineering-strategy",
+    "category": "career"
+  },
+  {
+    "id": 7,
+    "created_at": "2022-05-14T21:40:27+00:00",
+    "title": "Slides for Developers - Sli.dev",
+    "url": "https://sli.dev/",
+    "category": "tech"
+  },
+  {
+    "id": 9,
+    "created_at": "2022-05-14T21:42:18+00:00",
+    "title": "Sound of Colleagues",
+    "url": "https://soundofcolleagues.com/",
+    "category": "misc"
+  },
+  {
+    "id": 10,
+    "created_at": "2022-05-14T21:42:39+00:00",
+    "title": "LOGAF",
+    "url": "https://blog.danlew.net/2020/04/15/the-logaf-scale/",
+    "category": "misc"
+  },
+  {
+    "id": 11,
+    "created_at": "2022-05-14T21:43:25+00:00",
+    "title": "Never Ignore a Recruiter",
+    "url": "https://index.medium.com/career-advice-nobody-gave-me-never-ignore-a-recruiter-4474eac9556",
+    "category": "career"
+  },
+  {
+    "id": 12,
+    "created_at": "2022-05-14T21:44:34+00:00",
+    "title": "Maker's Schedule",
+    "url": "http://www.paulgraham.com/makersschedule.html",
+    "category": "career"
+  },
+  {
+    "id": 13,
+    "created_at": "2022-05-14T21:44:49+00:00",
+    "title": "The Cube Rule",
+    "url": "https://cuberule.com/",
+    "category": "misc"
+  },
+  {
+    "id": 14,
+    "created_at": "2022-05-14T21:45:23+00:00",
+    "title": "Do What the Fuck You Want to Public License",
+    "url": "http://www.wtfpl.net/",
+    "category": "misc"
+  },
+  {
+    "id": 22,
+    "created_at": "2022-05-16T18:36:22.450209+00:00",
+    "title": "Lorem Ipsum Generator ",
+    "url": "https://loremipsum.io/ultimate-list-of-lorem-ipsum-generators/",
+    "category": "tech"
+  },
+  {
+    "id": 23,
+    "created_at": "2022-06-09T02:18:29.740217+00:00",
+    "title": "Skew the frontend engineers misery",
+    "url": "https://lethain.com/skew-the-frontend-engineer-s-misery/",
+    "category": "career"
+  },
+  {
+    "id": 24,
+    "created_at": "2022-06-21T15:53:05.769306+00:00",
+    "title": "I Fucking Hate JIRA",
+    "url": "https://ifuckinghatejira.com/",
+    "category": "misc"
+  },
+  {
+    "id": 25,
+    "created_at": "2022-06-27T16:34:38.048744+00:00",
+    "title": "Index as a Key is Bad",
+    "url": "https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318",
+    "category": "tech"
+  },
+  {
+    "id": 26,
+    "created_at": "2022-09-22T11:34:52.106534+00:00",
+    "title": "Types vs Interfaces",
+    "url": "https://www.useinterface.dev/",
+    "category": "tech"
+  },
+  {
+    "id": 27,
+    "created_at": "2022-10-05T14:32:46.375014+00:00",
+    "title": "The Dead Sea Effect",
+    "url": "https://brucefwebster.com/2008/04/11/the-wetware-crisis-the-dead-sea-effect/",
+    "category": "career"
+  },
+  {
+    "id": 28,
+    "created_at": "2022-11-11T14:14:42.805886+00:00",
+    "title": "The Crypto Story",
+    "url": "https://www.bloomberg.com/features/2022-the-crypto-story/?leadSource=uverify%20wall",
+    "category": "misc"
+  },
+  {
+    "id": 29,
+    "created_at": "2022-12-05T23:39:57.818542+00:00",
+    "title": "Open AI GPT-3",
+    "url": "https://beta.openai.com/playground",
+    "category": "misc"
+  },
+  {
+    "id": 30,
+    "created_at": "2022-12-30T20:49:15.36192+00:00",
+    "title": "Frontend Interview Type",
+    "url": "https://www.zhenghao.io/posts/frontend-interview-type",
+    "category": "career"
+  },
+  {
+    "id": 31,
+    "created_at": "2023-10-11T14:22:21.420233+00:00",
+    "title": "Learn AI Prompting",
+    "url": "https://learnprompting.org/docs/intro",
+    "category": "tech"
+  },
+  {
+    "id": 36,
+    "created_at": "2023-12-15T16:32:08.405011+00:00",
+    "title": "Enterprise Accessibility ",
+    "url": "https://enterprise-accessibility.vercel.app/topics",
+    "category": "tech"
+  },
+  {
+    "id": 38,
+    "created_at": "2024-02-12T18:47:36.075533+00:00",
+    "title": "Rebase after Squash",
+    "url": "https://blog.k-nut.eu/git-rebase-onto",
+    "category": "tech"
+  }
+]

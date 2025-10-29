@@ -2,18 +2,12 @@
 import Header from "../components/Header/Header.astro";
 import BurgerToggle from "../components/BurgerToggle/BurgerToggle.astro";
 import Layout from "../layouts/Layout.astro";
-import { supabase } from "../supabase/supabase";
+import { getBurgers } from "../utils/local-data";
 
-const { data: burgers } = await supabase
-  .from("burgers")
-  .select()
-  .order("rank", {
-    ascending: true,
-  });
+const burgers = getBurgers();
 
-if (!burgers) {
-  throw new Error("Error fetching burgers");
-}
+// Sort by rank (same as the old Supabase query)
+burgers.sort((a, b) => a.rank - b.rank);
 
 const kitchenFloor = burgers.filter((burger) => burger.kitchen_floor);
 const currentBurgers = burgers.filter((burger) => !burger.kitchen_floor);
