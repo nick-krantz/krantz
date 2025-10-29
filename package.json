@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "format": "biome format --write ./src",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "add-burger": "node scripts/add-burger.js"
   },
   "dependencies": {
     "@lucide/astro": "^0.487.0",
