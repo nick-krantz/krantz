@@ -3,7 +3,6 @@
 ## Tooling
 
 Framework: [astro](https://astro.build/)  
-Database: [supabase](https://supabase.com/)  
 UI Styling: [tailwindcss](https://tailwindcss.com/)  
 Icons: [react-icons/fi](https://react-icons.github.io/react-icons/icons?name=fi)  
 Animation: [framer motion](https://www.framer.com/motion/)  
